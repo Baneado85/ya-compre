@@ -1,0 +1,711 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>YA COMPRÉ | Productos Premium a un solo Klick</title>
+  <meta name="description" content="YA COMPRÉ - Tu tienda online de confianza en Perú. Productos premium de diseño minimalista, tecnología, belleza y bienestar con envío a todo el Perú y pago contra entrega.">
+  <meta name="keywords" content="YA COMPRÉ, ecommerce Perú, productos premium, pago contra entrega, envío gratis Lima, ofertas Perú">
+  
+  <!-- Open Graph / Facebook / WhatsApp -->
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="YA COMPRÉ | Productos Premium a un solo Klick">
+  <meta property="og:description" content="Productos de diseño premium para una vida más simple y elegante. Envío a todo el Perú con pago contra entrega.">
+  <meta property="og:image" content="assets/images/logo2.png">
+
+  <!-- Favicon -->
+  <link rel="icon" type="image/png" href="assets/images/logo2.png">
+
+  <!-- Stylesheet -->
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+  <!-- Announcement Bar -->
+  <div class="announcement-bar" id="announcement-bar">
+    <div class="announcement-content" id="announcement-text">
+      Envío gratis a todo el Perú 🇵🇪 en pedidos seleccionados
+    </div>
+    <button class="announcement-close" id="close-announcement" aria-label="Cerrar aviso">&times;</button>
+  </div>
+
+  <!-- Site Navigation Header -->
+  <header class="site-header" id="site-header">
+    <div class="container nav-container">
+      
+      <!-- Mobile Menu Toggle Button -->
+      <button class="mobile-menu-toggle" id="mobile-menu-toggle" aria-label="Abrir menú de navegación">
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
+
+      <!-- Brand Logo & Name (Using Logo 2) -->
+      <a href="#" class="brand-logo" id="brand-logo-link">
+        <img src="assets/images/logo2.png" alt="YA COMPRÉ Logo">
+        <span class="brand-name">YA COMPRÉ</span>
+      </a>
+
+      <!-- Navigation Links -->
+      <nav>
+        <ul class="nav-links" id="nav-links">
+          <li><a href="#hero" class="active">Inicio</a></li>
+          <li><a href="#productos">Productos</a></li>
+          <li><a href="#centro-ayuda" onclick="openHelpModal(event)">Centro de ayuda</a></li>
+          <li><a href="#sobre-nosotros" onclick="openAboutModal(event)">Sobre nosotros</a></li>
+        </ul>
+      </nav>
+
+      <!-- Header Action Buttons -->
+      <div class="nav-actions">
+        <button class="icon-btn" id="search-icon-btn" onclick="openSearchModal()" aria-label="Buscar productos">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+        </button>
+
+        <button class="icon-btn" id="cart-icon-btn" aria-label="Ver Carrito de Compras">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/><path d="M16 10a4 4 0 0 1-8 0"/></svg>
+          <span class="cart-badge" id="cart-count-badge">0</span>
+        </button>
+      </div>
+
+    </div>
+  </header>
+
+  <main>
+    <!-- Hero Section -->
+    <section class="hero-section" id="hero">
+      <div class="hero-bg-wrapper">
+        <img src="assets/images/hero_bg.png" alt="Modern Minimalist Interior Living">
+      </div>
+      <div class="hero-overlay"></div>
+      <div class="container">
+        <div class="hero-content animate-fade-in">
+          <div class="hero-subtitle">NUEVOS LANZAMIENTOS</div>
+          <h1 class="hero-title">
+            Diseñado para la<br>
+            <span class="hero-slogan-dynamic" id="hero-slogan-dynamic">vida sin complicaciones</span>
+          </h1>
+          <p class="hero-description">
+            Productos premium. Diseño minimalista. Máximo impacto para simplificar tu rutina diaria.
+          </p>
+          <div class="hero-actions">
+            <a href="#productos" class="btn btn-primary btn-icon-right">
+              Comprar ahora
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+            </a>
+            <a href="#bestsellers" class="btn btn-outline-light">Explorar colección</a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Value Props Ticker Strip -->
+    <section class="features-ticker-strip">
+      <div class="container">
+        <div class="features-grid">
+          
+          <div class="feature-item">
+            <div class="feature-icon-wrapper">
+              <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="1" y="3" width="15" height="13"/><polygon points="16 8 20 8 23 11 23 16 16 16 16 8"/><circle cx="5.5" cy="18.5" r="2.5"/><circle cx="18.5" cy="18.5" r="2.5"/></svg>
+            </div>
+            <div class="feature-text">
+              <h4>Envíos a todo el Perú</h4>
+              <p>Lima y provincias con cobertura segura</p>
+            </div>
+          </div>
+
+          <div class="feature-item">
+            <div class="feature-icon-wrapper">
+              <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+            </div>
+            <div class="feature-text">
+              <h4>Revisado antes de enviar</h4>
+              <p>Cada pedido inspeccionado uno por uno</p>
+            </div>
+          </div>
+
+          <div class="feature-item">
+            <div class="feature-icon-wrapper">
+              <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"/></svg>
+            </div>
+            <div class="feature-text">
+              <h4>Atención por WhatsApp</h4>
+              <p>Te respondemos en minutos</p>
+            </div>
+          </div>
+
+          <div class="feature-item">
+            <div class="feature-icon-wrapper">
+              <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+            </div>
+            <div class="feature-text">
+              <h4>Pago Contra Entrega</h4>
+              <p>Paga tranquilo al recibirlo en casa</p>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- Catalog / Bestsellers Section -->
+    <section class="catalog-section" id="productos">
+      <div class="container">
+        
+        <div class="section-header">
+          <div>
+            <span class="section-tag">SELECCIÓN EXCLUSIVA</span>
+            <h2 class="section-title">Más vendidos</h2>
+          </div>
+          <a href="#productos" class="view-all-link" onclick="filterCategory('todos')">
+            Ver todo
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+          </a>
+        </div>
+
+        <!-- Category Filter Tabs -->
+        <div class="filter-tabs">
+          <button class="filter-tab active" data-category="todos">Todos los productos</button>
+          <button class="filter-tab" data-category="bestsellers">Destacados</button>
+          <button class="filter-tab" data-category="bienestar">Salud & Bienestar</button>
+          <button class="filter-tab" data-category="belleza">Belleza & Skincare</button>
+          <button class="filter-tab" data-category="hogar">Hogar & Estilo</button>
+        </div>
+
+        <!-- Products Grid Container -->
+        <div class="products-grid" id="products-grid">
+          <!-- Dynamic Products injected via JavaScript app.js -->
+        </div>
+
+      </div>
+    </section>
+
+    <!-- Promotional Discount Banner -->
+    <section class="promo-banner-section">
+      <div class="container">
+        <div class="promo-card">
+          <div class="promo-bg">
+            <img src="assets/images/hero_bg.png" alt="Promo Offer">
+          </div>
+          <div class="promo-overlay"></div>
+          
+          <div class="promo-content">
+            <span class="promo-tag">OFERTA LIMITADA</span>
+            <h2 class="promo-title">Hasta 50% OFF esta semana</h2>
+            <p class="promo-subtitle">En productos seleccionados con envío prioritario inmediato.</p>
+
+            <div class="promo-countdown">
+              <div class="countdown-box">
+                <span class="val" id="timer-hrs">01</span>
+                <span class="lbl">Horas</span>
+              </div>
+              <div class="countdown-box">
+                <span class="val" id="timer-min">58</span>
+                <span class="lbl">Minutos</span>
+              </div>
+              <div class="countdown-box">
+                <span class="val" id="timer-sec">04</span>
+                <span class="lbl">Segundos</span>
+              </div>
+            </div>
+
+            <a href="#productos" class="btn btn-primary" onclick="filterCategory('bestsellers')">Ver ofertas con descuento</a>
+          </div>
+
+          <div class="promo-badges">
+            <div class="badge-pill">✨ Exclusivo Online</div>
+            <div class="badge-pill">⚡ Stock Limitado</div>
+            <div class="badge-pill">📦 Despacho 24h</div>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- Interactive Posture Comparison Slider -->
+    <section class="comparison-section">
+      <div class="container">
+        <div class="comparison-wrapper">
+          <h2 class="comparison-title">Mira la diferencia en tu descanso</h2>
+          <p class="comparison-desc">Arrastra el control para comparar la postura de tu columna con la almohada cervical YA COMPRÉ.</p>
+          
+          <div class="before-after-container" id="comparison-container">
+            <!-- After Image (Bottom) -->
+            <img src="assets/images/almohada_cervical.png" alt="Con Almohada Ergonomica YA COMPRÉ" class="after-image">
+            <span class="comparison-label label-after">CON YA COMPRÉ</span>
+
+            <!-- Before Image (Top Clip) -->
+            <div class="before-image-wrapper" id="before-wrapper">
+              <img src="assets/images/hero_bg.png" alt="Sin Almohada Ergonomica" class="before-image">
+              <span class="comparison-label label-before">ALMOHADA COMÚN</span>
+            </div>
+
+            <!-- Drag Handle Button -->
+            <div class="slider-handle" id="comparison-handle">
+              <div class="slider-handle-button">↔</div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- TikTok Video Reviews Showcase -->
+    <section class="tiktok-section">
+      <div class="container">
+        <div class="section-header" style="text-align: center; display: block; margin-bottom: 2rem;">
+          <h2 class="section-title">Lo que dicen en TikTok</h2>
+          <p style="color: var(--text-secondary); margin-top: 0.5rem;">Gente real que transformó su rutina diaria. Etiquétanos en @yacompre para aparecer aquí.</p>
+        </div>
+
+        <div class="tiktok-grid">
+          
+          <div class="tiktok-card" onclick="openTikTokModal('Almohada Cervical', 'video1.mp4')">
+            <img src="assets/images/almohada_cervical.png" alt="Testimonio TikTok Cervical">
+            <div class="tiktok-card-overlay">
+              <div class="tiktok-badge">TikTok Viral</div>
+              <div class="play-icon-circle">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor"><polygon points="5 3 19 12 5 21 5 3"/></svg>
+              </div>
+              <div class="tiktok-caption">"Deja de destrozarte la columna al dormir..."</div>
+            </div>
+          </div>
+
+          <div class="tiktok-card" onclick="openTikTokModal('CleanNova Scrubber', 'video2.mp4')">
+            <img src="assets/images/cleannova_scrubber.png" alt="Testimonio TikTok CleanNova">
+            <div class="tiktok-card-overlay">
+              <div class="tiktok-badge">Recomendado</div>
+              <div class="play-icon-circle">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor"><polygon points="5 3 19 12 5 21 5 3"/></svg>
+              </div>
+              <div class="tiktok-caption">"Necesitas esto para limpiar tu baño sin esfuerzo!"</div>
+            </div>
+          </div>
+
+          <div class="tiktok-card" onclick="openTikTokModal('Retinol Kit', 'video3.mp4')">
+            <img src="assets/images/retinol_kit.png" alt="Testimonio TikTok Skincare">
+            <div class="tiktok-card-overlay">
+              <div class="tiktok-badge">Beauty Hack</div>
+              <div class="play-icon-circle">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor"><polygon points="5 3 19 12 5 21 5 3"/></svg>
+              </div>
+              <div class="tiktok-caption">"Mi piel cambió por completo en 14 días ✨"</div>
+            </div>
+          </div>
+
+          <div class="tiktok-card" onclick="openTikTokModal('Cortisol Calm', 'video4.mp4')">
+            <img src="assets/images/cortisol_calm.png" alt="Testimonio TikTok Cortisol Calm">
+            <div class="tiktok-card-overlay">
+              <div class="tiktok-badge">Bienestar</div>
+              <div class="play-icon-circle">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor"><polygon points="5 3 19 12 5 21 5 3"/></svg>
+              </div>
+              <div class="tiktok-caption">"Si duermes con ansiedad tienes que probarlo!"</div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- Testimonials Section -->
+    <section class="testimonials-section">
+      <div class="container">
+        
+        <div class="testimonials-header">
+          <div class="rating-summary">
+            <span class="rating-score">4.9</span>
+            <div>
+              <div style="color: var(--accent-star); font-size: 1.1rem;">★★★★★</div>
+              <div style="font-size: 0.85rem; color: #AAA;">Más de 9,560 clientes satisfechos</div>
+            </div>
+          </div>
+          <h2 class="section-title">Lo que dicen nuestros clientes</h2>
+        </div>
+
+        <div class="testimonials-grid" id="testimonials-grid">
+          <!-- Dynamic reviews rendered by app.js -->
+        </div>
+
+        <div class="add-review-cta">
+          <button class="btn btn-outline-light" onclick="openReviewModal()">Escribir mi opinión</button>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- Philosophy Section -->
+    <section class="philosophy-section">
+      <div class="container philosophy-container">
+        <span class="section-tag">NUESTRA FILOSOFÍA</span>
+        <blockquote class="philosophy-quote">
+          "Cada producto de nuestra colección es seleccionado minuciosamente por su diseño, calidad superior y capacidad de perdurar en tu día a día. Sin exageraciones ni modas pasajeras. Solo excelencia que habla por sí sola."
+        </blockquote>
+
+        <div class="stats-grid">
+          <div class="stat-item">
+            <h3>9,560+</h3>
+            <p>Clientes felices</p>
+          </div>
+          <div class="stat-item">
+            <h3>100%</h3>
+            <p>Verificado antes de envío</p>
+          </div>
+          <div class="stat-item">
+            <h3>40+</h3>
+            <p>Ciudades atendidas</p>
+          </div>
+        </div>
+
+        <button class="btn btn-secondary" onclick="openAboutModal(event)">Descubre nuestra historia</button>
+      </div>
+    </section>
+
+    <!-- Order Call to Action -->
+    <section class="order-cta-section">
+      <div class="order-cta-bg">
+        <img src="assets/images/hero_bg.png" alt="Order CTA Background">
+      </div>
+      <div class="container order-cta-content">
+        <span class="section-tag" style="color: var(--accent-gold);">TODO A UN SOLO KLICK</span>
+        <h2 class="order-cta-title">¿Listo para tu primer pedido?</h2>
+        
+        <div class="cta-trust-tags">
+          <span class="trust-tag">🚚 Envío gratis</span>
+          <span class="trust-tag">💵 Pago Contraentrega</span>
+          <span class="trust-tag">🛡️ Garantía de 30 días</span>
+        </div>
+
+        <a href="#productos" class="btn btn-primary btn-icon-right" style="padding: 1.1rem 2.5rem; font-size: 1.05rem;">
+          VER PRODUCTOS
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+        </a>
+      </div>
+    </section>
+  </main>
+
+  <!-- Site Footer (Using Logo 2) -->
+  <footer class="site-footer">
+    <div class="container">
+      <div class="footer-grid">
+        
+        <div class="footer-brand">
+          <a href="#" class="brand-logo">
+            <img src="assets/images/logo2.png" alt="YA COMPRÉ Logo Footer">
+            <span class="brand-name" style="color:#FFF;">YA COMPRÉ</span>
+          </a>
+          <p>Productos de diseño premium para una vida más simple, organizada y elegante. A un solo klick de distancia en todo el Perú.</p>
+          <div class="social-links">
+            <a href="#" class="social-btn" aria-label="Instagram">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/></svg>
+            </a>
+            <a href="#" class="social-btn" aria-label="TikTok">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M19.59 6.69a4.83 4.83 0 0 1-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 1 1-5.2-1.74 2.89 2.89 0 0 1 2.31-4.64 2.93 2.93 0 0 1 .88.13V6.02a6.32 6.32 0 0 0-.88-.06 6.34 6.34 0 1 0 6.34 6.34V9a8.16 8.16 0 0 0 4.77 1.52v-3.4a4.85 4.85 0 0 1-1-.43z"/></svg>
+            </a>
+            <a href="#" class="social-btn" aria-label="Facebook">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/></svg>
+            </a>
+          </div>
+        </div>
+
+        <div class="footer-col">
+          <h4>Tienda</h4>
+          <ul class="footer-links">
+            <li><a href="#productos" onclick="filterCategory('todos')">Novedades</a></li>
+            <li><a href="#productos" onclick="filterCategory('bestsellers')">Más vendidos</a></li>
+            <li><a href="#productos" onclick="filterCategory('bestsellers')">Ofertas especiales</a></li>
+            <li><a href="#productos" onclick="filterCategory('bienestar')">Colección Bienestar</a></li>
+          </ul>
+        </div>
+
+        <div class="footer-col">
+          <h4>Ayuda & Legal</h4>
+          <ul class="footer-links">
+            <li><a href="#" onclick="openHelpModal(event)">Políticas de privacidad</a></li>
+            <li><a href="#" onclick="openHelpModal(event)">Términos y condiciones</a></li>
+            <li><a href="#" onclick="openHelpModal(event)">Preguntas frecuentes</a></li>
+            <li><a href="#" onclick="openHelpModal(event)">Seguimiento de pedidos</a></li>
+          </ul>
+        </div>
+
+        <div class="footer-col">
+          <h4>Únete al Club YA COMPRÉ</h4>
+          <p style="font-size: 0.85rem; margin-bottom: 0.75rem;">Recibe descuentos exclusivos y avisos de nuevos lanzamientos directamente en tu correo.</p>
+          <form class="newsletter-form" onsubmit="event.preventDefault(); alert('¡Gracias por suscribirte a YA COMPRÉ!'); this.reset();">
+            <input type="email" placeholder="Tu correo electrónico" required>
+            <button type="submit" class="btn btn-primary" style="padding: 0.6rem 1.2rem; font-size: 0.85rem;">Suscribirse</button>
+          </form>
+        </div>
+
+      </div>
+
+      <div class="footer-bottom">
+        <div>© 2026 <strong>YA COMPRÉ</strong>. Todos los derechos reservados.</div>
+        <div class="payment-methods-strip">
+          <span>Métodos de Pago:</span>
+          <span class="payment-pill">💵 Contra Entrega</span>
+          <span class="payment-pill">📲 Yape / Plin</span>
+          <span class="payment-pill">💳 Tarjetas</span>
+        </div>
+      </div>
+
+    </div>
+  </footer>
+
+  <!-- Slide-out Cart Drawer -->
+  <div class="cart-drawer-overlay" id="cart-drawer-overlay"></div>
+  <aside class="cart-drawer" id="cart-drawer">
+    <div class="cart-drawer-header">
+      <h3>Tu Carrito (<span id="cart-drawer-count">YA COMPRÉ</span>)</h3>
+      <button class="icon-btn" id="close-cart-drawer" aria-label="Cerrar Carrito">&times;</button>
+    </div>
+    
+    <div class="free-shipping-progress">
+      <div class="free-shipping-text" id="free-shipping-text-val">
+        Agrega <strong>S/. 150.00</strong> más para Envío Gratis
+      </div>
+      <div class="progress-bar-bg">
+        <div class="progress-bar-fill" id="free-shipping-fill"></div>
+      </div>
+    </div>
+
+    <div class="cart-items-container" id="cart-items-container">
+      <!-- Injected via JavaScript -->
+    </div>
+
+    <div class="cart-drawer-footer">
+      <div class="cart-subtotal-row">
+        <span>Subtotal:</span>
+        <span id="cart-subtotal-val">S/. 0.00</span>
+      </div>
+      <p style="font-size: 0.75rem; color: var(--text-muted);">Impuestos y gastos de envío calculados al finalizar compra.</p>
+      <button class="cart-checkout-btn" id="cart-checkout-btn">
+        CONTINUAR AL PAGO CONTRA ENTREGA →
+      </button>
+    </div>
+  </aside>
+
+  <!-- Modals -->
+
+  <!-- Product Detail / Quick View Modal -->
+  <div class="modal-backdrop" id="product-modal-backdrop">
+    <div class="modal-window">
+      <button class="modal-close-btn" onclick="closeModals()">&times;</button>
+      <div id="product-modal-content">
+        <!-- Rendered by openProductModal in app.js -->
+      </div>
+    </div>
+  </div>
+
+  <!-- Cash on Delivery (Pago Contra Entrega) Checkout Form Modal -->
+  <div class="modal-backdrop" id="cod-modal-backdrop">
+    <div class="modal-window cod-form-modal">
+      <button class="modal-close-btn" onclick="closeModals()">&times;</button>
+      
+      <div style="text-align: center; margin-bottom: 1.5rem;">
+        <img src="assets/images/logo2.png" alt="YA COMPRÉ Logo" style="height: 48px; margin: 0 auto 0.5rem;">
+        <h2 style="font-family: var(--font-heading); font-size: 1.5rem;">Pedido Contra Entrega (Perú)</h2>
+        <p style="font-size: 0.85rem; color: var(--text-secondary);">Completa tus datos para enviarte el pedido y pagar al recibirlo.</p>
+      </div>
+
+      <div id="cod-order-summary"></div>
+
+      <form id="cod-checkout-form">
+        <div class="form-group">
+          <label for="cod-name">Nombres y Apellidos *</label>
+          <input type="text" id="cod-name" placeholder="Ej. Juan Pérez" required>
+        </div>
+
+        <div class="form-group">
+          <label for="cod-phone">Número de WhatsApp / Teléfono *</label>
+          <input type="tel" id="cod-phone" placeholder="Ej. 987654321" required>
+        </div>
+
+        <div class="form-group">
+          <label for="cod-district">Ciudad / Distrito / Provincia *</label>
+          <input type="text" id="cod-district" placeholder="Ej. San Borja, Lima o Chiclayo, Lambayeque" required>
+        </div>
+
+        <div class="form-group">
+          <label for="cod-address">Dirección de Entrega Exacta + Referencia *</label>
+          <input type="text" id="cod-address" placeholder="Ej. Av. Javier Prado 1234, Dpto 301 (Frente a la tienda X)" required>
+        </div>
+
+        <div class="form-group">
+          <label for="cod-payment">Forma de Pago Preferida al Recibir *</label>
+          <select id="cod-payment" required>
+            <option value="Efectivo en mano">Efectivo en mano al repartidor</option>
+            <option value="Yape / Plin">Yape o Plin al momento de recibir</option>
+            <option value="Tarjeta de crédito/débito">Tarjeta de Crédito / Débito pos repartidor</option>
+          </select>
+        </div>
+
+        <button type="submit" class="btn btn-whatsapp" style="width: 100%; height: 50px; font-size: 1.05rem; margin-top: 1rem;">
+          🚀 CONFIRMAR MI PEDIDO POR WHATSAPP
+        </button>
+      </form>
+    </div>
+  </div>
+
+  <!-- Help & FAQs Modal -->
+  <div class="modal-backdrop" id="help-modal-backdrop">
+    <div class="modal-window" style="max-width: 650px; padding: 2.5rem;">
+      <button class="modal-close-btn" onclick="closeModals()">&times;</button>
+      <h2 style="font-family: var(--font-heading); font-size: 1.75rem; margin-bottom: 1.5rem;">Centro de Ayuda & Preguntas Frecuentes</h2>
+
+      <div class="accordion-item active">
+        <div class="accordion-header">¿Cómo funciona el Pago Contra Entrega? <span>+</span></div>
+        <div class="accordion-content">
+          Tú realizas tu pedido en nuestra web o por WhatsApp. Nosotros lo empacamos y lo enviamos hasta la puerta de tu casa. Le pagas directamente al repartidor en efectivo, Yape, Plin o tarjeta cuando recibas y revises tu paquete.
+        </div>
+      </div>
+
+      <div class="accordion-item">
+        <div class="accordion-header">¿Cuánto demoran los envíos? <span>+</span></div>
+        <div class="accordion-content">
+          Para Lima Metropolitana entregamos en 24 a 48 horas hábiles. Para provincias el envío demora entre 2 a 4 días hábiles mediante Olva Courier o Shalom con seguimiento.
+        </div>
+      </div>
+
+      <div class="accordion-item">
+        <div class="accordion-header">¿Tienen garantía los productos? <span>+</span></div>
+        <div class="accordion-content">
+          ¡Sí! Todos nuestros productos cuentan con 30 días de garantía directa ante cualquier defecto de fábrica o disconformidad. Si tu producto no cumple con lo prometido te lo cambiamos o reembolsamos.
+        </div>
+      </div>
+
+      <div class="accordion-item">
+        <div class="accordion-header">¿Cómo puedo comunicarme con soporte? <span>+</span></div>
+        <div class="accordion-content">
+          Puedes hacer clic en el botón flotante de WhatsApp en la esquina inferior derecha o enviarnos un correo a contacto@yacompre.com.pe. Atendemos de Lunes a Sábado de 8:00 am a 8:00 pm.
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- About Us Modal -->
+  <div class="modal-backdrop" id="about-modal-backdrop">
+    <div class="modal-window" style="max-width: 650px; padding: 2.5rem;">
+      <button class="modal-close-btn" onclick="closeModals()">&times;</button>
+      <div style="text-align: center; margin-bottom: 1.5rem;">
+        <img src="assets/images/logo2.png" alt="YA COMPRÉ Logo" style="height: 60px; margin-bottom: 1rem;">
+        <h2 style="font-family: var(--font-heading); font-size: 1.8rem;">Sobre YA COMPRÉ</h2>
+      </div>
+      <p style="color: var(--text-secondary); line-height: 1.7; margin-bottom: 1rem;">
+        Nacimos en Perú con una misión clara: ofrecer productos útiles, de diseño minimalista y alta calidad que realmente mejoren el día a día de nuestros clientes.
+      </p>
+      <p style="color: var(--text-secondary); line-height: 1.7; margin-bottom: 1.5rem;">
+        Nos alejamos del desorden y de las falsas promesas. Seleccionamos cuidadosamente cada artículo, asegurándonos de que cumpla con los estándares más exigentes de durabilidad, confort y estética.
+      </p>
+      <div style="background-color: var(--bg-subtle); padding: 1.25rem; border-radius: var(--radius-md); text-align: center;">
+        <strong style="color: var(--text-primary); font-size: 1.1rem;">"Tu tranquilidad y satisfacción es nuestra máxima prioridad."</strong>
+      </div>
+    </div>
+  </div>
+
+  <!-- Review Submission Modal -->
+  <div class="modal-backdrop" id="review-modal-backdrop">
+    <div class="modal-window" style="max-width: 500px; padding: 2.5rem;">
+      <button class="modal-close-btn" onclick="closeModals()">&times;</button>
+      <h2 style="font-family: var(--font-heading); font-size: 1.5rem; margin-bottom: 1rem;">Deja tu opinión sobre YA COMPRÉ</h2>
+      
+      <form id="new-review-form">
+        <div class="form-group">
+          <label for="review-name">Tu Nombre *</label>
+          <input type="text" id="review-name" placeholder="Ej. Camila S." required>
+        </div>
+
+        <div class="form-group">
+          <label for="review-city">Ciudad / Distrito *</label>
+          <input type="text" id="review-city" placeholder="Ej. Surco, Lima" required>
+        </div>
+
+        <div class="form-group">
+          <label for="review-rating">Puntuación *</label>
+          <select id="review-rating" required>
+            <option value="5">★★★★★ (5/5) - Excelente</option>
+            <option value="4">★★★★☆ (4/5) - Muy Bueno</option>
+            <option value="3">★★★☆☆ (3/5) - Regular</option>
+          </select>
+        </div>
+
+        <div class="form-group">
+          <label for="review-text">Tu Comentario *</label>
+          <textarea id="review-text" rows="4" placeholder="¿Qué te pareció el producto y el servicio de entrega?" required></textarea>
+        </div>
+
+        <button type="submit" class="btn btn-secondary" style="width: 100%; font-size: 1rem;">Publicar Opinión</button>
+      </form>
+    </div>
+  </div>
+
+  <!-- Search Modal -->
+  <div class="modal-backdrop" id="search-modal-backdrop">
+    <div class="modal-window" style="max-width: 500px; padding: 2rem;">
+      <button class="modal-close-btn" onclick="closeModals()">&times;</button>
+      <h3 style="font-family: var(--font-heading); font-size: 1.3rem; margin-bottom: 1rem;">Buscar en YA COMPRÉ</h3>
+      <div class="form-group">
+        <input type="text" id="search-input" placeholder="Escribe el nombre del producto..." oninput="handleSearchInput(this.value)">
+      </div>
+      <div id="search-results-list" style="display:flex; flex-direction:column; gap:0.5rem; max-height:300px; overflow-y:auto;">
+        <!-- Filtered results -->
+      </div>
+    </div>
+  </div>
+
+  <!-- Floating WhatsApp Quick Button -->
+  <a href="https://wa.me/51900000000?text=Hola%20YA%20COMPR%C3%89%2C%20quisiera%20hacer%20una%20consulta%20sobre%20un%20producto" target="_blank" class="whatsapp-float-btn" aria-label="Contactar por WhatsApp">
+    <svg width="32" height="32" viewBox="0 0 24 24" fill="currentColor"><path d="M12.04 2c-5.46 0-9.91 4.45-9.91 9.91 0 1.75.46 3.45 1.32 4.95L2.05 22l5.25-1.38c1.45.79 3.08 1.21 4.74 1.21 5.46 0 9.91-4.45 9.91-9.91 0-2.65-1.03-5.14-2.9-7.01A9.85 9.85 0 0 0 12.04 2zm5.77 14.15c-.24.68-1.2 1.25-1.95 1.41-.51.11-1.18.2-3.44-.73-2.89-1.19-4.75-4.13-4.89-4.32-.14-.19-1.18-1.57-1.18-3 0-1.43.75-2.13 1.02-2.42.27-.29.59-.36.79-.36.2 0 .4 0 .57.01.18.01.43-.07.67.51.24.58.82 2 .89 2.15.07.15.12.33.02.53-.1.19-.15.31-.3.49-.15.18-.31.4-.44.54-.15.15-.3.31-.13.6.17.29.77 1.27 1.66 2.06 1.14 1.01 2.1 1.33 2.4 1.48.29.15.46.13.63-.07.17-.2.74-.86.94-1.15.2-.29.4-.24.67-.14.27.1.1.71 1.7 2.44.82.16.89.27.94.43.05.16.05.93-.19 1.61z"/></path></svg>
+    <span class="whatsapp-tooltip">¿Dudas? Chatea con nosotros</span>
+  </a>
+
+  <!-- Extra JS Helpers for Modal Openers -->
+  <script>
+    function openHelpModal(e) {
+      if (e) e.preventDefault();
+      document.getElementById('help-modal-backdrop').classList.add('active');
+    }
+    function openAboutModal(e) {
+      if (e) e.preventDefault();
+      document.getElementById('about-modal-backdrop').classList.add('active');
+    }
+    function openReviewModal() {
+      document.getElementById('review-modal-backdrop').classList.add('active');
+    }
+    function openSearchModal() {
+      document.getElementById('search-modal-backdrop').classList.add('active');
+      document.getElementById('search-input').focus();
+    }
+    function handleSearchInput(val) {
+      const resultsContainer = document.getElementById('search-results-list');
+      if (!val.trim()) {
+        resultsContainer.innerHTML = '';
+        return;
+      }
+      const query = val.toLowerCase();
+      const matches = PRODUCTS_DATA.filter(p => p.title.toLowerCase().includes(query) || p.category.toLowerCase().includes(query));
+      if (matches.length === 0) {
+        resultsContainer.innerHTML = '<p style="color: var(--text-muted); padding: 0.5rem;">No se encontraron productos.</p>';
+      } else {
+        resultsContainer.innerHTML = matches.map(p => `
+          <div style="display:flex; align-items:center; gap:0.75rem; padding:0.5rem; border-radius:6px; background:var(--bg-subtle); cursor:pointer;" onclick="closeModals(); openProductModal('${p.id}');">
+            <img src="${p.image}" style="width:40px; height:40px; border-radius:4px; object-fit:cover;">
+            <div>
+              <div style="font-weight:600; font-size:0.85rem;">${p.title}</div>
+              <div style="font-weight:700; font-size:0.8rem; color:var(--text-primary);">S/. ${p.price.toFixed(2)}</div>
+            </div>
+          </div>
+        `).join('');
+      }
+    }
+    function filterCategory(cat) {
+      const filterTab = document.querySelector(`.filter-tab[data-category="${cat}"]`);
+      if (filterTab) filterTab.click();
+    }
+  </script>
+
+  <!-- Application Logic -->
+  <script src="app.js"></script>
+
+</body>
+</html>
