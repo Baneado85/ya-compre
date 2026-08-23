@@ -33,7 +33,7 @@
           "urgency_text": "¡OFERTA ESPECIAL POR TIEMPO LIMITADO!",
           "show_stock_bar": true,
           "stock_text": "¡ALERTA DE STOCK BAJO!",
-          "initial_stock": 7,
+          "initial_stock": 10,
           "show_discount_badge": true,
           "discount_badge_text": "🔥 HASTA -50% OFF",
           "show_vendor": true,
