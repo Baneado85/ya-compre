@@ -1,0 +1,20 @@
+<div class="announcement-bar" id="announcement-bar">
+  <div class="announcement-content" id="announcement-text">
+    {{ section.settings.text | default: 'Envío gratis a todo el Perú 🇵🇪 en pedidos seleccionados' }}
+  </div>
+  <button class="announcement-close" id="close-announcement" aria-label="Cerrar aviso">&times;</button>
+</div>
+
+{% schema %}
+{
+  "name": "Barra de anuncio",
+  "settings": [
+    {
+      "type": "text",
+      "id": "text",
+      "label": "Texto del anuncio",
+      "default": "Envío gratis a todo el Perú 🇵🇪 en pedidos seleccionados"
+    }
+  ]
+}
+{% endschema %}

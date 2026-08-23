@@ -1,0 +1,54 @@
+<section class="promo-banner-section">
+  <div class="container">
+    <div class="promo-card">
+      <div class="promo-bg">
+        <img src="{{ 'hero_bg.png' | asset_url }}" alt="Promo Offer">
+      </div>
+      <div class="promo-overlay"></div>
+
+      <div class="promo-content">
+        <span class="promo-tag">{{ section.settings.tag | default: 'OFERTA LIMITADA' }}</span>
+        <h2 class="promo-title">{{ section.settings.title | default: 'Hasta 50% OFF esta semana' }}</h2>
+        <p class="promo-subtitle">{{ section.settings.subtitle | default: 'En productos seleccionados con envío prioritario inmediato.' }}</p>
+
+        <div class="promo-countdown">
+          <div class="countdown-box">
+            <span class="val" id="timer-hrs">01</span>
+            <span class="lbl">Horas</span>
+          </div>
+          <div class="countdown-box">
+            <span class="val" id="timer-min">58</span>
+            <span class="lbl">Minutos</span>
+          </div>
+          <div class="countdown-box">
+            <span class="val" id="timer-sec">04</span>
+            <span class="lbl">Segundos</span>
+          </div>
+        </div>
+
+        <a href="#productos" class="btn btn-primary" onclick="filterCategory('bestsellers')">Ver ofertas con descuento</a>
+      </div>
+
+      <div class="promo-badges">
+        <div class="badge-pill">✨ Exclusivo Online</div>
+        <div class="badge-pill">⚡ Stock Limitado</div>
+        <div class="badge-pill">📦 Despacho 24h</div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Banner de oferta",
+  "settings": [
+    { "type": "text", "id": "tag", "label": "Etiqueta", "default": "OFERTA LIMITADA" },
+    { "type": "text", "id": "title", "label": "Título", "default": "Hasta 50% OFF esta semana" },
+    { "type": "textarea", "id": "subtitle", "label": "Subtítulo", "default": "En productos seleccionados con envío prioritario inmediato." }
+  ],
+  "presets": [
+    { "name": "Banner de oferta" }
+  ]
+}
+{% endschema %}

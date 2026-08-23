@@ -1,0 +1,151 @@
+<section class="product-benefits-section" style="padding: 4rem 0; background: {{ section.settings.bg_color | default: '#f8fafc' }}; border-top: 1px solid rgba(0,0,0,0.05); border-bottom: 1px solid rgba(0,0,0,0.05);">
+  <div class="container">
+
+    {% if section.settings.title != blank %}
+      <div style="text-align: center; max-width: 700px; margin: 0 auto 3rem;">
+        {% if section.settings.tag != blank %}
+          <span style="display: inline-block; background: #e0f2fe; color: #0284c7; font-weight: 800; font-size: 0.8rem; padding: 0.35rem 0.85rem; border-radius: 20px; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 0.75rem;">
+            {{ section.settings.tag }}
+          </span>
+        {% endif %}
+        <h2 style="font-family: var(--font-heading, sans-serif); font-size: clamp(1.75rem, 4vw, 2.4rem); font-weight: 800; color: #0f172a; margin: 0 0 0.75rem; line-height: 1.25;">
+          {{ section.settings.title }}
+        </h2>
+        {% if section.settings.description != blank %}
+          <p style="font-size: 1rem; color: #64748b; margin: 0;">
+            {{ section.settings.description }}
+          </p>
+        {% endif %}
+      </div>
+    {% endif %}
+
+    <div class="benefits-grid" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 1.75rem;">
+      {% for block in section.blocks %}
+        <div 
+          class="benefit-card" 
+          {{ block.shopify_attributes }}
+          style="background: #ffffff; border-radius: 16px; padding: 2rem 1.5rem; border: 1px solid #e2e8f0; box-shadow: 0 4px 20px rgba(0,0,0,0.03); transition: transform 0.3s ease, box-shadow 0.3s ease; display: flex; flex-direction: column; align-items: flex-start;"
+        >
+          <div class="benefit-icon" style="width: 56px; height: 56px; border-radius: 14px; background: #eff6ff; color: #2563eb; display: flex; align-items: center; justify-content: center; font-size: 1.75rem; margin-bottom: 1.25rem;">
+            {{ block.settings.icon | default: "✨" }}
+          </div>
+
+          <h3 style="font-family: var(--font-heading, sans-serif); font-size: 1.2rem; font-weight: 800; color: #0f172a; margin: 0 0 0.6rem; line-height: 1.3;">
+            {{ block.settings.title }}
+          </h3>
+
+          <p style="font-size: 0.925rem; color: #475569; line-height: 1.6; margin: 0;">
+            {{ block.settings.text }}
+          </p>
+
+          {% if block.settings.image != blank %}
+            <img src="{{ block.settings.image | image_url: width: 600 }}" alt="{{ block.settings.title | escape }}" style="width: 100%; border-radius: 10px; margin-top: 1.25rem; object-fit: cover; aspect-ratio: 16/9;">
+          {% endif %}
+        </div>
+      {% endfor %}
+    </div>
+
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Beneficios Destacados",
+  "settings": [
+    {
+      "type": "text",
+      "id": "tag",
+      "label": "Etiqueta superior",
+      "default": "DISEÑO ERGONÓMICO Y SALUDABLE"
+    },
+    {
+      "type": "text",
+      "id": "title",
+      "label": "Título de la sección",
+      "default": "Por qué transformarás tu descanso desde la primera noche"
+    },
+    {
+      "type": "textarea",
+      "id": "description",
+      "label": "Descripción corta",
+      "default": "Diseñado minuciosamente para aliviar dolores de cuello, alinear la columna y brindar el máximo confort durante el sueño."
+    },
+    {
+      "type": "color",
+      "id": "bg_color",
+      "label": "Color de fondo",
+      "default": "#f8fafc"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "benefit",
+      "name": "Beneficio",
+      "settings": [
+        {
+          "type": "text",
+          "id": "icon",
+          "label": "Emoji o Icono",
+          "default": "🛏️"
+        },
+        {
+          "type": "text",
+          "id": "title",
+          "label": "Título del Beneficio",
+          "default": "Soporte Cervical Anatómico"
+        },
+        {
+          "type": "textarea",
+          "id": "text",
+          "label": "Descripción del Beneficio",
+          "default": "Mantiene las vértebras alineadas en su posición natural, eliminando la tensión acumulada en el cuello y hombros."
+        },
+        {
+          "type": "image_picker",
+          "id": "image",
+          "label": "Imagen ilustrativa (Opcional)"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Beneficios del Producto",
+      "blocks": [
+        {
+          "type": "benefit",
+          "settings": {
+            "icon": "🛏️",
+            "title": "Alineación Cervical Perfecta",
+            "text": "Se adapta a la curva natural del cuello para aliviar la presión sobre la columna y reducir rigidez matutina."
+          }
+        },
+        {
+          "type": "benefit",
+          "settings": {
+            "icon": "🧠",
+            "title": "Espuma Viscoelástica Memory Foam",
+            "text": "Espuma de alta densidad con memoria celular que no se deforma con el uso prolongado y retorna suavemente a su forma."
+          }
+        },
+        {
+          "type": "benefit",
+          "settings": {
+            "icon": "🌬️",
+            "title": "Tejido Transpirable e Hipoalergénico",
+            "text": "Funda lavable con tecnología microperforada que permite la circulación del aire evitando la acumulación de calor."
+          }
+        },
+        {
+          "type": "benefit",
+          "settings": {
+            "icon": "😴",
+            "title": "Sueño Profundo y Reparador",
+            "text": "Reduce los giros nocturnos involuntarios y mejora la oxigenación durante el descanso para despertar con energía."
+          }
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}

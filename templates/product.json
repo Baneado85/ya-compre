@@ -1,0 +1,91 @@
+{
+  "sections": {
+    "main-product": {
+      "type": "main-product",
+      "settings": {
+        "show_urgency_bar": true,
+        "urgency_text": "¡OFERTA ESPECIAL POR TIEMPO LIMITADO!",
+        "show_stock_bar": true,
+        "stock_text": "¡ALERTA DE STOCK BAJO!",
+        "initial_stock": 7,
+        "show_discount_badge": true,
+        "discount_badge_text": "🔥 HASTA -50% OFF",
+        "show_vendor": true,
+        "show_rating": true,
+        "rating_count": "142 opiniones verificadas",
+        "show_bundles": true,
+        "bundles_title": "🎁 ELIGE TU PACK EN PROMOCIÓN:",
+        "bundle1_title": "1 UNIDAD — Prueba Individual",
+        "bundle1_subtitle": "Envío Prioritario a todo el Perú",
+        "bundle2_title": "2 UNIDADES — Pack Pareja / Ahorro",
+        "bundle2_subtitle": "Lleva la 2da unidad con 50% OFF + Envío Gratis",
+        "bundle2_badge": "🔥 MÁS POPULAR (AHORRA 25%)",
+        "bundle3_title": "3 UNIDADES — Pack Familiar Mega Ahorro",
+        "bundle3_subtitle": "¡Lleva 3 al precio de 2.2 + Regalo Exclusivo!",
+        "bundle3_badge": "💎 MEJOR OFERTA (AHORRA 35%)",
+        "btn_text": "📦 PEDIR AHORA — PAGO CONTRA ENTREGA",
+        "btn_subtitle": "Pagas al recibir en la puerta de tu casa | Envío Gratis a todo el Perú",
+        "show_trust_badges": true,
+        "badge1_title": "Envío Gratis",
+        "badge1_sub": "A todo el Perú sin costo",
+        "badge2_title": "Pago al Recibir",
+        "badge2_sub": "Efectivo, Yape o Plin",
+        "badge3_title": "Garantía de 30 Días",
+        "badge3_sub": "Satisfacción 100% asegurada",
+        "badge4_title": "Despacho Rápido",
+        "badge4_sub": "Entrega en 24 a 48 hrs"
+      }
+    },
+    "product-benefits": {
+      "type": "product-benefits",
+      "settings": {
+        "tag": "DISEÑO ERGONÓMICO Y SALUDABLE",
+        "title": "Por qué transformarás tu descanso desde la primera noche",
+        "description": "Diseñado minuciosamente para aliviar dolores de cuello, alinear la columna y brindar el máximo confort durante el sueño."
+      }
+    },
+    "product-comparison": {
+      "type": "product-comparison",
+      "settings": {
+        "tag": "LA DIFERENCIA ES CLARA",
+        "title": "Nuestra Almohada Cervical vs Almohadas Comunes",
+        "subtitle": "Compara las especificaciones y comprueba por qué miles de personas nos eligen.",
+        "col1_header": "Especificación / Beneficio",
+        "col2_header": "YA COMPRÉ Premium",
+        "col3_header": "Almohadas Comunes"
+      }
+    },
+    "product-reviews": {
+      "type": "product-reviews",
+      "settings": {
+        "tag": "CLIENTES SATISFECHOS",
+        "title": "Lo que dicen quienes ya descansan con YA COMPRÉ",
+        "subtitle": "Basado en más de 140 compras verificadas en todo el Perú"
+      }
+    },
+    "product-faq": {
+      "type": "product-faq",
+      "settings": {
+        "tag": "DESPEJA TUS DUDAS",
+        "title": "Preguntas Frecuentes sobre tu Pedido",
+        "subtitle": "Todo lo que necesitas saber antes de realizar tu compra con Pago Contra Entrega."
+      }
+    },
+    "sticky-buy-bar": {
+      "type": "sticky-buy-bar",
+      "settings": {
+        "enable_sticky_bar": true,
+        "btn_text": "PEDIR AHORA — PAGO AL RECIBIR",
+        "btn_bg": "#16a34a"
+      }
+    }
+  },
+  "order": [
+    "main-product",
+    "product-benefits",
+    "product-comparison",
+    "product-reviews",
+    "product-faq",
+    "sticky-buy-bar"
+  ]
+}

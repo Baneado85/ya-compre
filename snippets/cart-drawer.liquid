@@ -1,0 +1,36 @@
+<!-- Slide-out Cart Drawer -->
+<div class="cart-drawer-overlay" id="cart-drawer-overlay"></div>
+<aside class="cart-drawer" id="cart-drawer">
+  <div class="cart-drawer-header">
+    <h3>Tu Carrito (<span id="cart-drawer-count">{{ cart.item_count }}</span>)</h3>
+    <button class="icon-btn" id="close-cart-drawer" aria-label="Cerrar Carrito">&times;</button>
+  </div>
+
+  <div class="free-shipping-progress">
+    <div class="free-shipping-text" id="free-shipping-text-val">
+      {% if cart.total_price >= 15000 %}
+        🎉 ¡Felicidades! Tienes <strong>ENVÍO GRATIS</strong>
+      {% else %}
+        Agrega <strong>{{ 15000 | minus: cart.total_price | money }}</strong> más para Envío Gratis
+      {% endif %}
+    </div>
+    <div class="progress-bar-bg">
+      <div class="progress-bar-fill" id="free-shipping-fill" style="width: {{ cart.total_price | times: 100 | divided_by: 15000 | at_most: 100 }}%;"></div>
+    </div>
+  </div>
+
+  <div class="cart-items-container" id="cart-items-container">
+    <!-- Injected via JavaScript on load -->
+  </div>
+
+  <div class="cart-drawer-footer">
+    <div class="cart-subtotal-row">
+      <span>Subtotal:</span>
+      <span id="cart-subtotal-val">{{ cart.total_price | money }}</span>
+    </div>
+    <p style="font-size: 0.75rem; color: var(--text-muted);">Impuestos y gastos de envío calculados al finalizar compra.</p>
+    <button class="cart-checkout-btn" id="cart-checkout-btn">
+      CONTINUAR AL PAGO →
+    </button>
+  </div>
+</aside>

@@ -1,0 +1,538 @@
+<section class="main-product-section" id="main-product-section" style="padding: 2rem 0 3rem;">
+  <div class="container">
+
+    {% if section.settings.show_urgency_bar %}
+      <!-- Urgency & Countdown Announcement Bar -->
+      <div class="urgency-banner" style="background: {{ section.settings.urgency_bg_color | default: 'linear-gradient(90deg, #e63946 0%, #d62828 100%)' }}; color: {{ section.settings.urgency_text_color | default: '#ffffff' }}; padding: 0.75rem 1.25rem; border-radius: var(--radius-md, 8px); margin-bottom: 1.5rem; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 0.5rem; box-shadow: 0 4px 15px rgba(230,57,70,0.25);">
+        <div class="urgency-text" style="font-weight: 700; font-size: 0.95rem; display: flex; align-items: center; gap: 0.5rem;">
+          <span style="font-size: 1.2rem; animation: pulse 1.5s infinite;">⚡</span>
+          <span>{{ section.settings.urgency_text | default: "¡OFERTA ESPECIAL POR TIEMPO LIMITADO!" }}</span>
+        </div>
+        <div class="urgency-timer" style="display: flex; align-items: center; gap: 0.4rem; font-weight: 800; font-family: monospace; font-size: 1.1rem; background: rgba(0,0,0,0.2); padding: 0.35rem 0.75rem; border-radius: 6px;">
+          <span id="pdp-countdown-hours">00</span>:
+          <span id="pdp-countdown-mins">14</span>:
+          <span id="pdp-countdown-secs">59</span>
+        </div>
+      </div>
+    {% endif %}
+
+    <div class="product-detail-grid" style="display: grid; grid-template-columns: 1fr; gap: 2.5rem;">
+      
+      <!-- Media Gallery -->
+      <div class="product-gallery" style="position: relative;">
+        <div class="main-image-wrapper" style="position: relative; border-radius: var(--radius-lg, 12px); overflow: hidden; background: #fff; border: 1px solid rgba(0,0,0,0.06); box-shadow: 0 8px 30px rgba(0,0,0,0.05);">
+          {% if section.settings.show_discount_badge %}
+            <div class="gallery-badge" style="position: absolute; top: 1rem; left: 1rem; z-index: 2; background: #e63946; color: #fff; font-weight: 800; font-size: 0.85rem; padding: 0.4rem 0.85rem; border-radius: 20px; text-transform: uppercase; letter-spacing: 0.5px; box-shadow: 0 4px 10px rgba(230,57,70,0.4);">
+              {{ section.settings.discount_badge_text | default: "🔥 HASTA -50% OFF" }}
+            </div>
+          {% endif %}
+          
+          <div class="cod-badge" style="position: absolute; top: 1rem; right: 1rem; z-index: 2; background: rgba(0,0,0,0.85); backdrop-filter: blur(8px); color: #ffd166; font-weight: 700; font-size: 0.75rem; padding: 0.4rem 0.85rem; border-radius: 20px; display: flex; align-items: center; gap: 0.35rem; border: 1px solid rgba(255,209,102,0.3);">
+            <span>🚚</span> PAGO CONTRA ENTREGA
+          </div>
+
+          {% if product.featured_image %}
+            <img src="{{ product.featured_image | image_url: width: 1000 }}" alt="{{ product.title | escape }}" class="main-product-img" id="main-product-media-img" style="width: 100%; height: auto; display: block; object-fit: cover; transition: transform 0.3s ease;">
+          {% else %}
+            <div style="width: 100%; aspect-ratio: 1/1; background: #f0f0f0; display: flex; align-items: center; justify-content: center; color: #999;">Sin Imagen</div>
+          {% endif %}
+        </div>
+
+        {% if product.images.size > 1 %}
+          <div class="gallery-thumbs" style="display: flex; gap: 0.75rem; margin-top: 1rem; overflow-x: auto; padding-bottom: 0.5rem;">
+            {% for image in product.images %}
+              <img 
+                src="{{ image | image_url: width: 250 }}" 
+                alt="{{ product.title | escape }}" 
+                class="thumb-item {% if forloop.first %}active{% endif %}" 
+                style="width: 75px; height: 75px; object-fit: cover; border-radius: 8px; cursor: pointer; border: 2px solid {% if forloop.first %}var(--color-button, #121212){% else %}transparent{% endif %}; opacity: {% if forloop.first %}1{% else %}0.7{% endif %}; transition: all 0.2s ease;"
+                onclick="switchProductGalleryThumb(this, '{{ image | image_url: width: 1000 }}')"
+              >
+            {% endfor %}
+          </div>
+        {% endif %}
+      </div>
+
+      <!-- Product Information -->
+      <div class="product-detail-info" style="display: flex; flex-direction: column;">
+        
+        {% if section.settings.show_vendor and product.vendor != blank %}
+          <span class="product-vendor" style="text-transform: uppercase; font-size: 0.8rem; font-weight: 700; letter-spacing: 1.5px; color: var(--text-secondary, #666); margin-bottom: 0.25rem;">
+            {{ product.vendor }}
+          </span>
+        {% endif %}
+
+        <h1 style="font-family: var(--font-heading, sans-serif); font-size: clamp(1.5rem, 4vw, 2.2rem); font-weight: 800; line-height: 1.25; margin: 0 0 0.75rem; color: var(--color-foreground, #111);">
+          {{ product.title }}
+        </h1>
+
+        <!-- Rating Summary -->
+        {% if section.settings.show_rating %}
+          <div class="product-rating-summary" style="display: flex; align-items: center; gap: 0.5rem; margin-bottom: 1rem;">
+            <div style="color: #ffb703; font-size: 1.1rem; letter-spacing: 1px;">★★★★★</div>
+            <span style="font-weight: 700; font-size: 0.9rem; color: #111;">4.9/5.0</span>
+            <a href="#product-reviews-section" style="font-size: 0.85rem; color: var(--text-secondary, #666); text-decoration: underline; cursor: pointer;">
+              ({{ section.settings.rating_count | default: "142 opiniones verificadas" }})
+            </a>
+          </div>
+        {% endif %}
+
+        <!-- Stock Progress Bar -->
+        {% if section.settings.show_stock_bar %}
+          <div class="stock-progress-box" style="background: #fff0f3; border: 1px solid #ffccd5; border-radius: 8px; padding: 0.75rem 1rem; margin-bottom: 1.25rem;">
+            <div style="display: flex; justify-content: space-between; font-size: 0.85rem; font-weight: 700; color: #c9184a; margin-bottom: 0.4rem;">
+              <span>🔥 {{ section.settings.stock_text | default: "¡ALERTA DE STOCK BAJO!" }}</span>
+              <span id="stock-count-val">{{ section.settings.initial_stock | default: 7 }} unidades restantes</span>
+            </div>
+            <div style="width: 100%; height: 8px; background: #ffb3c1; border-radius: 10px; overflow: hidden;">
+              <div id="stock-progress-bar" style="width: 85%; height: 100%; background: linear-gradient(90deg, #ff4d6d, #c9184a); border-radius: 10px; transition: width 0.5s ease;"></div>
+            </div>
+          </div>
+        {% endif %}
+
+        <!-- Price Section -->
+        <div class="product-price-container" style="display: flex; align-items: baseline; gap: 0.75rem; flex-wrap: wrap; margin-bottom: 1.25rem; padding-bottom: 1rem; border-bottom: 1px solid rgba(0,0,0,0.08);">
+          <span class="price-current" id="main-price-display" style="font-size: clamp(1.8rem, 4vw, 2.5rem); font-weight: 900; color: #0f172a; font-family: var(--font-heading, sans-serif);">
+            {{ product.selected_or_first_available_variant.price | money }}
+          </span>
+
+          {% if product.compare_at_price > product.price %}
+            <span class="price-original" id="main-compare-price-display" style="font-size: 1.25rem; text-decoration: line-through; color: #94a3b8; font-weight: 500;">
+              {{ product.compare_at_price | money }}
+            </span>
+            {% assign savings = product.compare_at_price | minus: product.price %}
+            <span class="savings-badge" style="background: #22c55e; color: #fff; font-size: 0.75rem; font-weight: 800; padding: 0.25rem 0.6rem; border-radius: 4px; text-transform: uppercase;">
+              Ahorras {{ savings | money }}
+            </span>
+          {% endif %}
+
+          <span class="shipping-tag" style="background: #e0f2fe; color: #0284c7; font-size: 0.75rem; font-weight: 700; padding: 0.25rem 0.6rem; border-radius: 4px; display: flex; align-items: center; gap: 0.25rem;">
+            <span>🚚</span> ENVÍO GRATIS
+          </span>
+        </div>
+
+        <!-- Product Short Description -->
+        {% if product.description != blank %}
+          <div class="product-short-desc" style="font-size: 0.95rem; line-height: 1.6; color: #475569; margin-bottom: 1.5rem;">
+            {{ product.description }}
+          </div>
+        {% endif %}
+
+        <!-- Quantity Multi-pack Bundles (High Converting Offer Packs) -->
+        {% if section.settings.show_bundles %}
+          <div class="bundles-container" style="margin-bottom: 1.5rem;">
+            <label style="font-weight: 800; font-size: 0.95rem; text-transform: uppercase; letter-spacing: 0.5px; display: block; margin-bottom: 0.75rem; color: #0f172a;">
+              {{ section.settings.bundles_title | default: "🎁 ELIGE TU PACK EN PROMOCIÓN:" }}
+            </label>
+
+            <div class="bundles-list" style="display: flex; flex-direction: column; gap: 0.75rem;">
+              
+              <!-- Pack 1 -->
+              <div 
+                class="bundle-option-card active" 
+                data-qty="1" 
+                data-price-multiplier="1" 
+                onclick="selectBundleOption(this, 1)"
+                style="border: 2px solid #2563eb; background: #eff6ff; border-radius: 10px; padding: 0.9rem 1.1rem; cursor: pointer; position: relative; transition: all 0.2s ease; display: flex; align-items: center; justify-content: space-between;"
+              >
+                <div style="display: flex; align-items: center; gap: 0.75rem;">
+                  <input type="radio" name="bundle_choice" value="1" checked style="accent-color: #2563eb; transform: scale(1.2);">
+                  <div>
+                    <div style="font-weight: 800; font-size: 0.95rem; color: #1e293b;">
+                      {{ section.settings.bundle1_title | default: "1 UNIDAD — Prueba Individual" }}
+                    </div>
+                    <div style="font-size: 0.8rem; color: #64748b;">
+                      {{ section.settings.bundle1_subtitle | default: "Envío Prioritario a todo el Perú" }}
+                    </div>
+                  </div>
+                </div>
+                <div style="text-align: right;">
+                  <div style="font-weight: 900; font-size: 1.1rem; color: #0f172a;" class="bundle-price-val">
+                    {{ product.price | money }}
+                  </div>
+                </div>
+              </div>
+
+              <!-- Pack 2 -->
+              <div 
+                class="bundle-option-card" 
+                data-qty="2" 
+                data-price-multiplier="1.75" 
+                onclick="selectBundleOption(this, 2)"
+                style="border: 2px solid #cbd5e1; background: #fff; border-radius: 10px; padding: 0.9rem 1.1rem; cursor: pointer; position: relative; transition: all 0.2s ease; display: flex; align-items: center; justify-content: space-between;"
+              >
+                <div style="position: absolute; top: -10px; right: 12px; background: linear-gradient(90deg, #ff4d6d, #dc2626); color: #fff; font-size: 0.7rem; font-weight: 800; padding: 0.15rem 0.6rem; border-radius: 10px; text-transform: uppercase;">
+                  {{ section.settings.bundle2_badge | default: "🔥 MÁS POPULAR (AHORRA 25%)" }}
+                </div>
+                <div style="display: flex; align-items: center; gap: 0.75rem;">
+                  <input type="radio" name="bundle_choice" value="2" style="accent-color: #2563eb; transform: scale(1.2);">
+                  <div>
+                    <div style="font-weight: 800; font-size: 0.95rem; color: #1e293b;">
+                      {{ section.settings.bundle2_title | default: "2 UNIDADES — Pack Pareja / Ahorro" }}
+                    </div>
+                    <div style="font-size: 0.8rem; color: #16a34a; font-weight: 700;">
+                      {{ section.settings.bundle2_subtitle | default: " include 2da unidad con 50% OFF + Envío Gratis" }}
+                    </div>
+                  </div>
+                </div>
+                <div style="text-align: right;">
+                  {% assign pack2_price = product.price | times: 1.75 %}
+                  <div style="font-weight: 900; font-size: 1.1rem; color: #0f172a;" class="bundle-price-val">
+                    {{ pack2_price | money }}
+                  </div>
+                </div>
+              </div>
+
+              <!-- Pack 3 -->
+              <div 
+                class="bundle-option-card" 
+                data-qty="3" 
+                data-price-multiplier="2.4" 
+                onclick="selectBundleOption(this, 3)"
+                style="border: 2px solid #cbd5e1; background: #fff; border-radius: 10px; padding: 0.9rem 1.1rem; cursor: pointer; position: relative; transition: all 0.2s ease; display: flex; align-items: center; justify-content: space-between;"
+              >
+                <div style="position: absolute; top: -10px; right: 12px; background: linear-gradient(90deg, #7c3aed, #4f46e5); color: #fff; font-size: 0.7rem; font-weight: 800; padding: 0.15rem 0.6rem; border-radius: 10px; text-transform: uppercase;">
+                  {{ section.settings.bundle3_badge | default: "💎 MEJOR OFERTA (AHORRA 35%)" }}
+                </div>
+                <div style="display: flex; align-items: center; gap: 0.75rem;">
+                  <input type="radio" name="bundle_choice" value="3" style="accent-color: #2563eb; transform: scale(1.2);">
+                  <div>
+                    <div style="font-weight: 800; font-size: 0.95rem; color: #1e293b;">
+                      {{ section.settings.bundle3_title | default: "3 UNIDADES — Pack Familiar Mega Ahorro" }}
+                    </div>
+                    <div style="font-size: 0.8rem; color: #7c3aed; font-weight: 700;">
+                      {{ section.settings.bundle3_subtitle | default: "¡Lleva 3 al precio de 2.2 + Regalo Exclusivo!" }}
+                    </div>
+                  </div>
+                </div>
+                <div style="text-align: right;">
+                  {% assign pack3_price = product.price | times: 2.4 %}
+                  <div style="font-weight: 900; font-size: 1.1rem; color: #0f172a;" class="bundle-price-val">
+                    {{ pack3_price | money }}
+                  </div>
+                </div>
+              </div>
+
+            </div>
+          </div>
+        {% endif %}
+
+        <!-- Variants Selector (if product has options) -->
+        {% unless product.has_only_default_variant %}
+          <div class="product-variant-selector-wrapper" style="margin-bottom: 1.5rem;">
+            {% for option in product.options_with_values %}
+              <div style="margin-bottom: 1rem;">
+                <label style="font-weight: 700; font-size: 0.9rem; color: #334155; display: block; margin-bottom: 0.4rem;">
+                  {{ option.name }}: <span style="font-weight: 400;" id="option-val-label-{{ option.position }}">{{ option.selected_value }}</span>
+                </label>
+                <div style="display: flex; gap: 0.5rem; flex-wrap: wrap;">
+                  {% for value in option.values %}
+                    <button 
+                      type="button" 
+                      class="variant-pill-btn {% if option.selected_value == value %}selected{% endif %}"
+                      data-option-index="{{ option.position }}"
+                      data-value="{{ value | escape }}"
+                      onclick="selectVariantOption(this, {{ option.position }}, '{{ value | escape }}')"
+                      style="padding: 0.5rem 1rem; border-radius: 20px; border: 1.5px solid {% if option.selected_value == value %}#0f172a{% else %}#cbd5e1{% endif %}; background: {% if option.selected_value == value %}#0f172a{% else %}#fff{% endif %}; color: {% if option.selected_value == value %}#fff{% else %}#334155{% endif %}; font-size: 0.85rem; font-weight: 600; cursor: pointer; transition: all 0.2s ease;"
+                    >
+                      {{ value }}
+                    </button>
+                  {% endfor %}
+                </div>
+              </div>
+            {% endfor %}
+
+            <!-- Hidden Shopify Native Variant Select -->
+            <select id="product-native-variant-select" style="display: none;">
+              {% for variant in product.variants %}
+                <option value="{{ variant.id }}" data-price="{{ variant.price }}" data-compare-price="{{ variant.compare_at_price }}" {% if variant == product.selected_or_first_available_variant %}selected{% endif %}>
+                  {{ variant.title }}
+                </option>
+              {% endfor %}
+            </select>
+          </div>
+        {% endunless %}
+
+        <!-- Quantity Input Hidden -->
+        <input type="hidden" id="selected-product-qty" value="1">
+
+        <!-- Releasit COD Form Direct Embed Container -->
+        <div class="releasit-cod-form" id="releasit-cod-form-container" data-product-id="{{ product.id }}" style="margin: 0.5rem 0 1.25rem;">
+          <!-- Releasit COD Form app automatically injects form here if set to inline embed -->
+        </div>
+
+        <!-- Primary High-Converting COD CTA Button -->
+        <div class="cta-action-area" style="margin-bottom: 1.5rem;">
+          <button 
+            type="button" 
+            id="main-cod-submit-btn" 
+            class="btn-cod-primary-action"
+            onclick="triggerCODOrderProcess()"
+            style="width: 100%; min-height: 62px; background: {{ section.settings.btn_bg_color | default: 'linear-gradient(90deg, #16a34a 0%, #15803d 100%)' }}; color: #ffffff; border: none; border-radius: 12px; font-family: var(--font-heading, sans-serif); font-size: 1.15rem; font-weight: 800; text-transform: uppercase; letter-spacing: 0.5px; cursor: pointer; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 0.2rem; box-shadow: 0 8px 25px rgba(22,163,74,0.35); transition: transform 0.2s ease, box-shadow 0.2s ease; animation: pulse-green 2s infinite;"
+          >
+            <div style="display: flex; align-items: center; gap: 0.5rem;">
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor"><path d="M12.04 2c-5.46 0-9.91 4.45-9.91 9.91 0 1.75.46 3.45 1.32 4.95L2.05 22l5.25-1.38c1.45.79 3.08 1.21 4.74 1.21 5.46 0 9.91-4.45 9.91-9.91 0-2.65-1.03-5.14-2.9-7.01A9.85 9.85 0 0 0 12.04 2zm5.77 14.15c-.24.68-1.2 1.25-1.95 1.41-.51.11-1.18.2-3.44-.73-2.89-1.19-4.75-4.13-4.89-4.32-.14-.19-1.18-1.57-1.18-3 0-1.43.75-2.13 1.02-2.42.27-.29.59-.36.79-.36.2 0 .4 0 .57.01.18.01.43-.07.67.51.24.58.82 2 .89 2.15.07.15.12.33.02.53-.1.19-.15.31-.3.49-.15.18-.31.4-.44.54-.15.15-.3.31-.13.6.17.29.77 1.27 1.66 2.06 1.14 1.01 2.1 1.33 2.4 1.48.29.15.46.13.63-.07.17-.2.74-.86.94-1.15.2-.29.4-.24.67-.14.27.1.1.71 1.7 2.44.82.16.89.27.94.43.05.16.05.93-.19 1.61z"/></svg>
+              <span>{{ section.settings.btn_text | default: "📦 PEDIR AHORA — PAGO CONTRA ENTREGA" }}</span>
+            </div>
+            <span style="font-size: 0.75rem; font-weight: 600; opacity: 0.95; text-transform: none; letter-spacing: 0;">
+              {{ section.settings.btn_subtitle | default: "Pagas al recibir en la puerta de tu casa | Envío Gratis a todo el Perú" }}
+            </span>
+          </button>
+        </div>
+
+        <!-- Trust Badges Container -->
+        {% if section.settings.show_trust_badges %}
+          <div class="trust-badges-grid" style="display: grid; grid-template-columns: repeat(2, 1fr); gap: 0.75rem; background: #f8fafc; padding: 1.25rem; border-radius: 12px; border: 1px solid #e2e8f0;">
+            <div style="display: flex; align-items: center; gap: 0.6rem;">
+              <span style="font-size: 1.4rem;">🚚</span>
+              <div>
+                <strong style="display: block; font-size: 0.85rem; color: #0f172a;">{{ section.settings.badge1_title | default: "Envío Gratis" }}</strong>
+                <span style="font-size: 0.75rem; color: #64748b;">{{ section.settings.badge1_sub | default: "A todo el Perú sin costo" }}</span>
+              </div>
+            </div>
+            <div style="display: flex; align-items: center; gap: 0.6rem;">
+              <span style="font-size: 1.4rem;">🤝</span>
+              <div>
+                <strong style="display: block; font-size: 0.85rem; color: #0f172a;">{{ section.settings.badge2_title | default: "Pago al Recibir" }}</strong>
+                <span style="font-size: 0.75rem; color: #64748b;">{{ section.settings.badge2_sub | default: "Efectivo, Yape o Plin" }}</span>
+              </div>
+            </div>
+            <div style="display: flex; align-items: center; gap: 0.6rem;">
+              <span style="font-size: 1.4rem;">🛡️</span>
+              <div>
+                <strong style="display: block; font-size: 0.85rem; color: #0f172a;">{{ section.settings.badge3_title | default: "Garantía de 30 Días" }}</strong>
+                <span style="font-size: 0.75rem; color: #64748b;">{{ section.settings.badge3_sub | default: "Satisfacción 100% asegurada" }}</span>
+              </div>
+            </div>
+            <div style="display: flex; align-items: center; gap: 0.6rem;">
+              <span style="font-size: 1.4rem;">⚡</span>
+              <div>
+                <strong style="display: block; font-size: 0.85rem; color: #0f172a;">{{ section.settings.badge4_title | default: "Despacho Rápido" }}</strong>
+                <span style="font-size: 0.75rem; color: #64748b;">{{ section.settings.badge4_sub | default: "Entrega en 24 a 48 hrs" }}</span>
+              </div>
+            </div>
+          </div>
+        {% endif %}
+
+      </div>
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Ficha de Producto COD",
+  "settings": [
+    {
+      "type": "header",
+      "content": "Barra de Urgencia y Temporizador"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_urgency_bar",
+      "label": "Mostrar barra de urgencia",
+      "default": true
+    },
+    {
+      "type": "text",
+      "id": "urgency_text",
+      "label": "Texto de urgencia",
+      "default": "¡OFERTA ESPECIAL POR TIEMPO LIMITADO!"
+    },
+    {
+      "type": "header",
+      "content": "Barra de Stock"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_stock_bar",
+      "label": "Mostrar indicador de stock",
+      "default": true
+    },
+    {
+      "type": "text",
+      "id": "stock_text",
+      "label": "Texto de alerta de stock",
+      "default": "¡ALERTA DE STOCK BAJO!"
+    },
+    {
+      "type": "number",
+      "id": "initial_stock",
+      "label": "Unidades restantes iniciales",
+      "default": 7
+    },
+    {
+      "type": "header",
+      "content": "Insignia de Descuento e Info"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_discount_badge",
+      "label": "Mostrar insignia de descuento sobre imagen",
+      "default": true
+    },
+    {
+      "type": "text",
+      "id": "discount_badge_text",
+      "label": "Texto insignia descuento",
+      "default": "🔥 HASTA -50% OFF"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_vendor",
+      "label": "Mostrar marca / proveedor",
+      "default": true
+    },
+    {
+      "type": "checkbox",
+      "id": "show_rating",
+      "label": "Mostrar estrellas y reseñas",
+      "default": true
+    },
+    {
+      "type": "text",
+      "id": "rating_count",
+      "label": "Texto resumen de opiniones",
+      "default": "142 opiniones verificadas"
+    },
+    {
+      "type": "header",
+      "content": "Packs de Ofertas por Cantidad (Bundles)"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_bundles",
+      "label": "Mostrar selector de packs por cantidad",
+      "default": true
+    },
+    {
+      "type": "text",
+      "id": "bundles_title",
+      "label": "Título de la sección de packs",
+      "default": "🎁 ELIGE TU PACK EN PROMOCIÓN:"
+    },
+    {
+      "type": "text",
+      "id": "bundle1_title",
+      "label": "Título Pack 1",
+      "default": "1 UNIDAD — Prueba Individual"
+    },
+    {
+      "type": "text",
+      "id": "bundle1_subtitle",
+      "label": "Subtítulo Pack 1",
+      "default": "Envío Prioritario a todo el Perú"
+    },
+    {
+      "type": "text",
+      "id": "bundle2_title",
+      "label": "Título Pack 2",
+      "default": "2 UNIDADES — Pack Pareja / Ahorro"
+    },
+    {
+      "type": "text",
+      "id": "bundle2_subtitle",
+      "label": "Subtítulo Pack 2",
+      "default": "Lleva la 2da unidad con 50% OFF + Envío Gratis"
+    },
+    {
+      "type": "text",
+      "id": "bundle2_badge",
+      "label": "Badge Pack 2",
+      "default": "🔥 MÁS POPULAR (AHORRA 25%)"
+    },
+    {
+      "type": "text",
+      "id": "bundle3_title",
+      "label": "Título Pack 3",
+      "default": "3 UNIDADES — Pack Familiar Mega Ahorro"
+    },
+    {
+      "type": "text",
+      "id": "bundle3_subtitle",
+      "label": "Subtítulo Pack 3",
+      "default": "¡Lleva 3 al precio de 2.2 + Regalo Exclusivo!"
+    },
+    {
+      "type": "text",
+      "id": "bundle3_badge",
+      "label": "Badge Pack 3",
+      "default": "💎 MEJOR OFERTA (AHORRA 35%)"
+    },
+    {
+      "type": "header",
+      "content": "Botón Principal de Compra COD"
+    },
+    {
+      "type": "text",
+      "id": "btn_text",
+      "label": "Texto del Botón Principal",
+      "default": "📦 PEDIR AHORA — PAGO CONTRA ENTREGA"
+    },
+    {
+      "type": "text",
+      "id": "btn_subtitle",
+      "label": "Subtítulo debajo del botón",
+      "default": "Pagas al recibir en la puerta de tu casa | Envío Gratis a todo el Perú"
+    },
+    {
+      "type": "header",
+      "content": "Garantías y Badges de Confianza"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_trust_badges",
+      "label": "Mostrar insignias de confianza",
+      "default": true
+    },
+    {
+      "type": "text",
+      "id": "badge1_title",
+      "label": "Insignia 1 Título",
+      "default": "Envío Gratis"
+    },
+    {
+      "type": "text",
+      "id": "badge1_sub",
+      "label": "Insignia 1 Subtítulo",
+      "default": "A todo el Perú sin costo"
+    },
+    {
+      "type": "text",
+      "id": "badge2_title",
+      "label": "Insignia 2 Título",
+      "default": "Pago al Recibir"
+    },
+    {
+      "type": "text",
+      "id": "badge2_sub",
+      "label": "Insignia 2 Subtítulo",
+      "default": "Efectivo, Yape o Plin"
+    },
+    {
+      "type": "text",
+      "id": "badge3_title",
+      "label": "Insignia 3 Título",
+      "default": "Garantía de 30 Días"
+    },
+    {
+      "type": "text",
+      "id": "badge3_sub",
+      "label": "Insignia 3 Subtítulo",
+      "default": "Satisfacción 100% asegurada"
+    },
+    {
+      "type": "text",
+      "id": "badge4_title",
+      "label": "Insignia 4 Título",
+      "default": "Despacho Rápido"
+    },
+    {
+      "type": "text",
+      "id": "badge4_sub",
+      "label": "Insignia 4 Subtítulo",
+      "default": "Entrega en 24 a 48 hrs"
+    }
+  ]
+}
+{% endschema %}

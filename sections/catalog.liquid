@@ -1,0 +1,109 @@
+<section class="catalog-section" id="productos">
+  <div class="container">
+
+    <div class="section-header">
+      <div>
+        <span class="section-tag">{{ section.settings.tag | default: 'SELECCIÓN EXCLUSIVA' }}</span>
+        <h2 class="section-title">{{ section.settings.title | default: 'Catálogo E-Commerce' }}</h2>
+      </div>
+      <a href="{{ section.settings.collection.url | default: routes.all_products_collection_url }}" class="view-all-link">
+        Ver todo
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+      </a>
+    </div>
+
+    <!-- Category Filter Tabs (filtran por etiqueta del producto: tecnologia, bienestar, belleza, hogar, bestseller) -->
+    <div class="filter-tabs">
+      <button class="filter-tab active" data-category="todos">Todos los productos</button>
+      <button class="filter-tab" data-category="bestsellers">Destacados</button>
+      <button class="filter-tab" data-category="tecnologia">Tecnología</button>
+      <button class="filter-tab" data-category="bienestar">Salud &amp; Bienestar</button>
+      <button class="filter-tab" data-category="belleza">Belleza &amp; Skincare</button>
+      <button class="filter-tab" data-category="hogar">Hogar &amp; Estilo</button>
+    </div>
+
+    <!-- Products Grid: productos reales de Shopify -->
+    <div class="products-grid" id="products-grid">
+      {% liquid
+        assign catalog_collection = section.settings.collection
+        if catalog_collection == blank
+          assign catalog_collection = collections.all
+        endif
+        assign catalog_limit = section.settings.products_to_show | default: 12
+      %}
+
+      {% for product in catalog_collection.products limit: catalog_limit %}
+        {% liquid
+          assign p_category = 'general'
+          if product.tags contains 'tecnologia'
+            assign p_category = 'tecnologia'
+          elsif product.tags contains 'bienestar'
+            assign p_category = 'bienestar'
+          elsif product.tags contains 'belleza'
+            assign p_category = 'belleza'
+          elsif product.tags contains 'hogar'
+            assign p_category = 'hogar'
+          endif
+
+          assign p_is_bestseller = false
+          if product.tags contains 'bestseller' or product.tags contains 'destacado'
+            assign p_is_bestseller = true
+          endif
+        %}
+        <article class="product-card" data-id="{{ product.id }}" data-category="{{ p_category }}" data-bestseller="{{ p_is_bestseller }}">
+          <a href="{{ product.url }}" class="product-image-container" style="display:block;">
+            {% if product.compare_at_price > product.price %}
+              {% assign discount_pct = product.compare_at_price | minus: product.price | times: 100 | divided_by: product.compare_at_price %}
+              <span class="discount-badge">-{{ discount_pct }}%</span>
+            {% endif %}
+            {% if product.featured_image %}
+              <img src="{{ product.featured_image | image_url: width: 600 }}" alt="{{ product.title | escape }}" loading="lazy">
+            {% endif %}
+          </a>
+          <div class="product-info">
+            <span class="product-vendor">{{ product.vendor }}</span>
+            <h3 class="product-title"><a href="{{ product.url }}" style="color:inherit; text-decoration:none;">{{ product.title }}</a></h3>
+            <div class="product-price-row">
+              <span class="price-current">{{ product.price | money }}</span>
+              {% if product.compare_at_price > product.price %}
+                <span class="price-original">{{ product.compare_at_price | money }}</span>
+              {% endif %}
+            </div>
+            <div class="product-actions">
+              {% if product.variants.size == 1 and product.available %}
+                <button class="btn-add-cart" data-variant-id="{{ product.selected_or_first_available_variant.id }}">
+                  <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/><path d="M16 10a4 4 0 0 1-8 0"/></svg>
+                  Añadir al carrito
+                </button>
+              {% elsif product.available %}
+                <a href="{{ product.url }}" class="btn-add-cart" style="text-decoration:none;">Ver opciones</a>
+              {% else %}
+                <button class="btn-add-cart" disabled style="opacity:0.5; cursor:not-allowed;">Agotado</button>
+              {% endif %}
+            </div>
+          </div>
+        </article>
+      {% else %}
+        <div style="grid-column: 1/-1; text-align:center; padding: 3rem; color: var(--text-muted);">
+          Todavía no hay productos publicados en esta colección. Agrégalos desde Shopify Admin → Productos.
+        </div>
+      {% endfor %}
+    </div>
+
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Catálogo",
+  "settings": [
+    { "type": "text", "id": "tag", "label": "Etiqueta", "default": "SELECCIÓN EXCLUSIVA" },
+    { "type": "text", "id": "title", "label": "Título", "default": "Catálogo E-Commerce" },
+    { "type": "collection", "id": "collection", "label": "Colección a mostrar", "info": "Si la dejas vacía se muestran todos los productos de la tienda." },
+    { "type": "range", "id": "products_to_show", "label": "Productos a mostrar", "min": 4, "max": 48, "step": 4, "default": 12 }
+  ],
+  "presets": [
+    { "name": "Catálogo" }
+  ]
+}
+{% endschema %}

@@ -1,0 +1,48 @@
+<section style="padding: 5rem 0;">
+  <div class="container">
+    <div class="section-header">
+      <div>
+        <span class="section-tag">COLECCIÓN</span>
+        <h1 class="section-title">{{ collection.title }}</h1>
+      </div>
+    </div>
+
+    {% if collection.description != blank %}
+      <div style="color: var(--text-secondary); margin-bottom: 2rem; max-width: 700px;">{{ collection.description }}</div>
+    {% endif %}
+
+    {% if collection.products.size == 0 %}
+      <p style="color: var(--text-muted); padding: 3rem 0;">Todavía no hay productos publicados en esta colección.</p>
+    {% else %}
+      <div class="products-grid">
+        {% for product in collection.products %}
+          <article class="product-card">
+            <div class="product-image-container">
+              {% if product.featured_image %}
+                <span class="discount-badge" style="{% unless product.compare_at_price > product.price %}display:none;{% endunless %}">
+                  {% if product.compare_at_price > product.price %}
+                    -{{ product.compare_at_price | minus: product.price | times: 100 | divided_by: product.compare_at_price }}%
+                  {% endif %}
+                </span>
+                <img src="{{ product.featured_image | image_url: width: 600 }}" alt="{{ product.title | escape }}" loading="lazy">
+              {% endif %}
+            </div>
+            <div class="product-info">
+              <span class="product-vendor">{{ product.vendor }}</span>
+              <h3 class="product-title"><a href="{{ product.url }}">{{ product.title }}</a></h3>
+              <div class="product-price-row">
+                <span class="price-current">{{ product.price | money }}</span>
+                {% if product.compare_at_price > product.price %}
+                  <span class="price-original">{{ product.compare_at_price | money }}</span>
+                {% endif %}
+              </div>
+              <div class="product-actions">
+                <a href="{{ product.url }}" class="btn-add-cart" style="text-decoration:none;">Ver producto</a>
+              </div>
+            </div>
+          </article>
+        {% endfor %}
+      </div>
+    {% endif %}
+  </div>
+</section>

@@ -1,0 +1,39 @@
+<section class="comparison-section">
+  <div class="container">
+    <div class="comparison-wrapper">
+      <h2 class="comparison-title">{{ section.settings.title | default: 'Mira la diferencia en tu descanso' }}</h2>
+      <p class="comparison-desc">{{ section.settings.description | default: 'Arrastra el control para comparar la postura de tu columna con la almohada cervical YA COMPRÉ.' }}</p>
+
+      <div class="before-after-container" id="comparison-container">
+        <!-- After Image (Bottom) -->
+        <img src="{{ 'almohada_cervical.png' | asset_url }}" alt="Con Almohada Ergonomica YA COMPRÉ" class="after-image">
+        <span class="comparison-label label-after">CON YA COMPRÉ</span>
+
+        <!-- Before Image (Top Clip) -->
+        <div class="before-image-wrapper" id="before-wrapper">
+          <img src="{{ 'hero_bg.png' | asset_url }}" alt="Sin Almohada Ergonomica" class="before-image">
+          <span class="comparison-label label-before">ALMOHADA COMÚN</span>
+        </div>
+
+        <!-- Drag Handle Button -->
+        <div class="slider-handle" id="comparison-handle">
+          <div class="slider-handle-button">↔</div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Comparador antes/después",
+  "settings": [
+    { "type": "text", "id": "title", "label": "Título", "default": "Mira la diferencia en tu descanso" },
+    { "type": "textarea", "id": "description", "label": "Descripción", "default": "Arrastra el control para comparar la postura de tu columna con la almohada cervical YA COMPRÉ." }
+  ],
+  "presets": [
+    { "name": "Comparador antes/después" }
+  ]
+}
+{% endschema %}

@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="{{ request.locale.iso_code }}">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>{{ page_title | default: "YA COMPRÉ | Productos Premium a un solo Klick" }}</title>
+  <meta name="description" content="{{ page_description | default: 'YA COMPRÉ - Tu tienda online e-commerce de confianza en Perú. Productos premium de tecnología, belleza, bienestar y hogar con envío a todo el Perú y pago contra entrega.' }}">
+  <meta name="keywords" content="YA COMPRÉ, ecommerce Perú, shopify perú, productos premium, pago contra entrega, envío gratis Lima, ofertas Perú">
+
+  <!-- Open Graph / Facebook / WhatsApp -->
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="YA COMPRÉ | Productos Premium a un solo Klick">
+  <meta property="og:description" content="Productos de diseño premium para una vida más simple y elegante. Envío a todo el Perú con pago contra entrega.">
+  <meta property="og:image" content="{{ 'logo2.png' | asset_url }}">
+
+  <!-- Favicon -->
+  <link rel="icon" type="image/png" href="{{ 'logo2.png' | asset_url }}">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+  <!-- Stylesheet -->
+  <link rel="stylesheet" href="{{ 'styles.css' | asset_url }}">
+
+  {{ content_for_header }}
+</head>
+<body>
+
+  <div style="display:none"> {% section 'announcement-bar' %} </div>
+  <div style="display:none"> {% section 'header' %} </div>
+
+  <main>
+    {{ content_for_layout }}
+  </main>
+
+  {% section 'footer' %}
+
+  {% render 'cart-drawer' %}
+  {% render 'modals' %}
+  {% render 'whatsapp-float' %}
+
+  <!-- Extra JS Helpers for Modal Openers -->
+  <script>
+    function openHelpModal(e) {
+      if (e) e.preventDefault();
+      document.getElementById('help-modal-backdrop').classList.add('active');
+    }
+    function openAboutModal(e) {
+      if (e) e.preventDefault();
+      document.getElementById('about-modal-backdrop').classList.add('active');
+    }
+    function openReviewModal() {
+      document.getElementById('review-modal-backdrop').classList.add('active');
+    }
+    function openSearchModal() {
+      document.getElementById('search-modal-backdrop').classList.add('active');
+      document.getElementById('search-input').focus();
+    }
+  </script>
+
+  {% render 'reviews-data' %}
+
+  <!-- Application Scripts -->
+  <script src="{{ 'app.js' | asset_url }}" defer></script>
+
+</body>
+</html>

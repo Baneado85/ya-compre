@@ -1,0 +1,153 @@
+<!-- Cash on Delivery (Pago Contra Entrega) Checkout Form Modal -->
+<div class="modal-backdrop" id="cod-modal-backdrop">
+  <div class="modal-window cod-form-modal">
+    <button class="modal-close-btn" onclick="closeModals()">&times;</button>
+
+    <div style="text-align: center; margin-bottom: 1.5rem;">
+      <img src="{{ 'logo2.png' | asset_url }}" alt="{{ shop.name }} Logo" style="height: 48px; margin: 0 auto 0.5rem;">
+      <h2 style="font-family: var(--font-heading); font-size: 1.5rem;">Pedido Contra Entrega (Perú)</h2>
+      <p style="font-size: 0.85rem; color: var(--text-secondary);">Completa tus datos para enviarte el pedido y pagar al recibirlo.</p>
+    </div>
+
+    <div id="cod-order-summary"></div>
+
+    <form id="cod-checkout-form">
+      <div class="form-group">
+        <label for="cod-name">Nombres y Apellidos *</label>
+        <input type="text" id="cod-name" placeholder="Ej. Juan Pérez" required>
+      </div>
+
+      <div class="form-group">
+        <label for="cod-phone">Número de WhatsApp / Teléfono *</label>
+        <input type="tel" id="cod-phone" placeholder="Ej. 987654321" required>
+      </div>
+
+      <div class="form-group">
+        <label for="cod-district">Ciudad / Distrito / Provincia *</label>
+        <input type="text" id="cod-district" placeholder="Ej. San Borja, Lima o Chiclayo, Lambayeque" required>
+      </div>
+
+      <div class="form-group">
+        <label for="cod-address">Dirección de Entrega Exacta + Referencia *</label>
+        <input type="text" id="cod-address" placeholder="Ej. Av. Javier Prado 1234, Dpto 301 (Frente a la tienda X)" required>
+      </div>
+
+      <div class="form-group">
+        <label for="cod-payment">Forma de Pago Preferida al Recibir *</label>
+        <select id="cod-payment" required>
+          <option value="Efectivo en mano">Efectivo en mano al repartidor</option>
+          <option value="Yape / Plin">Yape o Plin al momento de recibir</option>
+          <option value="Tarjeta de crédito/débito">Tarjeta de Crédito / Débito pos repartidor</option>
+        </select>
+      </div>
+
+      <button type="submit" class="btn btn-whatsapp" style="width: 100%; height: 50px; font-size: 1.05rem; margin-top: 1rem;">
+        🚀 CONFIRMAR MI PEDIDO POR WHATSAPP
+      </button>
+    </form>
+  </div>
+</div>
+
+<!-- Help & FAQs Modal -->
+<div class="modal-backdrop" id="help-modal-backdrop">
+  <div class="modal-window" style="max-width: 650px; padding: 2.5rem;">
+    <button class="modal-close-btn" onclick="closeModals()">&times;</button>
+    <h2 style="font-family: var(--font-heading); font-size: 1.75rem; margin-bottom: 1.5rem;">Centro de Ayuda & Preguntas Frecuentes</h2>
+
+    <div class="accordion-item active">
+      <div class="accordion-header">¿Cómo funciona el Pago Contra Entrega? <span>+</span></div>
+      <div class="accordion-content">
+        Tú realizas tu pedido en nuestra web o por WhatsApp. Nosotros lo empacamos y lo enviamos hasta la puerta de tu casa. Le pagas directamente al repartidor en efectivo, Yape, Plin o tarjeta cuando recibas y revises tu paquete.
+      </div>
+    </div>
+
+    <div class="accordion-item">
+      <div class="accordion-header">¿Puedo comprar con Shopify Checkout? <span>+</span></div>
+      <div class="accordion-content">
+        ¡Sí! Esta tienda funciona sobre Shopify. Cuando actives el checkout oficial de Shopify para tus productos, el pago con tarjeta se procesa de forma segura directamente en la plataforma.
+      </div>
+    </div>
+
+    <div class="accordion-item">
+      <div class="accordion-header">¿Cuánto demoran los envíos? <span>+</span></div>
+      <div class="accordion-content">
+        Para Lima Metropolitana entregamos en 24 a 48 horas hábiles. Para provincias el envío demora entre 2 a 4 días hábiles mediante Olva Courier o Shalom con seguimiento.
+      </div>
+    </div>
+
+    <div class="accordion-item">
+      <div class="accordion-header">¿Tienen garantía los productos? <span>+</span></div>
+      <div class="accordion-content">
+        ¡Sí! Todos nuestros productos cuentan con 30 días de garantía directa ante cualquier defecto de fábrica o disconformidad. Si tu producto no cumple con lo prometido te lo cambiamos o reembolsamos.
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- About Us Modal -->
+<div class="modal-backdrop" id="about-modal-backdrop">
+  <div class="modal-window" style="max-width: 650px; padding: 2.5rem;">
+    <button class="modal-close-btn" onclick="closeModals()">&times;</button>
+    <div style="text-align: center; margin-bottom: 1.5rem;">
+      <img src="{{ 'logo2.png' | asset_url }}" alt="{{ shop.name }} Logo" style="height: 60px; margin-bottom: 1rem;">
+      <h2 style="font-family: var(--font-heading); font-size: 1.8rem;">Sobre {{ shop.name }}</h2>
+    </div>
+    <p style="color: var(--text-secondary); line-height: 1.7; margin-bottom: 1rem;">
+      Nacimos en Perú con una misión clara: ofrecer productos útiles, de diseño minimalista y alta calidad que realmente mejoren el día a día de nuestros clientes.
+    </p>
+    <p style="color: var(--text-secondary); line-height: 1.7; margin-bottom: 1.5rem;">
+      Nos alejamos del desorden y de las falsas promesas. Seleccionamos cuidadosamente cada artículo, asegurándonos de que cumpla con los estándares más exigentes de durabilidad, confort y estética.
+    </p>
+    <div style="background-color: var(--bg-subtle); padding: 1.25rem; border-radius: var(--radius-md); text-align: center;">
+      <strong style="color: var(--text-primary); font-size: 1.1rem;">"Tu tranquilidad y satisfacción es nuestra máxima prioridad."</strong>
+    </div>
+  </div>
+</div>
+
+<!-- Review Submission Modal -->
+<div class="modal-backdrop" id="review-modal-backdrop">
+  <div class="modal-window" style="max-width: 500px; padding: 2.5rem;">
+    <button class="modal-close-btn" onclick="closeModals()">&times;</button>
+    <h2 style="font-family: var(--font-heading); font-size: 1.5rem; margin-bottom: 1rem;">Deja tu opinión sobre {{ shop.name }}</h2>
+
+    <form id="new-review-form">
+      <div class="form-group">
+        <label for="review-name">Tu Nombre *</label>
+        <input type="text" id="review-name" placeholder="Ej. Camila S." required>
+      </div>
+
+      <div class="form-group">
+        <label for="review-city">Ciudad / Distrito *</label>
+        <input type="text" id="review-city" placeholder="Ej. Surco, Lima" required>
+      </div>
+
+      <div class="form-group">
+        <label for="review-rating">Puntuación *</label>
+        <select id="review-rating" required>
+          <option value="5">★★★★★ (5/5) - Excelente</option>
+          <option value="4">★★★★☆ (4/5) - Muy Bueno</option>
+          <option value="3">★★★☆☆ (3/5) - Regular</option>
+        </select>
+      </div>
+
+      <div class="form-group">
+        <label for="review-text">Tu Comentario *</label>
+        <textarea id="review-text" rows="4" placeholder="¿Qué te pareció el producto y el servicio de entrega?" required></textarea>
+      </div>
+
+      <button type="submit" class="btn btn-secondary" style="width: 100%; font-size: 1rem;">Publicar Opinión</button>
+    </form>
+  </div>
+</div>
+
+<!-- Search Modal -->
+<div class="modal-backdrop" id="search-modal-backdrop">
+  <div class="modal-window" style="max-width: 500px; padding: 2rem;">
+    <button class="modal-close-btn" onclick="closeModals()">&times;</button>
+    <h3 style="font-family: var(--font-heading); font-size: 1.3rem; margin-bottom: 1rem;">Buscar en {{ shop.name }}</h3>
+    <form class="form-group" onsubmit="handleSearchSubmit(event)" style="display:flex; gap:0.5rem;">
+      <input type="text" id="search-input" name="q" placeholder="Escribe el nombre del producto..." style="flex-grow:1;" autocomplete="off">
+      <button type="submit" class="btn btn-secondary">Buscar</button>
+    </form>
+  </div>
+</div>

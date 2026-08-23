@@ -1,0 +1,68 @@
+<section class="tiktok-section">
+  <div class="container">
+    <div class="section-header" style="text-align: center; display: block; margin-bottom: 2rem;">
+      <h2 class="section-title">{{ section.settings.title | default: 'Lo que dicen en TikTok' }}</h2>
+      <p style="color: var(--text-secondary); margin-top: 0.5rem;">Gente real que transformó su rutina diaria. Etiquétanos en @yacompre para aparecer aquí.</p>
+    </div>
+
+    <div class="tiktok-grid">
+
+      <div class="tiktok-card" onclick="openTikTokModal('Auriculares Wireless Pro', 'video1.mp4')">
+        <img src="{{ 'auriculares_pro.png' | asset_url }}" alt="Testimonio TikTok Auriculares Pro">
+        <div class="tiktok-card-overlay">
+          <div class="tiktok-badge">TikTok Viral 🔥</div>
+          <div class="play-icon-circle">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor"><polygon points="5 3 19 12 5 21 5 3"/></svg>
+          </div>
+          <div class="tiktok-caption">"La cancelación de ruido aisló todo el tráfico de Lima 🎧"</div>
+        </div>
+      </div>
+
+      <div class="tiktok-card" onclick="openTikTokModal('Almohada Cervical', 'video2.mp4')">
+        <img src="{{ 'almohada_cervical.png' | asset_url }}" alt="Testimonio TikTok Cervical">
+        <div class="tiktok-card-overlay">
+          <div class="tiktok-badge">Recomendado</div>
+          <div class="play-icon-circle">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor"><polygon points="5 3 19 12 5 21 5 3"/></svg>
+          </div>
+          <div class="tiktok-caption">"Deja de destrozarte la columna al dormir..."</div>
+        </div>
+      </div>
+
+      <div class="tiktok-card" onclick="openTikTokModal('SmartWatch Ultra', 'video3.mp4')">
+        <img src="{{ 'smartwatch_ultra.png' | asset_url }}" alt="Testimonio TikTok Smartwatch">
+        <div class="tiktok-card-overlay">
+          <div class="tiktok-badge">Tech Hack</div>
+          <div class="play-icon-circle">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor"><polygon points="5 3 19 12 5 21 5 3"/></svg>
+          </div>
+          <div class="tiktok-caption">"Parece de 800 soles pero costó una fracción ⌚"</div>
+        </div>
+      </div>
+
+      <div class="tiktok-card" onclick="openTikTokModal('Mochila Antirrobo', 'video4.mp4')">
+        <img src="{{ 'mochila_antirrobo.png' | asset_url }}" alt="Testimonio TikTok Mochila">
+        <div class="tiktok-card-overlay">
+          <div class="tiktok-badge">Viajes &amp; Trabajo</div>
+          <div class="play-icon-circle">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor"><polygon points="5 3 19 12 5 21 5 3"/></svg>
+          </div>
+          <div class="tiktok-caption">"Totalmente impermeable y cargo mi cel por USB 🎒"</div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Reseñas de TikTok",
+  "settings": [
+    { "type": "text", "id": "title", "label": "Título", "default": "Lo que dicen en TikTok" }
+  ],
+  "presets": [
+    { "name": "Reseñas de TikTok" }
+  ]
+}
+{% endschema %}

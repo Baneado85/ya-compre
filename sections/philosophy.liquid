@@ -1,0 +1,43 @@
+<section class="philosophy-section">
+  <div class="container philosophy-container">
+    <span class="section-tag">NUESTRA FILOSOFÍA</span>
+    <blockquote class="philosophy-quote">
+      {{ section.settings.quote | default: '"Cada producto de nuestra colección es seleccionado minuciosamente por su diseño, calidad superior y capacidad de perdurar en tu día a día. Sin exageraciones ni modas pasajeras. Solo excelencia que habla por sí sola."' }}
+    </blockquote>
+
+    <div class="stats-grid">
+      <div class="stat-item">
+        <h3>{{ section.settings.stat1_value | default: '9,560+' }}</h3>
+        <p>{{ section.settings.stat1_label | default: 'Clientes felices' }}</p>
+      </div>
+      <div class="stat-item">
+        <h3>{{ section.settings.stat2_value | default: '100%' }}</h3>
+        <p>{{ section.settings.stat2_label | default: 'Verificado antes de envío' }}</p>
+      </div>
+      <div class="stat-item">
+        <h3>{{ section.settings.stat3_value | default: '40+' }}</h3>
+        <p>{{ section.settings.stat3_label | default: 'Ciudades atendidas' }}</p>
+      </div>
+    </div>
+
+    <button class="btn btn-secondary" onclick="openAboutModal(event)">Descubre nuestra historia</button>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Filosofía y estadísticas",
+  "settings": [
+    { "type": "textarea", "id": "quote", "label": "Cita" },
+    { "type": "text", "id": "stat1_value", "label": "Estadística 1 - valor", "default": "9,560+" },
+    { "type": "text", "id": "stat1_label", "label": "Estadística 1 - etiqueta", "default": "Clientes felices" },
+    { "type": "text", "id": "stat2_value", "label": "Estadística 2 - valor", "default": "100%" },
+    { "type": "text", "id": "stat2_label", "label": "Estadística 2 - etiqueta", "default": "Verificado antes de envío" },
+    { "type": "text", "id": "stat3_value", "label": "Estadística 3 - valor", "default": "40+" },
+    { "type": "text", "id": "stat3_label", "label": "Estadística 3 - etiqueta", "default": "Ciudades atendidas" }
+  ],
+  "presets": [
+    { "name": "Filosofía y estadísticas" }
+  ]
+}
+{% endschema %}

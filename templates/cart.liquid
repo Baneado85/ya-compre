@@ -1,0 +1,35 @@
+<section style="padding: 5rem 0;">
+  <div class="container" style="max-width: 700px;">
+    <h1 class="section-title" style="margin-bottom: 2rem;">Tu Carrito</h1>
+
+    {% if cart.item_count == 0 %}
+      <div class="cart-empty-state">
+        <p>Tu carrito está vacío</p>
+        <a href="{{ routes.root_url }}" class="btn btn-outline-dark" style="margin-top: 1rem;">Explorar Productos</a>
+      </div>
+    {% else %}
+      {% form 'cart' %}
+        {% for item in cart.items %}
+          <div class="cart-item">
+            {% if item.image %}
+              <img src="{{ item.image | image_url: width: 150 }}" alt="{{ item.title | escape }}" class="cart-item-img">
+            {% endif %}
+            <div class="cart-item-details">
+              <div class="cart-item-title">{{ item.product.title }}</div>
+              <div class="cart-item-price">{{ item.final_line_price | money }}</div>
+              <input type="number" name="updates[{{ item.key }}]" value="{{ item.quantity }}" min="0" style="width: 70px; padding: 0.4rem;">
+            </div>
+          </div>
+        {% endfor %}
+
+        <div class="cart-subtotal-row" style="margin-top: 1.5rem;">
+          <span>Subtotal:</span>
+          <span>{{ cart.total_price | money }}</span>
+        </div>
+
+        <button type="submit" name="update" class="btn btn-outline-dark" style="width: 100%; margin-top: 1rem;">Actualizar carrito</button>
+        <button type="submit" name="checkout" class="cart-checkout-btn" style="margin-top: 0.75rem;">CONTINUAR AL PAGO →</button>
+      {% endform %}
+    {% endif %}
+  </div>
+</section>

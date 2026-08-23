@@ -1,0 +1,19 @@
+<section style="padding: 5rem 0;">
+  <div class="container">
+    <h1 class="section-title" style="margin-bottom: 2rem;">Colecciones</h1>
+    <div class="products-grid">
+      {% for collection in collections %}
+        <article class="product-card">
+          <div class="product-image-container">
+            {% if collection.image %}
+              <img src="{{ collection.image | image_url: width: 600 }}" alt="{{ collection.title | escape }}" loading="lazy">
+            {% endif %}
+          </div>
+          <div class="product-info">
+            <h3 class="product-title"><a href="{{ collection.url }}">{{ collection.title }}</a></h3>
+          </div>
+        </article>
+      {% endfor %}
+    </div>
+  </div>
+</section>

@@ -1,0 +1,217 @@
+<section class="product-comparison-section" style="padding: 4.5rem 0; background: #ffffff;">
+  <div class="container">
+
+    <div style="text-align: center; max-width: 700px; margin: 0 auto 3rem;">
+      {% if section.settings.tag != blank %}
+        <span style="display: inline-block; background: #fef3c7; color: #d97706; font-weight: 800; font-size: 0.8rem; padding: 0.35rem 0.85rem; border-radius: 20px; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 0.75rem;">
+          {{ section.settings.tag }}
+        </span>
+      {% endif %}
+      <h2 style="font-family: var(--font-heading, sans-serif); font-size: clamp(1.75rem, 4vw, 2.4rem); font-weight: 800; color: #0f172a; margin: 0 0 0.75rem; line-height: 1.25;">
+        {{ section.settings.title }}
+      </h2>
+      {% if section.settings.subtitle != blank %}
+        <p style="font-size: 1rem; color: #64748b; margin: 0;">
+          {{ section.settings.subtitle }}
+        </p>
+      {% endif %}
+    </div>
+
+    <div class="comparison-table-wrapper" style="max-width: 850px; margin: 0 auto; overflow-x: auto; background: #ffffff; border-radius: 20px; border: 1px solid #e2e8f0; box-shadow: 0 10px 40px rgba(0,0,0,0.04);">
+      <table style="width: 100%; border-collapse: collapse; text-align: left; font-size: 0.95rem;">
+        <thead>
+          <tr style="border-bottom: 2px solid #e2e8f0;">
+            <th style="padding: 1.25rem 1.5rem; width: 45%; background: #f8fafc; font-weight: 700; color: #475569; border-top-left-radius: 20px;">
+              {{ section.settings.col1_header | default: "Característica" }}
+            </th>
+            <th style="padding: 1.25rem 1.5rem; width: 30%; background: #eff6ff; text-align: center; color: #1e3a8a; font-weight: 900; font-size: 1.05rem; border-bottom: 3px solid #2563eb;">
+              <span style="display: flex; align-items: center; justify-content: center; gap: 0.35rem;">
+                <span>✨</span> {{ section.settings.col2_header | default: "NUESTRA ALMOHADA" }}
+              </span>
+            </th>
+            <th style="padding: 1.25rem 1.5rem; width: 25%; background: #f8fafc; text-align: center; color: #94a3b8; font-weight: 600; border-top-right-radius: 20px;">
+              {{ section.settings.col3_header | default: "Otras Almohadas" }}
+            </th>
+          </tr>
+        </thead>
+        <tbody>
+          {% for block in section.blocks %}
+            <tr {{ block.shopify_attributes }} style="border-bottom: 1px solid #f1f5f9;">
+              <td style="padding: 1.1rem 1.5rem; font-weight: 700; color: #1e293b;">
+                {{ block.settings.feature_name }}
+              </td>
+              <td style="padding: 1.1rem 1.5rem; background: rgba(239, 246, 255, 0.4); text-align: center; font-weight: 800; color: #16a34a;">
+                {% if block.settings.our_value_type == 'check' %}
+                  <span style="font-size: 1.3rem;">✅</span>
+                  {% if block.settings.our_value != blank %}
+                    <span style="display: block; font-size: 0.8rem; color: #15803d; font-weight: 700;">{{ block.settings.our_value }}</span>
+                  {% endif %}
+                {% else %}
+                  <span style="color: #1e293b;">{{ block.settings.our_value }}</span>
+                {% endif %}
+              </td>
+              <td style="padding: 1.1rem 1.5rem; text-align: center; color: #94a3b8;">
+                {% if block.settings.other_value_type == 'cross' %}
+                  <span style="font-size: 1.2rem; color: #ef4444;">❌</span>
+                  {% if block.settings.other_value != blank %}
+                    <span style="display: block; font-size: 0.8rem; color: #94a3b8;">{{ block.settings.other_value }}</span>
+                  {% endif %}
+                {% else %}
+                  <span>{{ block.settings.other_value }}</span>
+                {% endif %}
+              </td>
+            </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+    </div>
+
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Tabla Comparativa",
+  "settings": [
+    {
+      "type": "text",
+      "id": "tag",
+      "label": "Etiqueta superior",
+      "default": "LA DIFERENCIA ES CLARA"
+    },
+    {
+      "type": "text",
+      "id": "title",
+      "label": "Título de la sección",
+      "default": "Nuestra Almohada Cervical vs Almohadas Comunes"
+    },
+    {
+      "type": "text",
+      "id": "subtitle",
+      "label": "Subtítulo de la sección",
+      "default": "Compara las especificaciones y comprueba por qué miles de personas nos eligen."
+    },
+    {
+      "type": "text",
+      "id": "col1_header",
+      "label": "Encabezado Columna 1",
+      "default": "Especificación / Beneficio"
+    },
+    {
+      "type": "text",
+      "id": "col2_header",
+      "label": "Encabezado Columna 2 (Tu Producto)",
+      "default": "YA COMPRÉ Premium"
+    },
+    {
+      "type": "text",
+      "id": "col3_header",
+      "label": "Encabezado Columna 3 (Competencia)",
+      "default": "Almohadas Comunes"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "row",
+      "name": "Fila Comparativa",
+      "settings": [
+        {
+          "type": "text",
+          "id": "feature_name",
+          "label": "Nombre del atributo",
+          "default": "Soporte Ergonómico Anatómico"
+        },
+        {
+          "type": "select",
+          "id": "our_value_type",
+          "label": "Icono Tu Producto",
+          "options": [
+            { "value": "check", "label": "Check Verde (✅)" },
+            { "value": "text", "label": "Texto Personalizado" }
+          ],
+          "default": "check"
+        },
+        {
+          "type": "text",
+          "id": "our_value",
+          "label": "Texto adicional Tu Producto",
+          "default": "Diseño Mariposa 3D"
+        },
+        {
+          "type": "select",
+          "id": "other_value_type",
+          "label": "Icono Otros",
+          "options": [
+            { "value": "cross", "label": "Cruz Roja (❌)" },
+            { "value": "text", "label": "Texto Personalizado" }
+          ],
+          "default": "cross"
+        },
+        {
+          "type": "text",
+          "id": "other_value",
+          "label": "Texto adicional Otros",
+          "default": "Plana sin curvatura"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Tabla Comparativa",
+      "blocks": [
+        {
+          "type": "row",
+          "settings": {
+            "feature_name": "Memory Foam 100% Alta Densidad",
+            "our_value_type": "check",
+            "our_value": "Retorna en 3-5 segundos",
+            "other_value_type": "cross",
+            "other_value": "Relleno sintético deformable"
+          }
+        },
+        {
+          "type": "row",
+          "settings": {
+            "feature_name": "Alineación Cervical Correcta",
+            "our_value_type": "check",
+            "our_value": "Alivia tensión de cuello",
+            "other_value_type": "cross",
+            "other_value": "Provoca rigidez al despertar"
+          }
+        },
+        {
+          "type": "row",
+          "settings": {
+            "feature_name": "Funda Respirable Lavable",
+            "our_value_type": "check",
+            "our_value": "Microperforada antibacteriana",
+            "other_value_type": "cross",
+            "other_value": "Tela calurosa no removible"
+          }
+        },
+        {
+          "type": "row",
+          "settings": {
+            "feature_name": "Garantía Total de Satisfacción",
+            "our_value_type": "check",
+            "our_value": "30 Días de Garantía Directa",
+            "other_value_type": "cross",
+            "other_value": "Sin garantía de cambios"
+          }
+        },
+        {
+          "type": "row",
+          "settings": {
+            "feature_name": "Pago Contra Entrega en Todo Perú",
+            "our_value_type": "check",
+            "our_value": "Pagas en tu puerta al recibir",
+            "other_value_type": "cross",
+            "other_value": "Solo pago anticipado"
+          }
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}

@@ -1,0 +1,31 @@
+<section style="padding: 5rem 0;">
+  <div class="container">
+    <h1 class="section-title" style="margin-bottom: 2rem;">Buscar</h1>
+
+    <form action="{{ routes.search_url }}" method="get" role="search" style="max-width: 480px; margin-bottom: 2.5rem; display:flex; gap:0.5rem;">
+      <input type="search" name="q" value="{{ search.terms | escape }}" placeholder="Buscar productos..." style="flex-grow:1; padding: 0.85rem 1rem; border-radius: var(--radius-sm); border: 1px solid var(--border-light);">
+      <button type="submit" class="btn btn-secondary">Buscar</button>
+    </form>
+
+    {% if search.performed %}
+      {% if search.results_count == 0 %}
+        <p style="color: var(--text-secondary);">No se encontraron resultados para "{{ search.terms }}".</p>
+      {% else %}
+        <div class="products-grid">
+          {% for item in search.results %}
+            <article class="product-card">
+              <div class="product-image-container">
+                {% if item.featured_image %}
+                  <img src="{{ item.featured_image | image_url: width: 600 }}" alt="{{ item.title | escape }}" loading="lazy">
+                {% endif %}
+              </div>
+              <div class="product-info">
+                <h3 class="product-title"><a href="{{ item.url }}">{{ item.title }}</a></h3>
+              </div>
+            </article>
+          {% endfor %}
+        </div>
+      {% endif %}
+    {% endif %}
+  </div>
+</section>

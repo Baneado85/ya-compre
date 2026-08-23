@@ -1,0 +1,9 @@
+<section style="padding: 5rem 0;">
+  <div class="container" style="max-width: 760px;">
+    <h1 class="section-title" style="margin-bottom: 0.5rem;">{{ article.title }}</h1>
+    <p style="color: var(--text-muted); margin-bottom: 2rem;">{{ article.published_at | date: "%d/%m/%Y" }} · {{ article.author }}</p>
+    <div style="color: var(--text-secondary); line-height: 1.7;">
+      {{ article.content }}
+    </div>
+  </div>
+</section>

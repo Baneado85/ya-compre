@@ -1,0 +1,172 @@
+<section class="product-reviews-section" id="product-reviews-section" style="padding: 4.5rem 0; background: #f8fafc;">
+  <div class="container">
+
+    <!-- Header & Overall Score -->
+    <div style="text-align: center; max-width: 700px; margin: 0 auto 3rem;">
+      <span style="display: inline-block; background: #dcfce7; color: #166534; font-weight: 800; font-size: 0.8rem; padding: 0.35rem 0.85rem; border-radius: 20px; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 0.75rem;">
+        {{ section.settings.tag | default: "CLIENTES SATISFECHOS" }}
+      </span>
+      <h2 style="font-family: var(--font-heading, sans-serif); font-size: clamp(1.75rem, 4vw, 2.4rem); font-weight: 800; color: #0f172a; margin: 0 0 1rem;">
+        {{ section.settings.title | default: "Opiniones de Clientes Verificados" }}
+      </h2>
+      
+      <div style="display: flex; align-items: center; justify-content: center; gap: 1rem; flex-wrap: wrap; margin-bottom: 1.5rem;">
+        <div style="font-size: 2.8rem; font-weight: 900; color: #0f172a; line-height: 1;">4.9</div>
+        <div style="text-align: left;">
+          <div style="color: #ffb703; font-size: 1.3rem; letter-spacing: 2px;">★★★★★</div>
+          <div style="font-size: 0.85rem; color: #64748b; font-weight: 600;">{{ section.settings.subtitle | default: "Basado en más de 140 compras en todo el Perú" }}</div>
+        </div>
+      </div>
+
+      <button type="button" class="btn btn-secondary" onclick="openReviewModal()" style="padding: 0.7rem 1.5rem; border-radius: 20px; font-weight: 700; font-size: 0.9rem;">
+        ✍️ Escribir una Reseña
+      </button>
+    </div>
+
+    <!-- Reviews Grid -->
+    <div class="reviews-grid" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 1.5rem;">
+      {% for block in section.blocks %}
+        <div 
+          class="review-card" 
+          {{ block.shopify_attributes }}
+          style="background: #ffffff; border-radius: 16px; padding: 1.75rem; border: 1px solid #e2e8f0; box-shadow: 0 4px 20px rgba(0,0,0,0.03); display: flex; flex-direction: column; justify-content: space-between;"
+        >
+          <div>
+            <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 0.85rem;">
+              <div style="color: #ffb703; font-size: 1rem;">
+                {% case block.settings.rating %}
+                  {% when 5 %}★★★★★
+                  {% when 4 %}★★★★☆
+                  {% when 3 %}★★★☆☆
+                  {% default %}★★★★★
+                {% endcase %}
+              </div>
+              <span style="font-size: 0.75rem; color: #94a3b8; font-weight: 500;">{{ block.settings.date }}</span>
+            </div>
+
+            <p style="font-size: 0.925rem; color: #334155; line-height: 1.6; margin: 0 0 1.25rem; font-style: italic;">
+              "{{ block.settings.text }}"
+            </p>
+          </div>
+
+          <div style="display: flex; align-items: center; gap: 0.75rem; border-top: 1px solid #f1f5f9; padding-top: 1rem;">
+            <div style="width: 42px; height: 42px; border-radius: 50%; background: linear-gradient(135deg, #2563eb, #3b82f6); color: #fff; font-weight: 800; display: flex; align-items: center; justify-content: center; font-size: 1rem;">
+              {{ block.settings.author | slice: 0, 1 }}
+            </div>
+            <div>
+              <strong style="display: block; font-size: 0.9rem; color: #0f172a;">{{ block.settings.author }}</strong>
+              <div style="display: flex; align-items: center; gap: 0.35rem; font-size: 0.75rem; color: #16a34a; font-weight: 700;">
+                <span>✅</span> <span>{{ block.settings.location | default: "Comprador Verificado" }}</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      {% endfor %}
+    </div>
+
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Reseñas de Clientes",
+  "settings": [
+    {
+      "type": "text",
+      "id": "tag",
+      "label": "Etiqueta superior",
+      "default": "CLIENTES SATISFECHOS"
+    },
+    {
+      "type": "text",
+      "id": "title",
+      "label": "Título de la sección",
+      "default": "Lo que dicen quienes ya descansan con YA COMPRÉ"
+    },
+    {
+      "type": "text",
+      "id": "subtitle",
+      "label": "Subtítulo de la sección",
+      "default": "Basado en más de 140 compras verificadas en todo el Perú"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "review",
+      "name": "Reseña de cliente",
+      "settings": [
+        {
+          "type": "text",
+          "id": "author",
+          "label": "Nombre del cliente",
+          "default": "María Fernanda G."
+        },
+        {
+          "type": "text",
+          "id": "location",
+          "label": "Ubicación / Estado",
+          "default": "Miraflores, Lima (Comprador Verificado)"
+        },
+        {
+          "type": "range",
+          "id": "rating",
+          "min": 1,
+          "max": 5,
+          "step": 1,
+          "label": "Puntuación de estrellas",
+          "default": 5
+        },
+        {
+          "type": "textarea",
+          "id": "text",
+          "label": "Comentario de la reseña",
+          "default": "Increíble la diferencia. Tenía dolores de cuello casi todas las mañanas y desde el primer día sentí un alivio tremendo. El pago contra entrega fue súper seguro y rápido."
+        },
+        {
+          "type": "text",
+          "id": "date",
+          "label": "Fecha",
+          "default": "Hace 2 días"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Reseñas de Clientes",
+      "blocks": [
+        {
+          "type": "review",
+          "settings": {
+            "author": "Carlos R.",
+            "location": "Surco, Lima • Comprador Verificado",
+            "rating": 5,
+            "text": "Excelente calidad de materiales. El producto llegó tal cual las fotos en menos de 24 horas a mi domicilio. Le pagué al repartidor con Yape. Muy recomendado.",
+            "date": "Ayer"
+          }
+        },
+        {
+          "type": "review",
+          "settings": {
+            "author": "Lucía M.",
+            "location": "Arequipa • Comprador Verificado",
+            "rating": 5,
+            "text": "Me encantó el pack de 2 unidades, comprados para mi esposo y para mí. Duermo de lado y la forma de mariposa es súper cómoda para los brazos.",
+            "date": "Hace 3 días"
+          }
+        },
+        {
+          "type": "review",
+          "settings": {
+            "author": "Jorge V.",
+            "location": "Trujillo • Comprador Verificado",
+            "rating": 5,
+            "text": "Atención A1 por WhatsApp. Tenía dudas sobre el pago contra entrega a provincia pero llegó por Olva en 3 días. La almohada recupera su forma al instante.",
+            "date": "Hace 5 días"
+          }
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}

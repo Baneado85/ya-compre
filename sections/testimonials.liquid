@@ -1,0 +1,36 @@
+<section class="testimonials-section">
+  <div class="container">
+
+    <div class="testimonials-header">
+      <div class="rating-summary">
+        <span class="rating-score">4.9</span>
+        <div>
+          <div style="color: var(--accent-star); font-size: 1.1rem;">★★★★★</div>
+          <div style="font-size: 0.85rem; color: #AAA;">Más de 9,560 clientes satisfechos</div>
+        </div>
+      </div>
+      <h2 class="section-title">{{ section.settings.title | default: 'Lo que dicen nuestros clientes' }}</h2>
+    </div>
+
+    <div class="testimonials-grid" id="testimonials-grid">
+      <!-- Dynamic reviews rendered by app.js from CUSTOMER_REVIEWS -->
+    </div>
+
+    <div class="add-review-cta">
+      <button class="btn btn-outline-light" onclick="openReviewModal()">Escribir mi opinión</button>
+    </div>
+
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Testimonios",
+  "settings": [
+    { "type": "text", "id": "title", "label": "Título", "default": "Lo que dicen nuestros clientes" }
+  ],
+  "presets": [
+    { "name": "Testimonios" }
+  ]
+}
+{% endschema %}

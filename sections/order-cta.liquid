@@ -1,0 +1,32 @@
+<section class="order-cta-section">
+  <div class="order-cta-bg">
+    <img src="{{ 'hero_bg.png' | asset_url }}" alt="Order CTA Background">
+  </div>
+  <div class="container order-cta-content">
+    <span class="section-tag" style="color: var(--accent-gold);">TODO A UN SOLO KLICK</span>
+    <h2 class="order-cta-title">{{ section.settings.title | default: '¿Listo para tu primer pedido?' }}</h2>
+
+    <div class="cta-trust-tags">
+      <span class="trust-tag">🚚 Envío gratis</span>
+      <span class="trust-tag">💵 Pago Contraentrega</span>
+      <span class="trust-tag">🛡️ Garantía de 30 días</span>
+    </div>
+
+    <a href="#productos" class="btn btn-primary btn-icon-right" style="padding: 1.1rem 2.5rem; font-size: 1.05rem;">
+      VER PRODUCTOS
+      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+    </a>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "CTA final de pedido",
+  "settings": [
+    { "type": "text", "id": "title", "label": "Título", "default": "¿Listo para tu primer pedido?" }
+  ],
+  "presets": [
+    { "name": "CTA final de pedido" }
+  ]
+}
+{% endschema %}

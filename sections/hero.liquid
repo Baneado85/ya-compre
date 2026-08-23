@@ -1,0 +1,39 @@
+<section class="hero-section" id="hero">
+  <div class="hero-bg-wrapper">
+    <img src="{{ 'hero_bg.png' | asset_url }}" alt="Modern Minimalist Interior Living">
+  </div>
+  <div class="hero-overlay"></div>
+  <div class="container">
+    <div class="hero-content animate-fade-in">
+      <div class="hero-subtitle">{{ section.settings.subtitle | default: 'NUEVOS LANZAMIENTOS' }}</div>
+      <h1 class="hero-title">
+        {{ section.settings.title | default: 'Diseñado para la' }}<br>
+        <span class="hero-slogan-dynamic" id="hero-slogan-dynamic">vida sin complicaciones</span>
+      </h1>
+      <p class="hero-description">
+        {{ section.settings.description | default: 'Productos premium. Tecnología y diseño minimalista. Máximo impacto para simplificar tu rutina diaria.' }}
+      </p>
+      <div class="hero-actions">
+        <a href="#productos" class="btn btn-primary btn-icon-right">
+          Comprar ahora
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+        </a>
+        <a href="#productos" class="btn btn-outline-light" onclick="filterCategory('bestsellers')">Explorar destacados</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Hero",
+  "settings": [
+    { "type": "text", "id": "subtitle", "label": "Subtítulo", "default": "NUEVOS LANZAMIENTOS" },
+    { "type": "text", "id": "title", "label": "Título", "default": "Diseñado para la" },
+    { "type": "textarea", "id": "description", "label": "Descripción", "default": "Productos premium. Tecnología y diseño minimalista. Máximo impacto para simplificar tu rutina diaria." }
+  ],
+  "presets": [
+    { "name": "Hero" }
+  ]
+}
+{% endschema %}
