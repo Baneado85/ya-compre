@@ -22,15 +22,15 @@
         <thead>
           <tr style="border-bottom: 2px solid #e2e8f0;">
             <th style="padding: 1.25rem 1.5rem; width: 45%; background: #f8fafc; font-weight: 700; color: #475569; border-top-left-radius: 20px;">
-              {{ section.settings.col1_header | default: "Característica" }}
+              {{ section.settings.col1_header | default: "Especificación / Beneficio" }}
             </th>
             <th style="padding: 1.25rem 1.5rem; width: 30%; background: #eff6ff; text-align: center; color: #1e3a8a; font-weight: 900; font-size: 1.05rem; border-bottom: 3px solid #2563eb;">
               <span style="display: flex; align-items: center; justify-content: center; gap: 0.35rem;">
-                <span>✨</span> {{ section.settings.col2_header | default: "NUESTRA ALMOHADA" }}
+                <span>✨</span> {{ section.settings.col2_header | default: "NUESTRO PRODUCTO" }}
               </span>
             </th>
             <th style="padding: 1.25rem 1.5rem; width: 25%; background: #f8fafc; text-align: center; color: #94a3b8; font-weight: 600; border-top-right-radius: 20px;">
-              {{ section.settings.col3_header | default: "Otras Almohadas" }}
+              {{ section.settings.col3_header | default: "Productos Convencionales" }}
             </th>
           </tr>
         </thead>
@@ -83,7 +83,7 @@
       "type": "text",
       "id": "title",
       "label": "Título de la sección",
-      "default": "Nuestra Almohada Cervical vs Almohadas Comunes"
+      "default": "Nuestro Producto vs Productos Convencionales"
     },
     {
       "type": "text",
@@ -107,7 +107,7 @@
       "type": "text",
       "id": "col3_header",
       "label": "Encabezado Columna 3 (Competencia)",
-      "default": "Almohadas Comunes"
+      "default": "Productos Convencionales"
     }
   ],
   "blocks": [
@@ -119,7 +119,7 @@
           "type": "text",
           "id": "feature_name",
           "label": "Nombre del atributo",
-          "default": "Soporte Ergonómico Anatómico"
+          "default": "Diseño Ergonómico Probado"
         },
         {
           "type": "select",
@@ -135,7 +135,7 @@
           "type": "text",
           "id": "our_value",
           "label": "Texto adicional Tu Producto",
-          "default": "Diseño Mariposa 3D"
+          "default": "Diseño 100% Optimizado"
         },
         {
           "type": "select",
@@ -151,7 +151,7 @@
           "type": "text",
           "id": "other_value",
           "label": "Texto adicional Otros",
-          "default": "Plana sin curvatura"
+          "default": "Sin estándares de calidad"
         }
       ]
     }
@@ -163,41 +163,21 @@
         {
           "type": "row",
           "settings": {
-            "feature_name": "Memory Foam 100% Alta Densidad",
+            "feature_name": "Materiales 100% Premium",
             "our_value_type": "check",
-            "our_value": "Retorna en 3-5 segundos",
+            "our_value": "Insumos probados de alta resistencia",
             "other_value_type": "cross",
-            "other_value": "Relleno sintético deformable"
+            "other_value": "Materiales sintéticos frágiles"
           }
         },
         {
           "type": "row",
           "settings": {
-            "feature_name": "Alineación Cervical Correcta",
+            "feature_name": "Garantía Total de 30 Días",
             "our_value_type": "check",
-            "our_value": "Alivia tensión de cuello",
+            "our_value": "Garantía directa ante fallas",
             "other_value_type": "cross",
-            "other_value": "Provoca rigidez al despertar"
-          }
-        },
-        {
-          "type": "row",
-          "settings": {
-            "feature_name": "Funda Respirable Lavable",
-            "our_value_type": "check",
-            "our_value": "Microperforada antibacteriana",
-            "other_value_type": "cross",
-            "other_value": "Tela calurosa no removible"
-          }
-        },
-        {
-          "type": "row",
-          "settings": {
-            "feature_name": "Garantía Total de Satisfacción",
-            "our_value_type": "check",
-            "our_value": "30 Días de Garantía Directa",
-            "other_value_type": "cross",
-            "other_value": "Sin garantía de cambios"
+            "other_value": "Sin garantía de devoluciones"
           }
         },
         {
@@ -207,7 +187,17 @@
             "our_value_type": "check",
             "our_value": "Pagas en tu puerta al recibir",
             "other_value_type": "cross",
-            "other_value": "Solo pago anticipado"
+            "other_value": "Exigen pago 100% por adelantado"
+          }
+        },
+        {
+          "type": "row",
+          "settings": {
+            "feature_name": "Despacho Rápido Prioritario",
+            "our_value_type": "check",
+            "our_value": "Entrega en 24 a 48 horas",
+            "other_value_type": "cross",
+            "other_value": "Demoras excesivas de semanas"
           }
         }
       ]

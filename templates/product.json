@@ -39,27 +39,27 @@
     "product-benefits": {
       "type": "product-benefits",
       "settings": {
-        "tag": "DISEÑO ERGONÓMICO Y SALUDABLE",
-        "title": "Por qué transformarás tu descanso desde la primera noche",
-        "description": "Diseñado minuciosamente para aliviar dolores de cuello, alinear la columna y brindar el máximo confort durante el sueño."
+        "tag": "CALIDAD Y DISEÑO PREMIUM",
+        "title": "Por qué elegir nuestro producto",
+        "description": "Diseñado minuciosamente con estándares exigentes para garantizar la máxima durabilidad, comodidad y satisfacción."
       }
     },
     "product-comparison": {
       "type": "product-comparison",
       "settings": {
         "tag": "LA DIFERENCIA ES CLARA",
-        "title": "Nuestra Almohada Cervical vs Almohadas Comunes",
+        "title": "Nuestro Producto vs Productos Convencionales",
         "subtitle": "Compara las especificaciones y comprueba por qué miles de personas nos eligen.",
         "col1_header": "Especificación / Beneficio",
         "col2_header": "YA COMPRÉ Premium",
-        "col3_header": "Almohadas Comunes"
+        "col3_header": "Productos Convencionales"
       }
     },
     "product-reviews": {
       "type": "product-reviews",
       "settings": {
         "tag": "CLIENTES SATISFECHOS",
-        "title": "Lo que dicen quienes ya descansan con YA COMPRÉ",
+        "title": "Lo que dicen quienes ya compraron en YA COMPRÉ",
         "subtitle": "Basado en más de 140 compras verificadas en todo el Perú"
       }
     },
