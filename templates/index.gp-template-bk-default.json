@@ -1,1 +1,92 @@
-{"order":["hero","features-ticker","catalog","promo-banner","comparison-slider","tiktok-reviews","testimonials","philosophy","order-cta"],"sections":{"catalog":{"settings":{"collection":"","products_to_show":12,"tag":"SELECCIÓN EXCLUSIVA","title":"Catálogo"},"type":"catalog"},"comparison-slider":{"disabled":true,"settings":{"description":"Arrastra el control para comparar la postura de tu columna con la almohada cervical YA COMPRÉ.","title":"Mira la diferencia en tu descanso"},"type":"comparison-slider"},"features-ticker":{"settings":{},"type":"features-ticker"},"hero":{"settings":{"description":"Productos premium. Tecnología y diseño minimalista. Máximo impacto para simplificar tu rutina diaria.","subtitle":"NUEVOS LANZAMIENTOS","title":"Diseñado para la"},"type":"hero"},"order-cta":{"settings":{"title":"¿Listo para tu primer pedido?"},"type":"order-cta"},"philosophy":{"settings":{"quote":"","stat1_label":"Clientes felices","stat1_value":"9,560+","stat2_label":"Verificado antes de envío","stat2_value":"100%","stat3_label":"Ciudades atendidas","stat3_value":"40+"},"type":"philosophy"},"promo-banner":{"settings":{"subtitle":"En productos seleccionados con envío prioritario inmediato.","tag":"OFERTA LIMITADA","title":"Hasta 50% OFF esta semana"},"type":"promo-banner"},"testimonials":{"settings":{"title":"Lo que dicen nuestros clientes"},"type":"testimonials"},"tiktok-reviews":{"disabled":true,"settings":{"title":"Lo que dicen en TikTok"},"type":"tiktok-reviews"}}}
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
+{
+  "sections": {
+    "hero": {
+      "type": "hero",
+      "settings": {
+        "subtitle": "NUEVOS LANZAMIENTOS",
+        "title": "Diseñado para la",
+        "description": "Productos premium. Tecnología y diseño minimalista. Máximo impacto para simplificar tu rutina diaria."
+      }
+    },
+    "features-ticker": {
+      "type": "features-ticker",
+      "settings": {}
+    },
+    "catalog": {
+      "type": "catalog",
+      "settings": {
+        "tag": "SELECCIÓN EXCLUSIVA",
+        "title": "Catálogo",
+        "collection": "",
+        "products_to_show": 12
+      }
+    },
+    "promo-banner": {
+      "type": "promo-banner",
+      "settings": {
+        "tag": "OFERTA LIMITADA",
+        "title": "Hasta 50% OFF esta semana",
+        "subtitle": "En productos seleccionados con envío prioritario inmediato."
+      }
+    },
+    "comparison-slider": {
+      "type": "comparison-slider",
+      "disabled": true,
+      "settings": {
+        "title": "Mira la diferencia en calidad",
+        "description": "Arrastra el control para comparar la calidad de nuestro producto con opciones convencionales."
+      }
+    },
+    "tiktok-reviews": {
+      "type": "tiktok-reviews",
+      "disabled": true,
+      "settings": {
+        "title": "Lo que dicen en TikTok"
+      }
+    },
+    "testimonials": {
+      "type": "testimonials",
+      "settings": {
+        "title": "Lo que dicen nuestros clientes"
+      }
+    },
+    "philosophy": {
+      "type": "philosophy",
+      "settings": {
+        "quote": "",
+        "stat1_value": "9,560+",
+        "stat1_label": "Clientes felices",
+        "stat2_value": "100%",
+        "stat2_label": "Verificado antes de envío",
+        "stat3_value": "40+",
+        "stat3_label": "Ciudades atendidas"
+      }
+    },
+    "order-cta": {
+      "type": "order-cta",
+      "settings": {
+        "title": "¿Listo para tu primer pedido?"
+      }
+    }
+  },
+  "order": [
+    "hero",
+    "features-ticker",
+    "catalog",
+    "promo-banner",
+    "comparison-slider",
+    "tiktok-reviews",
+    "testimonials",
+    "philosophy",
+    "order-cta"
+  ]
+}

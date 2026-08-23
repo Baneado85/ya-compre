@@ -1,1 +1,114 @@
-{"current":{"sections":{"announcement-bar":{"type":"announcement-bar","settings":{"text":"Envío gratis a todo el Perú 🇵🇪 en pedidos seleccionados"}},"header":{"type":"header","settings":{"brand_name":"YA COMPRÉ"}},"footer":{"type":"footer","settings":{}}},"content_for_index":[],"blocks":{"13669795325273674392":{"type":"shopify:\/\/apps\/releasit-cod-form\/blocks\/app-embed\/72faf214-4174-4fec-886b-0d0e8d3af9a2","disabled":false,"settings":{}}}},"presets":{"Default":{}}}
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
+{
+  "current": {
+    "sections": {
+      "announcement-bar": {
+        "type": "announcement-bar",
+        "settings": {
+          "text": "Envío gratis a todo el Perú 🇵🇪 en pedidos seleccionados"
+        }
+      },
+      "header": {
+        "type": "header",
+        "settings": {
+          "brand_name": "YA COMPRÉ"
+        }
+      },
+      "footer": {
+        "type": "footer",
+        "settings": {}
+      },
+      "main-product": {
+        "type": "main-product",
+        "settings": {
+          "show_urgency_bar": true,
+          "urgency_text": "¡OFERTA ESPECIAL POR TIEMPO LIMITADO!",
+          "show_stock_bar": true,
+          "stock_text": "¡ALERTA DE STOCK BAJO!",
+          "initial_stock": 7,
+          "show_discount_badge": true,
+          "discount_badge_text": "🔥 HASTA -50% OFF",
+          "show_vendor": true,
+          "show_rating": true,
+          "rating_count": "142 opiniones verificadas",
+          "show_bundles": true,
+          "bundles_title": "🎁 ELIGE TU PACK EN PROMOCIÓN:",
+          "bundle1_title": "1 UNIDAD — Prueba Individual",
+          "bundle1_subtitle": "Envío Prioritario a todo el Perú",
+          "bundle2_title": "2 UNIDADES — Pack Pareja / Ahorro",
+          "bundle2_subtitle": "Lleva la 2da unidad con 50% OFF + Envío Gratis",
+          "bundle2_badge": "🔥 MÁS POPULAR (AHORRA 25%)",
+          "bundle3_title": "3 UNIDADES — Pack Familiar Mega Ahorro",
+          "bundle3_subtitle": "¡Lleva 3 al precio de 2.2 + Regalo Exclusivo!",
+          "bundle3_badge": "💎 MEJOR OFERTA (AHORRA 35%)",
+          "btn_text": "📦 PEDIR AHORA — PAGO CONTRA ENTREGA",
+          "btn_subtitle": "Pagas al recibir en la puerta de tu casa | Envío Gratis a todo el Perú",
+          "show_trust_badges": false,
+          "badge1_title": "Envío Gratis",
+          "badge1_sub": "A todo el Perú sin costo",
+          "badge2_title": "Pago al Recibir",
+          "badge2_sub": "",
+          "badge3_title": "Garantía de 30 Días",
+          "badge3_sub": "Satisfacción 100% asegurada",
+          "badge4_title": "Despacho Rápido",
+          "badge4_sub": "Entrega en 24 a 48 hrs"
+        }
+      },
+      "product-benefits": {
+        "type": "product-benefits",
+        "settings": {
+          "tag": "CALIDAD Y DISEÑO PREMIUM",
+          "title": "Por qué elegir nuestro producto",
+          "description": "Diseñado minuciosamente con estándares exigentes para garantizar la máxima durabilidad, comodidad y satisfacción.",
+          "bg_color": "#f8fafc"
+        }
+      },
+      "product-comparison": {
+        "type": "product-comparison",
+        "settings": {
+          "tag": "LA DIFERENCIA ES CLARA",
+          "title": "Nuestro Producto vs Productos Convencionales",
+          "subtitle": "Compara las especificaciones y comprueba por qué miles de personas nos eligen.",
+          "col1_header": "Especificación / Beneficio",
+          "col2_header": "YA COMPRÉ Premium",
+          "col3_header": "Productos Convencionales"
+        }
+      },
+      "product-faq": {
+        "type": "product-faq",
+        "settings": {
+          "tag": "DESPEJA TUS DUDAS",
+          "title": "Preguntas Frecuentes sobre tu Pedido",
+          "subtitle": "Todo lo que necesitas saber antes de realizar tu compra con Pago Contra Entrega."
+        }
+      },
+      "sticky-buy-bar": {
+        "type": "sticky-buy-bar",
+        "settings": {
+          "enable_sticky_bar": true,
+          "btn_text": "PEDIR AHORA — PAGO AL RECIBIR",
+          "btn_bg": "#16a34a"
+        }
+      }
+    },
+    "content_for_index": [],
+    "blocks": {
+      "13669795325273674392": {
+        "type": "shopify://apps/releasit-cod-form/blocks/app-embed/72faf214-4174-4fec-886b-0d0e8d3af9a2",
+        "disabled": false,
+        "settings": {}
+      }
+    }
+  },
+  "presets": {
+    "Default": {}
+  }
+}

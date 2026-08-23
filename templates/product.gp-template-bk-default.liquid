@@ -1,83 +1,10 @@
-<section style="padding: 4rem 0;">
-  <div class="container">
-    <div class="product-detail-grid" style="padding: 0;">
-      <div class="product-gallery">
-        {% if product.featured_image %}
-          <img src="{{ product.featured_image | image_url: width: 900 }}" alt="{{ product.title | escape }}" class="main-product-img" id="modal-main-img">
-        {% endif %}
-        {% if product.images.size > 1 %}
-          <div class="gallery-thumbs">
-            {% for image in product.images %}
-              <img src="{{ image | image_url: width: 200 }}" class="thumb-item {% if forloop.first %}active{% endif %}" onclick="switchModalThumb(this, '{{ image | image_url: width: 900 }}')">
-            {% endfor %}
-          </div>
-        {% endif %}
-      </div>
-      <div class="product-detail-info">
-        {% if product.vendor %}<span class="product-vendor">{{ product.vendor }}</span>{% endif %}
-        <h1 style="font-family: var(--font-heading); font-size: 1.75rem; font-weight: 700; margin: 0.5rem 0 0.75rem;">{{ product.title }}</h1>
+{% comment %}
+  Dynamic High-Converting Product Template (Shopify OS 2.0)
+{% endcomment %}
 
-        <div class="product-price-row" style="margin: 0 0 1.5rem;">
-          <span class="price-current" id="product-price-current" style="font-size: 1.8rem;" data-price="{{ product.selected_or_first_available_variant.price }}">{{ product.selected_or_first_available_variant.price | money }}</span>
-          {% if product.compare_at_price > product.price %}
-            <span class="price-original" style="font-size: 1.2rem;">{{ product.compare_at_price | money }}</span>
-          {% endif %}
-        </div>
-
-        <div style="color: var(--text-secondary); margin-bottom: 1.5rem;">{{ product.description }}</div>
-
-        {% unless product.has_only_default_variant %}
-          <div class="form-group">
-            <label for="product-variant-select">Opciones</label>
-            <select id="product-variant-select" onchange="document.getElementById('product-add-to-cart-btn').setAttribute('data-variant-id', this.value)">
-              {% for variant in product.variants %}
-                <option value="{{ variant.id }}" {% unless variant.available %}disabled{% endunless %} {% if variant == product.selected_or_first_available_variant %}selected{% endif %}>
-                  {{ variant.title }} {% unless variant.available %}(Agotado){% endunless %}
-                </option>
-              {% endfor %}
-            </select>
-          </div>
-        {% endunless %}
-
-        <div style="display:flex; gap: 1rem; align-items: center; margin-bottom: 1.5rem;">
-          <div class="qty-selector" style="height: 48px;">
-            <button type="button" class="qty-btn" style="width: 38px; height: 100%; font-size: 1.1rem;" onclick="adjustProductQty(-1)">-</button>
-            <span id="product-qty-val" class="qty-val" style="padding: 0 1rem; font-size: 1.1rem;">1</span>
-            <button type="button" class="qty-btn" style="width: 38px; height: 100%; font-size: 1.1rem;" onclick="adjustProductQty(1)">+</button>
-          </div>
-          <button
-            id="product-add-to-cart-btn"
-            class="btn btn-primary btn-add-cart"
-            style="flex-grow: 1; height: 48px; background-color: var(--bg-dark); color: #FFF; border-radius: var(--radius-full);"
-            data-variant-id="{{ product.selected_or_first_available_variant.id }}"
-            data-qty-input="product-qty-val-input"
-            {% unless product.available %}disabled style="opacity:0.5;"{% endunless %}>
-            {% if product.available %}Añadir al carrito{% else %}Agotado{% endif %}
-          </button>
-          <input type="hidden" id="product-qty-val-input" value="1">
-        </div>
-
-        <button class="btn btn-whatsapp" style="width: 100%; height: 50px; margin-bottom: 1.5rem; font-size: 1rem;" onclick="openCODModal('{{ product.title | escape }}', '{{ product.selected_or_first_available_variant.price | money }}')">
-          <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M12.04 2c-5.46 0-9.91 4.45-9.91 9.91 0 1.75.46 3.45 1.32 4.95L2.05 22l5.25-1.38c1.45.79 3.08 1.21 4.74 1.21 5.46 0 9.91-4.45 9.91-9.91 0-2.65-1.03-5.14-2.9-7.01A9.85 9.85 0 0 0 12.04 2zm5.77 14.15c-.24.68-1.2 1.25-1.95 1.41-.51.11-1.18.2-3.44-.73-2.89-1.19-4.75-4.13-4.89-4.32-.14-.19-1.18-1.57-1.18-3 0-1.43.75-2.13 1.02-2.42.27-.29.59-.36.79-.36.2 0 .4 0 .57.01.18.01.43-.07.67.51.24.58.82 2 .89 2.15.07.15.12.33.02.53-.1.19-.15.31-.3.49-.15.18-.31.4-.44.54-.15.15-.3.31-.13.6.17.29.77 1.27 1.66 2.06 1.14 1.01 2.1 1.33 2.4 1.48.29.15.46.13.63-.07.17-.2.74-.86.94-1.15.2-.29.4-.24.67-.14.27.1.1.71 1.7 2.44.82.16.89.27.94.43.05.16.05.93-.19 1.61z"/></path></svg>
-          Lo quiero — Pago contra entrega
-        </button>
-
-        <div style="background-color: var(--bg-subtle); padding: 1rem; border-radius: var(--radius-sm); font-size: 0.85rem; color: var(--text-secondary); display: flex; flex-direction: column; gap: 0.5rem;">
-          <div>✅ <strong>Garantía Total:</strong> 30 días de satisfacción asegurada</div>
-          <div>🚚 <strong>Envío Rápido:</strong> Despacho prioritario en 24 a 48 horas</div>
-          <div>🛡️ <strong>Pago Seguro:</strong> Cancelas al repartidor o pagas con tarjeta en el checkout de Shopify</div>
-        </div>
-      </div>
-    </div>
-  </div>
-</section>
-
-<script>
-  function adjustProductQty(delta) {
-    const el = document.getElementById('product-qty-val');
-    const input = document.getElementById('product-qty-val-input');
-    const next = Math.max(1, parseInt(el.textContent, 10) + delta);
-    el.textContent = next;
-    if (input) input.value = next;
-  }
-</script>
+{% section 'main-product' %}
+{% section 'product-benefits' %}
+{% section 'product-comparison' %}
+{% section 'product-reviews' %}
+{% section 'product-faq' %}
+{% section 'sticky-buy-bar' %}
