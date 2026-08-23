@@ -31,7 +31,8 @@
     <!-- CTA Button -->
     <button 
       type="button" 
-      onclick="triggerCODOrderProcess()"
+      data-releasit-button="true"
+      onclick="triggerCODOrderProcess(event)"
       style="padding: 0.75rem 1.5rem; background: {{ section.settings.btn_bg | default: '#16a34a' }}; color: #ffffff; border: none; border-radius: 10px; font-weight: 800; font-size: 0.95rem; font-family: var(--font-heading, sans-serif); text-transform: uppercase; cursor: pointer; display: flex; align-items: center; gap: 0.4rem; flex-shrink: 0; box-shadow: 0 4px 15px rgba(22,163,74,0.3);"
     >
       <span>📦</span>

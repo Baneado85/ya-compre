@@ -23,7 +23,7 @@
         <div class="main-image-wrapper" style="position: relative; border-radius: var(--radius-lg, 12px); overflow: hidden; background: #fff; border: 1px solid rgba(0,0,0,0.06); box-shadow: 0 8px 30px rgba(0,0,0,0.05);">
           {% if section.settings.show_discount_badge %}
             <div class="gallery-badge" style="position: absolute; top: 1rem; left: 1rem; z-index: 2; background: #e63946; color: #fff; font-weight: 800; font-size: 0.85rem; padding: 0.4rem 0.85rem; border-radius: 20px; text-transform: uppercase; letter-spacing: 0.5px; box-shadow: 0 4px 10px rgba(230,57,70,0.4);">
-              {{ section.settings.discount_badge_text | default: "🔥 HASTA -50% OFF" }}
+              {{ section.settings.discount_badge_text | default: "🔥 HASTA -30% OFF" }}
             </div>
           {% endif %}
           
@@ -34,7 +34,7 @@
           {% if product.featured_image %}
             <img src="{{ product.featured_image | image_url: width: 1000 }}" alt="{{ product.title | escape }}" class="main-product-img" id="main-product-media-img" style="width: 100%; height: auto; display: block; object-fit: cover; transition: transform 0.3s ease;">
           {% else %}
-            <div style="width: 100%; aspect-ratio: 1/1; background: #f0f0f0; display: flex; align-items: center; justify-content: center; color: #999;">Sin Imagen</div>
+            <img src="{{ 'magnesio_complex.png' | asset_url }}" alt="BIOTINA MAX + COLÁGENO" class="main-product-img" id="main-product-media-img" style="width: 100%; height: auto; display: block; object-fit: cover;">
           {% endif %}
         </div>
 
@@ -63,7 +63,7 @@
         {% endif %}
 
         <h1 style="font-family: var(--font-heading, sans-serif); font-size: clamp(1.5rem, 4vw, 2.2rem); font-weight: 800; line-height: 1.25; margin: 0 0 0.75rem; color: var(--color-foreground, #111);">
-          {{ product.title }}
+          {{ product.title | default: "BIOTINA MAX + COLÁGENO - FÓRMULA PREMIUM" }}
         </h1>
 
         <!-- Rating Summary -->
@@ -82,7 +82,7 @@
           <div class="stock-progress-box" style="background: #fff0f3; border: 1px solid #ffccd5; border-radius: 8px; padding: 0.75rem 1rem; margin-bottom: 1.25rem;">
             <div style="display: flex; justify-content: space-between; font-size: 0.85rem; font-weight: 700; color: #c9184a; margin-bottom: 0.4rem;">
               <span>🔥 {{ section.settings.stock_text | default: "¡ALERTA DE STOCK BAJO!" }}</span>
-              <span id="stock-count-val">{{ section.settings.initial_stock | default: 7 }} unidades restantes</span>
+              <span id="stock-count-val">{{ section.settings.initial_stock | default: 10 }} unidades restantes</span>
             </div>
             <div style="width: 100%; height: 8px; background: #ffb3c1; border-radius: 10px; overflow: hidden;">
               <div id="stock-progress-bar" style="width: 85%; height: 100%; background: linear-gradient(90deg, #ff4d6d, #c9184a); border-radius: 10px; transition: width 0.5s ease;"></div>
@@ -93,16 +93,20 @@
         <!-- Price Section -->
         <div class="product-price-container" style="display: flex; align-items: baseline; gap: 0.75rem; flex-wrap: wrap; margin-bottom: 1.25rem; padding-bottom: 1rem; border-bottom: 1px solid rgba(0,0,0,0.08);">
           <span class="price-current" id="main-price-display" style="font-size: clamp(1.8rem, 4vw, 2.5rem); font-weight: 900; color: #0f172a; font-family: var(--font-heading, sans-serif);">
-            {{ product.selected_or_first_available_variant.price | money }}
+            {% if product.price != blank and product.price > 0 %}
+              {{ product.selected_or_first_available_variant.price | money }}
+            {% else %}
+              S/. 139.90
+            {% endif %}
           </span>
 
           {% if product.compare_at_price > product.price %}
             <span class="price-original" id="main-compare-price-display" style="font-size: 1.25rem; text-decoration: line-through; color: #94a3b8; font-weight: 500;">
               {{ product.compare_at_price | money }}
             </span>
-            {% assign savings = product.compare_at_price | minus: product.price %}
-            <span class="savings-badge" style="background: #22c55e; color: #fff; font-size: 0.75rem; font-weight: 800; padding: 0.25rem 0.6rem; border-radius: 4px; text-transform: uppercase;">
-              Ahorras {{ savings | money }}
+          {% else %}
+            <span class="price-original" id="main-compare-price-display" style="font-size: 1.25rem; text-decoration: line-through; color: #94a3b8; font-weight: 500;">
+              S/. 199.90
             </span>
           {% endif %}
 
@@ -111,111 +115,33 @@
           </span>
         </div>
 
-        <!-- Product Short Description -->
-        {% if product.description != blank %}
-          <div class="product-short-desc" style="font-size: 0.95rem; line-height: 1.6; color: #475569; margin-bottom: 1.5rem;">
-            {{ product.description }}
+        <!-- Clean Standard Quantity Selector (Sube / Baja Cantidad sin ofertas arbitrarias) -->
+        <div class="quantity-selector-container" style="margin-bottom: 1.5rem;">
+          <label style="font-weight: 700; font-size: 0.9rem; color: #334155; display: block; margin-bottom: 0.5rem;">
+            Cantidad:
+          </label>
+          <div style="display: flex; align-items: center; gap: 0.5rem; max-width: 140px;">
+            <button 
+              type="button" 
+              onclick="adjustQtyVal(-1)" 
+              style="width: 40px; height: 42px; border-radius: 8px; border: 1px solid #cbd5e1; background: #f8fafc; font-size: 1.2rem; font-weight: 700; cursor: pointer;"
+            >−</button>
+            <input 
+              type="number" 
+              id="selected-product-qty" 
+              name="quantity" 
+              value="1" 
+              min="1" 
+              onchange="onQtyInputChange(this.value)"
+              style="width: 50px; height: 42px; text-align: center; border-radius: 8px; border: 1px solid #cbd5e1; font-size: 1rem; font-weight: 700; outline: none;"
+            >
+            <button 
+              type="button" 
+              onclick="adjustQtyVal(1)" 
+              style="width: 40px; height: 42px; border-radius: 8px; border: 1px solid #cbd5e1; background: #f8fafc; font-size: 1.2rem; font-weight: 700; cursor: pointer;"
+            >+</button>
           </div>
-        {% endif %}
-
-        <!-- Quantity Multi-pack Bundles (High Converting Offer Packs) -->
-        {% if section.settings.show_bundles %}
-          <div class="bundles-container" style="margin-bottom: 1.5rem;">
-            <label style="font-weight: 800; font-size: 0.95rem; text-transform: uppercase; letter-spacing: 0.5px; display: block; margin-bottom: 0.75rem; color: #0f172a;">
-              {{ section.settings.bundles_title | default: "🎁 ELIGE TU PACK EN PROMOCIÓN:" }}
-            </label>
-
-            <div class="bundles-list" style="display: flex; flex-direction: column; gap: 0.75rem;">
-              
-              <!-- Pack 1 -->
-              <div 
-                class="bundle-option-card active" 
-                data-qty="1" 
-                data-price-multiplier="1" 
-                onclick="selectBundleOption(this, 1)"
-                style="border: 2px solid #2563eb; background: #eff6ff; border-radius: 10px; padding: 0.9rem 1.1rem; cursor: pointer; position: relative; transition: all 0.2s ease; display: flex; align-items: center; justify-content: space-between;"
-              >
-                <div style="display: flex; align-items: center; gap: 0.75rem;">
-                  <input type="radio" name="bundle_choice" value="1" checked style="accent-color: #2563eb; transform: scale(1.2);">
-                  <div>
-                    <div style="font-weight: 800; font-size: 0.95rem; color: #1e293b;">
-                      {{ section.settings.bundle1_title | default: "1 UNIDAD — Prueba Individual" }}
-                    </div>
-                    <div style="font-size: 0.8rem; color: #64748b;">
-                      {{ section.settings.bundle1_subtitle | default: "Envío Prioritario a todo el Perú" }}
-                    </div>
-                  </div>
-                </div>
-                <div style="text-align: right;">
-                  <div style="font-weight: 900; font-size: 1.1rem; color: #0f172a;" class="bundle-price-val">
-                    {{ product.price | money }}
-                  </div>
-                </div>
-              </div>
-
-              <!-- Pack 2 -->
-              <div 
-                class="bundle-option-card" 
-                data-qty="2" 
-                data-price-multiplier="1.75" 
-                onclick="selectBundleOption(this, 2)"
-                style="border: 2px solid #cbd5e1; background: #fff; border-radius: 10px; padding: 0.9rem 1.1rem; cursor: pointer; position: relative; transition: all 0.2s ease; display: flex; align-items: center; justify-content: space-between;"
-              >
-                <div style="position: absolute; top: -10px; right: 12px; background: linear-gradient(90deg, #ff4d6d, #dc2626); color: #fff; font-size: 0.7rem; font-weight: 800; padding: 0.15rem 0.6rem; border-radius: 10px; text-transform: uppercase;">
-                  {{ section.settings.bundle2_badge | default: "🔥 MÁS POPULAR (AHORRA 25%)" }}
-                </div>
-                <div style="display: flex; align-items: center; gap: 0.75rem;">
-                  <input type="radio" name="bundle_choice" value="2" style="accent-color: #2563eb; transform: scale(1.2);">
-                  <div>
-                    <div style="font-weight: 800; font-size: 0.95rem; color: #1e293b;">
-                      {{ section.settings.bundle2_title | default: "2 UNIDADES — Pack Pareja / Ahorro" }}
-                    </div>
-                    <div style="font-size: 0.8rem; color: #16a34a; font-weight: 700;">
-                      {{ section.settings.bundle2_subtitle | default: "Lleva la 2da unidad con 50% OFF + Envío Gratis" }}
-                    </div>
-                  </div>
-                </div>
-                <div style="text-align: right;">
-                  {% assign pack2_price = product.price | times: 1.75 %}
-                  <div style="font-weight: 900; font-size: 1.1rem; color: #0f172a;" class="bundle-price-val">
-                    {{ pack2_price | money }}
-                  </div>
-                </div>
-              </div>
-
-              <!-- Pack 3 -->
-              <div 
-                class="bundle-option-card" 
-                data-qty="3" 
-                data-price-multiplier="2.4" 
-                onclick="selectBundleOption(this, 3)"
-                style="border: 2px solid #cbd5e1; background: #fff; border-radius: 10px; padding: 0.9rem 1.1rem; cursor: pointer; position: relative; transition: all 0.2s ease; display: flex; align-items: center; justify-content: space-between;"
-              >
-                <div style="position: absolute; top: -10px; right: 12px; background: linear-gradient(90deg, #7c3aed, #4f46e5); color: #fff; font-size: 0.7rem; font-weight: 800; padding: 0.15rem 0.6rem; border-radius: 10px; text-transform: uppercase;">
-                  {{ section.settings.bundle3_badge | default: "💎 MEJOR OFERTA (AHORRA 35%)" }}
-                </div>
-                <div style="display: flex; align-items: center; gap: 0.75rem;">
-                  <input type="radio" name="bundle_choice" value="3" style="accent-color: #2563eb; transform: scale(1.2);">
-                  <div>
-                    <div style="font-weight: 800; font-size: 0.95rem; color: #1e293b;">
-                      {{ section.settings.bundle3_title | default: "3 UNIDADES — Pack Familiar Mega Ahorro" }}
-                    </div>
-                    <div style="font-size: 0.8rem; color: #7c3aed; font-weight: 700;">
-                      {{ section.settings.bundle3_subtitle | default: "¡Lleva 3 al precio de 2.2 + Regalo Exclusivo!" }}
-                    </div>
-                  </div>
-                </div>
-                <div style="text-align: right;">
-                  {% assign pack3_price = product.price | times: 2.4 %}
-                  <div style="font-weight: 900; font-size: 1.1rem; color: #0f172a;" class="bundle-price-val">
-                    {{ pack3_price | money }}
-                  </div>
-                </div>
-              </div>
-
-            </div>
-          </div>
-        {% endif %}
+        </div>
 
         <!-- Variants Selector (if product has options) -->
         {% unless product.has_only_default_variant %}
@@ -256,7 +182,6 @@
         <!-- Standard Shopify Form for Native Releasit App Hooks -->
         {% form 'product', product, id: 'product-form-pdp', class: 'form product-form', data-type: 'add-to-cart-form' %}
           <input type="hidden" name="id" value="{{ product.selected_or_first_available_variant.id }}" id="product-variant-id-input">
-          <input type="hidden" name="quantity" value="1" id="selected-product-qty">
 
           <!-- Releasit COD Form App Blocks Support -->
           {% for block in section.blocks %}
@@ -268,34 +193,13 @@
 
           <!-- Releasit COD Form Direct Embed Container -->
           <div class="releasit-cod-form" id="releasit-cod-form-container" data-product-id="{{ product.id }}" style="margin: 0.5rem 0 1.25rem;">
-            <!-- Releasit COD Form Shopify app automatically renders here if configured as embedded form -->
-          </div>
-
-          <!-- Primary High-Converting COD CTA Button -->
-          <div class="cta-action-area" style="margin-bottom: 1.5rem;">
-            <button 
-              type="submit" 
-              name="add"
-              id="main-cod-submit-btn" 
-              class="btn-cod-primary-action"
-              data-releasit-button="true"
-              onclick="triggerCODOrderProcess(event)"
-              style="width: 100%; min-height: 62px; background: {{ section.settings.btn_bg_color | default: 'linear-gradient(90deg, #16a34a 0%, #15803d 100%)' }}; color: #ffffff; border: none; border-radius: 12px; font-family: var(--font-heading, sans-serif); font-size: 1.15rem; font-weight: 800; text-transform: uppercase; letter-spacing: 0.5px; cursor: pointer; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 0.2rem; box-shadow: 0 8px 25px rgba(22,163,74,0.35); transition: transform 0.2s ease, box-shadow 0.2s ease; animation: pulse-green 2s infinite;"
-            >
-              <div style="display: flex; align-items: center; gap: 0.5rem;">
-                <span style="font-size: 1.4rem;">📦</span>
-                <span>{{ section.settings.btn_text | default: "📦 PEDIR AHORA — PAGO CONTRA ENTREGA" }}</span>
-              </div>
-              <span style="font-size: 0.75rem; font-weight: 600; opacity: 0.95; text-transform: none; letter-spacing: 0;">
-                {{ section.settings.btn_subtitle | default: "Pagas al recibir en la puerta de tu casa | Envío Gratis a todo el Perú" }}
-              </span>
-            </button>
+            <!-- Releasit COD Form Shopify app automatically renders its form and payment button here -->
           </div>
         {% endform %}
 
         <!-- Trust Badges Container -->
         {% if section.settings.show_trust_badges %}
-          <div class="trust-badges-grid" style="display: grid; grid-template-columns: repeat(2, 1fr); gap: 0.75rem; background: #f8fafc; padding: 1.25rem; border-radius: 12px; border: 1px solid #e2e8f0;">
+          <div class="trust-badges-grid" style="display: grid; grid-template-columns: repeat(2, 1fr); gap: 0.75rem; background: #f8fafc; padding: 1.25rem; border-radius: 12px; border: 1px solid #e2e8f0; margin-top: 1rem;">
             <div style="display: flex; align-items: center; gap: 0.6rem;">
               <span style="font-size: 1.4rem;">🚚</span>
               <div>
@@ -327,10 +231,126 @@
           </div>
         {% endif %}
 
+        <!-- Product Detailed Copy Provided by Merchant -->
+        <div class="product-full-copy" style="margin-top: 2rem; border-top: 1px solid #e2e8f0; padding-top: 2rem; color: #334155; line-height: 1.7; font-size: 0.95rem;">
+          
+          <p style="font-size: 1.05rem; line-height: 1.7; margin-bottom: 1.5rem; font-weight: 500;">
+            Descubre el poder de una fórmula creada para quienes quieren llevar su rutina de belleza y bienestar al siguiente nivel. <strong>BIOTINA MAX + COLÁGENO – FÓRMULA PREMIUM</strong> combina dos de los ingredientes más reconocidos en el mundo del cuidado personal en un suplemento pensado para complementar tu día a día desde el interior.
+          </p>
+
+          <div style="background: #fdf2f8; border-left: 4px solid #ec4899; padding: 1.25rem; border-radius: 8px; margin-bottom: 1.5rem;">
+            <h3 style="font-family: var(--font-heading, sans-serif); color: #be185d; font-size: 1.15rem; margin: 0 0 0.5rem; font-weight: 800;">
+              💎 BELLEZA QUE EMPIEZA DESDE ADENTRO
+            </h3>
+            <p style="margin: 0; color: #831843;">
+              Una combinación premium de Biotina + Colágeno ideal para acompañar el cuidado de tu cabello, piel y uñas, convirtiéndose en el aliado perfecto de tu rutina diaria de belleza.
+            </p>
+          </div>
+
+          <h3 style="font-family: var(--font-heading, sans-serif); color: #0f172a; font-size: 1.2rem; font-weight: 800; margin: 1.75rem 0 1rem;">
+            ✨ ¿POR QUÉ ELEGIR BIOTINA MAX + COLÁGENO?
+          </h3>
+
+          <ul style="list-style: none; padding: 0; margin: 0 0 1.75rem; display: flex; flex-direction: column; gap: 0.85rem;">
+            <li style="display: flex; gap: 0.6rem;">
+              <span style="color: #2563eb; font-weight: 800;">•</span>
+              <div><strong>Fórmula Premium:</strong> una combinación especialmente pensada para quienes buscan algo más que un suplemento convencional.</div>
+            </li>
+            <li style="display: flex; gap: 0.6rem;">
+              <span style="color: #2563eb; font-weight: 800;">•</span>
+              <div><strong>Cabello con apariencia más cuidada:</strong> complementa tu rutina para mantener una imagen fuerte, saludable y llena de vitalidad.</div>
+            </li>
+            <li style="display: flex; gap: 0.6rem;">
+              <span style="color: #2563eb; font-weight: 800;">•</span>
+              <div><strong>Uñas como protagonistas:</strong> ideal para quienes desean acompañar el mantenimiento de uñas fuertes y bien cuidadas.</div>
+            </li>
+            <li style="display: flex; gap: 0.6rem;">
+              <span style="color: #2563eb; font-weight: 800;">•</span>
+              <div><strong>Piel y belleza integral:</strong> el colágeno forma parte natural de la estructura de la piel, mientras que la biotina participa en procesos normales del organismo.</div>
+            </li>
+            <li style="display: flex; gap: 0.6rem;">
+              <span style="color: #2563eb; font-weight: 800;">•</span>
+              <div><strong>Belleza 360°:</strong> cabello, piel y uñas en una sola fórmula.</div>
+            </li>
+            <li style="display: flex; gap: 0.6rem;">
+              <span style="color: #2563eb; font-weight: 800;">•</span>
+              <div><strong>Fácil de incorporar a tu rutina:</strong> porque cuidarte no debería ser complicado.</div>
+            </li>
+          </ul>
+
+          <h3 style="font-family: var(--font-heading, sans-serif); color: #0f172a; font-size: 1.2rem; font-weight: 800; margin: 1.75rem 0 1rem;">
+            🌟 TU RITUAL DE BELLEZA, AHORA EN VERSIÓN PREMIUM
+          </h3>
+
+          <p style="margin-bottom: 1rem;">
+            No se trata solamente de verte bien. Se trata de convertir cada día en una oportunidad para invertir en ti, en tu cuidado y en esa confianza que se nota.
+          </p>
+
+          <p style="margin-bottom: 1.5rem;">
+            <strong>BIOTINA MAX + COLÁGENO</strong> ha sido pensado para mujeres y hombres que buscan complementar un estilo de vida enfocado en el bienestar, el cuidado personal y una imagen impecable.
+          </p>
+
+          <div style="background: #f8fafc; border: 1px solid #e2e8f0; border-radius: 12px; padding: 1.5rem; margin-bottom: 1.5rem;">
+            <h4 style="font-family: var(--font-heading, sans-serif); color: #0f172a; font-size: 1.1rem; font-weight: 800; margin: 0 0 1rem; text-align: center;">
+              🔥 DOS GRANDES ALIADOS. UNA SOLA FÓRMULA.
+            </h4>
+
+            <div style="margin-bottom: 1rem;">
+              <strong style="color: #1e293b; display: block; margin-bottom: 0.25rem;">BIOTINA</strong>
+              <p style="margin: 0; font-size: 0.9rem; color: #64748b;">
+                Una vitamina ampliamente utilizada en suplementos de belleza y nutrición, relacionada con el mantenimiento normal del cabello y la piel.*
+              </p>
+            </div>
+
+            <div>
+              <strong style="color: #1e293b; display: block; margin-bottom: 0.25rem;">COLÁGENO</strong>
+              <p style="margin: 0; font-size: 0.9rem; color: #64748b;">
+                Una proteína naturalmente presente en nuestro organismo y uno de los componentes estructurales más importantes de tejidos como la piel.*
+              </p>
+            </div>
+          </div>
+
+          <div style="text-align: center; padding: 1.25rem; background: #eff6ff; border-radius: 12px; margin-bottom: 1.5rem;">
+            <p style="font-weight: 800; color: #1e40af; margin: 0 0 0.5rem; font-size: 1.05rem;">
+              💖 Haz de tu cuidado personal un hábito, no una excepción.
+            </p>
+            <p style="margin: 0; color: #1d4ed8; font-size: 0.95rem;">
+              Incorpora <strong>BIOTINA MAX + COLÁGENO – FÓRMULA PREMIUM</strong> a tu rutina y dale a tu belleza el protagonismo que merece.
+            </p>
+          </div>
+
+          <p style="text-align: center; font-weight: 800; font-size: 1.1rem; color: #0f172a; margin-bottom: 1rem;">
+            Más cuidado. Más confianza. Más tú.<br>
+            <span style="color: #2563eb;">BIOTINA MAX + COLÁGENO</span><br>
+            <span style="font-size: 0.9rem; font-weight: 600; color: #64748b;">La combinación premium que tu rutina de belleza estaba esperando.</span>
+          </p>
+
+          <p style="font-size: 0.75rem; color: #94a3b8; line-height: 1.5; font-style: italic; margin-top: 1.5rem; border-top: 1px solid #f1f5f9; padding-top: 1rem;">
+            * Los suplementos alimenticios no sustituyen una alimentación equilibrada ni un estilo de vida saludable. Las propiedades y declaraciones permitidas pueden variar según la composición exacta del producto y la normativa de cada país.
+          </p>
+
+        </div>
+
       </div>
     </div>
   </div>
 </section>
+
+<script>
+  function adjustQtyVal(delta) {
+    const input = document.getElementById('selected-product-qty');
+    if (!input) return;
+    const current = parseInt(input.value, 10) || 1;
+    const next = Math.max(1, current + delta);
+    input.value = next;
+  }
+  function onQtyInputChange(val) {
+    const input = document.getElementById('selected-product-qty');
+    if (!input) return;
+    const current = parseInt(val, 10) || 1;
+    input.value = Math.max(1, current);
+  }
+</script>
 
 {% schema %}
 {
@@ -377,7 +397,7 @@
       "type": "number",
       "id": "initial_stock",
       "label": "Unidades restantes iniciales",
-      "default": 7
+      "default": 10
     },
     {
       "type": "header",
@@ -393,7 +413,7 @@
       "type": "text",
       "id": "discount_badge_text",
       "label": "Texto insignia descuento",
-      "default": "🔥 HASTA -50% OFF"
+      "default": "🔥 HASTA -30% OFF"
     },
     {
       "type": "checkbox",
@@ -412,86 +432,6 @@
       "id": "rating_count",
       "label": "Texto resumen de opiniones",
       "default": "142 opiniones verificadas"
-    },
-    {
-      "type": "header",
-      "content": "Packs de Ofertas por Cantidad (Bundles)"
-    },
-    {
-      "type": "checkbox",
-      "id": "show_bundles",
-      "label": "Mostrar selector de packs por cantidad",
-      "default": true
-    },
-    {
-      "type": "text",
-      "id": "bundles_title",
-      "label": "Título de la sección de packs",
-      "default": "🎁 ELIGE TU PACK EN PROMOCIÓN:"
-    },
-    {
-      "type": "text",
-      "id": "bundle1_title",
-      "label": "Título Pack 1",
-      "default": "1 UNIDAD — Prueba Individual"
-    },
-    {
-      "type": "text",
-      "id": "bundle1_subtitle",
-      "label": "Subtítulo Pack 1",
-      "default": "Envío Prioritario a todo el Perú"
-    },
-    {
-      "type": "text",
-      "id": "bundle2_title",
-      "label": "Título Pack 2",
-      "default": "2 UNIDADES — Pack Pareja / Ahorro"
-    },
-    {
-      "type": "text",
-      "id": "bundle2_subtitle",
-      "label": "Subtítulo Pack 2",
-      "default": "Lleva la 2da unidad con 50% OFF + Envío Gratis"
-    },
-    {
-      "type": "text",
-      "id": "bundle2_badge",
-      "label": "Badge Pack 2",
-      "default": "🔥 MÁS POPULAR (AHORRA 25%)"
-    },
-    {
-      "type": "text",
-      "id": "bundle3_title",
-      "label": "Título Pack 3",
-      "default": "3 UNIDADES — Pack Familiar Mega Ahorro"
-    },
-    {
-      "type": "text",
-      "id": "bundle3_subtitle",
-      "label": "Subtítulo Pack 3",
-      "default": "¡Lleva 3 al precio de 2.2 + Regalo Exclusivo!"
-    },
-    {
-      "type": "text",
-      "id": "bundle3_badge",
-      "label": "Badge Pack 3",
-      "default": "💎 MEJOR OFERTA (AHORRA 35%)"
-    },
-    {
-      "type": "header",
-      "content": "Botón Principal de Compra COD"
-    },
-    {
-      "type": "text",
-      "id": "btn_text",
-      "label": "Texto del Botón Principal",
-      "default": "📦 PEDIR AHORA — PAGO CONTRA ENTREGA"
-    },
-    {
-      "type": "text",
-      "id": "btn_subtitle",
-      "label": "Subtítulo debajo del botón",
-      "default": "Pagas al recibir en la puerta de tu casa | Envío Gratis a todo el Perú"
     },
     {
       "type": "header",

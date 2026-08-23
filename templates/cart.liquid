@@ -28,7 +28,7 @@
         </div>
 
         <button type="submit" name="update" class="btn btn-outline-dark" style="width: 100%; margin-top: 1rem;">Actualizar carrito</button>
-        <button type="submit" name="checkout" class="cart-checkout-btn" style="margin-top: 0.75rem;">CONTINUAR AL PAGO →</button>
+        <button type="button" class="cart-checkout-btn" data-releasit-button="true" onclick="triggerCODOrderProcess(event)" style="margin-top: 0.75rem;">CONTINUAR AL PAGO (PAGO CONTRA ENTREGA) →</button>
       {% endform %}
     {% endif %}
   </div>

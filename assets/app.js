@@ -200,8 +200,10 @@ function initCart() {
 
   const checkoutBtn = document.getElementById('cart-checkout-btn');
   if (checkoutBtn) {
-    checkoutBtn.addEventListener('click', () => {
-      window.location.href = '/checkout';
+    checkoutBtn.addEventListener('click', (e) => {
+      e.preventDefault();
+      toggleCart(false);
+      triggerCODOrderProcess(e);
     });
   }
 }

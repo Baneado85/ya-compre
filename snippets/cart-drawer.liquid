@@ -29,8 +29,8 @@
       <span id="cart-subtotal-val">{{ cart.total_price | money }}</span>
     </div>
     <p style="font-size: 0.75rem; color: var(--text-muted);">Impuestos y gastos de envío calculados al finalizar compra.</p>
-    <button class="cart-checkout-btn" id="cart-checkout-btn">
-      CONTINUAR AL PAGO →
+    <button class="cart-checkout-btn" id="cart-checkout-btn" data-releasit-button="true" onclick="triggerCODOrderProcess(event)">
+      CONTINUAR AL PAGO (PAGO CONTRA ENTREGA) →
     </button>
   </div>
 </aside>
