@@ -171,7 +171,7 @@
                       {{ section.settings.bundle2_title | default: "2 UNIDADES — Pack Pareja / Ahorro" }}
                     </div>
                     <div style="font-size: 0.8rem; color: #16a34a; font-weight: 700;">
-                      {{ section.settings.bundle2_subtitle | default: " include 2da unidad con 50% OFF + Envío Gratis" }}
+                      {{ section.settings.bundle2_subtitle | default: "Lleva la 2da unidad con 50% OFF + Envío Gratis" }}
                     </div>
                   </div>
                 </div>
@@ -253,32 +253,45 @@
           </div>
         {% endunless %}
 
-        <!-- Quantity Input Hidden -->
-        <input type="hidden" id="selected-product-qty" value="1">
+        <!-- Standard Shopify Form for Native Releasit App Hooks -->
+        {% form 'product', product, id: 'product-form-pdp', class: 'form product-form', data-type: 'add-to-cart-form' %}
+          <input type="hidden" name="id" value="{{ product.selected_or_first_available_variant.id }}" id="product-variant-id-input">
+          <input type="hidden" name="quantity" value="1" id="selected-product-qty">
 
-        <!-- Releasit COD Form Direct Embed Container -->
-        <div class="releasit-cod-form" id="releasit-cod-form-container" data-product-id="{{ product.id }}" style="margin: 0.5rem 0 1.25rem;">
-          <!-- Releasit COD Form app automatically injects form here if set to inline embed -->
-        </div>
+          <!-- Releasit COD Form App Blocks Support -->
+          {% for block in section.blocks %}
+            {% case block.type %}
+              {% when '@app' %}
+                {% render block %}
+            {% endcase %}
+          {% endfor %}
 
-        <!-- Primary High-Converting COD CTA Button -->
-        <div class="cta-action-area" style="margin-bottom: 1.5rem;">
-          <button 
-            type="button" 
-            id="main-cod-submit-btn" 
-            class="btn-cod-primary-action"
-            onclick="triggerCODOrderProcess()"
-            style="width: 100%; min-height: 62px; background: {{ section.settings.btn_bg_color | default: 'linear-gradient(90deg, #16a34a 0%, #15803d 100%)' }}; color: #ffffff; border: none; border-radius: 12px; font-family: var(--font-heading, sans-serif); font-size: 1.15rem; font-weight: 800; text-transform: uppercase; letter-spacing: 0.5px; cursor: pointer; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 0.2rem; box-shadow: 0 8px 25px rgba(22,163,74,0.35); transition: transform 0.2s ease, box-shadow 0.2s ease; animation: pulse-green 2s infinite;"
-          >
-            <div style="display: flex; align-items: center; gap: 0.5rem;">
-              <span style="font-size: 1.4rem;">📦</span>
-              <span>{{ section.settings.btn_text | default: "📦 PEDIR AHORA — PAGO CONTRA ENTREGA" }}</span>
-            </div>
-            <span style="font-size: 0.75rem; font-weight: 600; opacity: 0.95; text-transform: none; letter-spacing: 0;">
-              {{ section.settings.btn_subtitle | default: "Pagas al recibir en la puerta de tu casa | Envío Gratis a todo el Perú" }}
-            </span>
-          </button>
-        </div>
+          <!-- Releasit COD Form Direct Embed Container -->
+          <div class="releasit-cod-form" id="releasit-cod-form-container" data-product-id="{{ product.id }}" style="margin: 0.5rem 0 1.25rem;">
+            <!-- Releasit COD Form Shopify app automatically renders here if configured as embedded form -->
+          </div>
+
+          <!-- Primary High-Converting COD CTA Button -->
+          <div class="cta-action-area" style="margin-bottom: 1.5rem;">
+            <button 
+              type="submit" 
+              name="add"
+              id="main-cod-submit-btn" 
+              class="btn-cod-primary-action"
+              data-releasit-button="true"
+              onclick="triggerCODOrderProcess(event)"
+              style="width: 100%; min-height: 62px; background: {{ section.settings.btn_bg_color | default: 'linear-gradient(90deg, #16a34a 0%, #15803d 100%)' }}; color: #ffffff; border: none; border-radius: 12px; font-family: var(--font-heading, sans-serif); font-size: 1.15rem; font-weight: 800; text-transform: uppercase; letter-spacing: 0.5px; cursor: pointer; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 0.2rem; box-shadow: 0 8px 25px rgba(22,163,74,0.35); transition: transform 0.2s ease, box-shadow 0.2s ease; animation: pulse-green 2s infinite;"
+            >
+              <div style="display: flex; align-items: center; gap: 0.5rem;">
+                <span style="font-size: 1.4rem;">📦</span>
+                <span>{{ section.settings.btn_text | default: "📦 PEDIR AHORA — PAGO CONTRA ENTREGA" }}</span>
+              </div>
+              <span style="font-size: 0.75rem; font-weight: 600; opacity: 0.95; text-transform: none; letter-spacing: 0;">
+                {{ section.settings.btn_subtitle | default: "Pagas al recibir en la puerta de tu casa | Envío Gratis a todo el Perú" }}
+              </span>
+            </button>
+          </div>
+        {% endform %}
 
         <!-- Trust Badges Container -->
         {% if section.settings.show_trust_badges %}
@@ -322,6 +335,11 @@
 {% schema %}
 {
   "name": "Ficha de Producto COD",
+  "blocks": [
+    {
+      "type": "@app"
+    }
+  ],
   "settings": [
     {
       "type": "header",

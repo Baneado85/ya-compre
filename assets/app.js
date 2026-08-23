@@ -618,33 +618,33 @@ function selectVariantOption(btnEl, optionPos, value) {
 }
 
 // --- 4. Releasit COD Form Trigger & Fallback ---
-function triggerCODOrderProcess() {
-  // Check if Releasit COD Form container or API exists
-  const releasitFormContainer = document.getElementById('releasit-cod-form-container') || document.querySelector('.releasit-cod-form');
-  
-  if (window.ReleasitCOD && typeof window.ReleasitCOD.open === 'function') {
-    window.ReleasitCOD.open();
+function triggerCODOrderProcess(event) {
+  // If Releasit COD Form app script is present on Shopify storefront, let Releasit handle form submit natively
+  if (window._RSI_COD_FORM_SETTINGS || (window.ReleasitCOD && typeof window.ReleasitCOD.open === 'function')) {
+    if (window.ReleasitCOD && typeof window.ReleasitCOD.open === 'function') {
+      if (event) event.preventDefault();
+      window.ReleasitCOD.open();
+      return;
+    }
+    const releasitFormContainer = document.getElementById('releasit-cod-form-container') || document.querySelector('.releasit-cod-form');
+    if (releasitFormContainer && releasitFormContainer.children.length > 0) {
+      if (event) event.preventDefault();
+      releasitFormContainer.scrollIntoView({ behavior: 'smooth', block: 'center' });
+      const firstInput = releasitFormContainer.querySelector('input');
+      if (firstInput) firstInput.focus();
+      return;
+    }
+    // Otherwise let Releasit intercept submit naturally
     return;
   }
 
-  if (releasitFormContainer && releasitFormContainer.children.length > 0) {
-    releasitFormContainer.scrollIntoView({ behavior: 'smooth', block: 'center' });
-    const firstInput = releasitFormContainer.querySelector('input');
-    if (firstInput) firstInput.focus();
-    return;
-  }
-
-  // Fallback: Smooth scroll to form or open COD Modal
-  if (releasitFormContainer) {
-    releasitFormContainer.scrollIntoView({ behavior: 'smooth', block: 'center' });
-  }
-
-  // Open native COD modal if Releasit script tag isn't active on local preview
+  // Fallback for local preview if Releasit app script isn't loaded
   const productTitleEl = document.querySelector('h1');
   const title = productTitleEl ? productTitleEl.textContent.trim() : 'Producto Premium';
   const priceDisplay = document.getElementById('main-price-display');
   const price = priceDisplay ? priceDisplay.textContent.trim() : '';
 
+  if (event) event.preventDefault();
   openCODModal(title, price);
 }
 
