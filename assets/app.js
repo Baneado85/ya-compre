@@ -608,44 +608,47 @@ function selectVariantOption(btnEl, optionPos, value) {
 
 // --- 4. Releasit COD Form Trigger & Fallback ---
 function triggerCODOrderProcess(event) {
-  // Close cart drawer if open
+  if (event) event.preventDefault();
   toggleCart(false);
 
   // 1. Check if Releasit COD Form JS API is available
   if (window.ReleasitCOD && typeof window.ReleasitCOD.open === 'function') {
-    if (event) event.preventDefault();
     window.ReleasitCOD.open();
     return;
   }
 
-  // 2. Check if Releasit embedded form container has loaded inputs
+  // 2. Check if Releasit embedded form container is present on current page
   const releasitFormContainer = document.getElementById('releasit-cod-form-container') || document.querySelector('.releasit-cod-form');
-  if (releasitFormContainer && releasitFormContainer.children.length > 0) {
-    if (event) event.preventDefault();
+  if (releasitFormContainer) {
     releasitFormContainer.scrollIntoView({ behavior: 'smooth', block: 'center' });
-    const firstInput = releasitFormContainer.querySelector('input, button');
+    const firstInput = releasitFormContainer.querySelector('input, button, select');
     if (firstInput) firstInput.focus();
     return;
   }
 
-  // 3. Try submitting product form if Releasit button exists
+  // 3. If on product page, click product form submit button
   const pdpForm = document.getElementById('product-form-pdp') || document.querySelector('form[action*="/cart/add"]');
   if (pdpForm) {
     const submitBtn = pdpForm.querySelector('[data-releasit-button], button[type="submit"]');
     if (submitBtn && submitBtn !== event?.target) {
-      if (event) event.preventDefault();
       submitBtn.click();
       return;
     }
   }
 
-  // Fallback for local preview if Releasit app script isn't loaded
+  // 4. If on cart or homepage, navigate directly to product page Releasit form
+  const pdpLink = document.querySelector('a[href*="/products/"]')?.getAttribute('href');
+  if (pdpLink) {
+    window.location.href = pdpLink + '#releasit-cod-form-container';
+    return;
+  }
+
+  // Fallback modal for local preview if no product page link exists
   const productTitleEl = document.querySelector('h1');
   const title = productTitleEl ? productTitleEl.textContent.trim() : 'Producto Premium';
   const priceDisplay = document.getElementById('main-price-display');
   const price = priceDisplay ? priceDisplay.textContent.trim() : '';
 
-  if (event) event.preventDefault();
   openCODModal(title, price);
 }
 
