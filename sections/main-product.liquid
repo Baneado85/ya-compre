@@ -196,15 +196,21 @@
             <!-- Releasit COD Form Shopify app automatically renders its form and payment button here -->
           </div>
 
-          <!-- Secondary Option: Add to Cart Button -->
+          <!-- Primary Action: Open Pago en Casa Modal Form -->
           <div style="margin-top: 0.75rem;">
             <button 
               type="button" 
-              class="btn-add-to-cart-action"
-              onclick="onPDPAddToCartClick(event)"
-              style="width: 100%; min-height: 52px; background: #ffffff; color: #0f172a; border: 2px solid #0f172a; border-radius: 12px; font-family: var(--font-heading, sans-serif); font-size: 1rem; font-weight: 800; text-transform: uppercase; letter-spacing: 0.5px; cursor: pointer; display: flex; align-items: center; justify-content: center; gap: 0.5rem; transition: all 0.2s ease;"
+              class="btn-cod-primary-action"
+              onclick="openCODModal()"
+              style="width: 100%; min-height: 62px; background: linear-gradient(90deg, #16a34a 0%, #15803d 100%); color: #ffffff; border: none; border-radius: 12px; font-family: var(--font-heading, sans-serif); font-size: 1.15rem; font-weight: 900; text-transform: uppercase; letter-spacing: 0.5px; cursor: pointer; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 0.2rem; box-shadow: 0 8px 25px rgba(22,163,74,0.35); animation: pulse-green 2s infinite;"
             >
-              <span>🛒</span> AGREGAR AL CARRITO
+              <div style="display: flex; align-items: center; gap: 0.5rem;">
+                <span style="font-size: 1.4rem;">📦</span>
+                <span>PEDIR AHORA — PAGO CONTRA ENTREGA</span>
+              </div>
+              <span style="font-size: 0.75rem; font-weight: 600; opacity: 0.95; text-transform: none; letter-spacing: 0;">
+                Pagas al recibir en la puerta de tu casa | Envío Gratis a todo el Perú
+              </span>
             </button>
           </div>
         {% endform %}
