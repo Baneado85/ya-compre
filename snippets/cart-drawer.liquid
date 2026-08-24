@@ -6,17 +6,8 @@
     <button class="icon-btn" id="close-cart-drawer" aria-label="Cerrar Carrito">&times;</button>
   </div>
 
-  <div class="free-shipping-progress">
-    <div class="free-shipping-text" id="free-shipping-text-val">
-      {% if cart.total_price >= 15000 %}
-        🎉 ¡Felicidades! Tienes <strong>ENVÍO GRATIS</strong>
-      {% else %}
-        Agrega <strong>{{ 15000 | minus: cart.total_price | money }}</strong> más para Envío Gratis
-      {% endif %}
-    </div>
-    <div class="progress-bar-bg">
-      <div class="progress-bar-fill" id="free-shipping-fill" style="width: {{ cart.total_price | times: 100 | divided_by: 15000 | at_most: 100 }}%;"></div>
-    </div>
+  <div style="background: #dcfce7; color: #166534; padding: 0.65rem 1rem; border-radius: 8px; font-weight: 700; font-size: 0.85rem; text-align: center; margin: 0.75rem 1rem 0; border: 1px solid #bbf7d0;">
+    🎉 ¡Felicidades! Tienes <strong>ENVÍO GRATIS</strong> a todo el Perú
   </div>
 
   <div class="cart-items-container" id="cart-items-container">
@@ -28,9 +19,9 @@
       <span>Subtotal:</span>
       <span id="cart-subtotal-val">{{ cart.total_price | money }}</span>
     </div>
-    <p style="font-size: 0.75rem; color: var(--text-muted);">Impuestos y gastos de envío calculados al finalizar compra.</p>
+    <p style="font-size: 0.75rem; color: var(--text-muted);">Envío gratis y pago contra entrega al recibir en tu domicilio.</p>
     <button class="cart-checkout-btn" id="cart-checkout-btn" data-releasit-button="true" onclick="triggerCODOrderProcess(event)">
-      CONTINUAR AL PAGO (PAGO CONTRA ENTREGA) →
+      📦 PAGO CONTRA ENTREGA
     </button>
   </div>
 </aside>

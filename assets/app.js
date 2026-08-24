@@ -233,19 +233,6 @@ function renderCartDrawer(cart) {
   if (drawerCount) drawerCount.textContent = cart.item_count;
   if (subtotalEl) subtotalEl.textContent = formatMoney(cart.total_price);
 
-  const subtotal = cart.total_price / 100;
-  if (progressFill && progressText) {
-    if (subtotal >= FREE_SHIPPING_THRESHOLD) {
-      progressFill.style.width = '100%';
-      progressText.innerHTML = '🎉 ¡Felicidades! Tienes <strong>ENVÍO GRATIS</strong>';
-    } else {
-      const needed = FREE_SHIPPING_THRESHOLD - subtotal;
-      const pct = Math.min(100, (subtotal / FREE_SHIPPING_THRESHOLD) * 100);
-      progressFill.style.width = `${pct}%`;
-      progressText.innerHTML = `Agrega <strong>S/. ${needed.toFixed(2)}</strong> más para Envío Gratis`;
-    }
-  }
-
   if (!cartContainer) return;
 
   if (cart.item_count === 0) {
@@ -621,23 +608,35 @@ function selectVariantOption(btnEl, optionPos, value) {
 
 // --- 4. Releasit COD Form Trigger & Fallback ---
 function triggerCODOrderProcess(event) {
-  // If Releasit COD Form app script is present on Shopify storefront, let Releasit handle form submit natively
-  if (window._RSI_COD_FORM_SETTINGS || (window.ReleasitCOD && typeof window.ReleasitCOD.open === 'function')) {
-    if (window.ReleasitCOD && typeof window.ReleasitCOD.open === 'function') {
-      if (event) event.preventDefault();
-      window.ReleasitCOD.open();
-      return;
-    }
-    const releasitFormContainer = document.getElementById('releasit-cod-form-container') || document.querySelector('.releasit-cod-form');
-    if (releasitFormContainer && releasitFormContainer.children.length > 0) {
-      if (event) event.preventDefault();
-      releasitFormContainer.scrollIntoView({ behavior: 'smooth', block: 'center' });
-      const firstInput = releasitFormContainer.querySelector('input');
-      if (firstInput) firstInput.focus();
-      return;
-    }
-    // Otherwise let Releasit intercept submit naturally
+  // Close cart drawer if open
+  toggleCart(false);
+
+  // 1. Check if Releasit COD Form JS API is available
+  if (window.ReleasitCOD && typeof window.ReleasitCOD.open === 'function') {
+    if (event) event.preventDefault();
+    window.ReleasitCOD.open();
     return;
+  }
+
+  // 2. Check if Releasit embedded form container has loaded inputs
+  const releasitFormContainer = document.getElementById('releasit-cod-form-container') || document.querySelector('.releasit-cod-form');
+  if (releasitFormContainer && releasitFormContainer.children.length > 0) {
+    if (event) event.preventDefault();
+    releasitFormContainer.scrollIntoView({ behavior: 'smooth', block: 'center' });
+    const firstInput = releasitFormContainer.querySelector('input, button');
+    if (firstInput) firstInput.focus();
+    return;
+  }
+
+  // 3. Try submitting product form if Releasit button exists
+  const pdpForm = document.getElementById('product-form-pdp') || document.querySelector('form[action*="/cart/add"]');
+  if (pdpForm) {
+    const submitBtn = pdpForm.querySelector('[data-releasit-button], button[type="submit"]');
+    if (submitBtn && submitBtn !== event?.target) {
+      if (event) event.preventDefault();
+      submitBtn.click();
+      return;
+    }
   }
 
   // Fallback for local preview if Releasit app script isn't loaded
