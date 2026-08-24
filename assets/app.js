@@ -696,3 +696,29 @@ function initStickyBuyBar() {
   });
 }
 
+// --- 6. Shopify Theme Editor (Personalizador) Safe Interceptor ---
+document.addEventListener('DOMContentLoaded', () => {
+  initThemeEditorProtection();
+});
+
+function initThemeEditorProtection() {
+  // Intercept all submit and checkout clicks in Shopify Theme Editor (designMode)
+  document.addEventListener('submit', (e) => {
+    if (window.Shopify && window.Shopify.designMode) {
+      e.preventDefault();
+      console.log('Envío de formulario interceptado en el Personalizador de Shopify para evitar error de URL no compatible.');
+      return false;
+    }
+  }, true);
+
+  document.addEventListener('click', (e) => {
+    const btn = e.target.closest('[data-releasit-button], .cart-checkout-btn, button[name="add"], button[type="submit"]');
+    if (btn && window.Shopify && window.Shopify.designMode) {
+      e.preventDefault();
+      console.log('Clic de botón interceptado en el Personalizador de Shopify.');
+      return false;
+    }
+  }, true);
+}
+
+

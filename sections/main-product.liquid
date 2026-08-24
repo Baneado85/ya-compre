@@ -180,7 +180,7 @@
         {% endunless %}
 
         <!-- Standard Shopify Form for Native Releasit App Hooks -->
-        {% form 'product', product, id: 'product-form-pdp', class: 'form product-form', data-type: 'add-to-cart-form' %}
+        {% form 'product', product, id: 'product-form-pdp', class: 'form product-form', data-type: 'add-to-cart-form', onsubmit: 'if(window.Shopify && window.Shopify.designMode){ event.preventDefault(); return false; }' %}
           <input type="hidden" name="id" value="{{ product.selected_or_first_available_variant.id }}" id="product-variant-id-input">
 
           <!-- Releasit COD Form App Blocks Support -->
