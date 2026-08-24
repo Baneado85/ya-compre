@@ -240,7 +240,7 @@ function renderCartDrawer(cart) {
       <div class="cart-empty-state">
         <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/><path d="M16 10a4 4 0 0 1-8 0"/></svg>
         <p>Tu carrito está vacío</p>
-        <button class="btn btn-outline-dark" style="margin-top: 1rem;" onclick="toggleCart(false)">Explorar Productos</button>
+        <button class="btn btn-outline-dark" style="margin-top: 1rem;" onclick="navigateToCatalog(event)">Explorar Productos</button>
       </div>
     `;
   } else {
@@ -719,5 +719,27 @@ function initThemeEditorProtection() {
     }
   }, true);
 }
+
+function navigateToCatalog(e) {
+  if (e) e.preventDefault();
+  toggleCart(false);
+  const catalogEl = document.getElementById('productos') || document.getElementById('catalog') || document.querySelector('.catalog-section');
+  if (catalogEl) {
+    catalogEl.scrollIntoView({ behavior: 'smooth', block: 'start' });
+  } else {
+    window.location.href = '/collections/all';
+  }
+}
+
+function onPDPAddToCartClick(e) {
+  if (e) e.preventDefault();
+  const variantId = document.getElementById('product-variant-id-input')?.value || document.getElementById('product-native-variant-select')?.value;
+  const qtyInput = document.getElementById('selected-product-qty');
+  const qty = qtyInput ? parseInt(qtyInput.value || '1', 10) : 1;
+  if (variantId) {
+    addToCart(variantId, qty);
+  }
+}
+
 
 

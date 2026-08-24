@@ -195,6 +195,18 @@
           <div class="releasit-cod-form" id="releasit-cod-form-container" data-product-id="{{ product.id }}" style="margin: 0.5rem 0 1.25rem;">
             <!-- Releasit COD Form Shopify app automatically renders its form and payment button here -->
           </div>
+
+          <!-- Secondary Option: Add to Cart Button -->
+          <div style="margin-top: 0.75rem;">
+            <button 
+              type="button" 
+              class="btn-add-to-cart-action"
+              onclick="onPDPAddToCartClick(event)"
+              style="width: 100%; min-height: 52px; background: #ffffff; color: #0f172a; border: 2px solid #0f172a; border-radius: 12px; font-family: var(--font-heading, sans-serif); font-size: 1rem; font-weight: 800; text-transform: uppercase; letter-spacing: 0.5px; cursor: pointer; display: flex; align-items: center; justify-content: center; gap: 0.5rem; transition: all 0.2s ease;"
+            >
+              <span>🛒</span> AGREGAR AL CARRITO
+            </button>
+          </div>
         {% endform %}
 
         <!-- Trust Badges Container -->
