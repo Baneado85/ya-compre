@@ -1,12 +1,11 @@
 <!-- =========================================================================
   PLANTILLA PREMIUM DE PÁGINA DE GRACIAS PARA RELEASIT COD FORM
-  Copia todo este código HTML y pégalo en el panel de Releasit COD Form 
-  en: Configuración / Éxito de Entrega / Página de Gracias HTML.
+  Soporta reemplazo automático de {first_name}, {order_number}, etc.
 ========================================================================= -->
 
-<div style="font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif; max-width: 620px; margin: 0 auto; background: #ffffff; border-radius: 20px; padding: 2.25rem 1.75rem; box-shadow: 0 10px 40px rgba(0,0,0,0.08); border: 1px solid #e2e8f0; color: #1e293b; text-align: left; box-sizing: border-box;">
+<div id="thank-you-card-container" style="font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif; max-width: 620px; margin: 0 auto; background: #ffffff; border-radius: 20px; padding: 2.25rem 1.75rem; box-shadow: 0 10px 40px rgba(0,0,0,0.08); border: 1px solid #e2e8f0; color: #1e293b; text-align: left; box-sizing: border-box;">
 
-  <!-- Header con Animación y Checkmark Verde -->
+  <!-- Header con Checkmark Verde -->
   <div style="text-align: center; margin-bottom: 2rem;">
     <div style="width: 72px; height: 72px; background: #dcfce7; color: #16a34a; border-radius: 50%; display: inline-flex; align-items: center; justify-content: center; font-size: 2.2rem; margin-bottom: 1rem; box-shadow: 0 8px 20px rgba(22,163,74,0.2);">
       ✓
@@ -16,10 +15,10 @@
       ¡PEDIDO CONFIRMADO CON ÉXITO! 🎉
     </span>
     <h2 style="font-size: 1.65rem; font-weight: 900; color: #0f172a; margin: 0 0 0.5rem; line-height: 1.25;">
-      ¡Muchas gracias por tu compra, {first_name}!
+      ¡Muchas gracias por tu compra<span id="ty-name-span"></span>!
     </h2>
     <p style="font-size: 0.95rem; color: #64748b; margin: 0; line-height: 1.5;">
-      Hemos recibido tu pedido <strong>#{order_number}</strong> correctamente. En breve nos comunicaremos contigo para coordinar la entrega en tu domicilio.
+      Hemos recibido tu pedido correctamente. En breve nos comunicaremos contigo para coordinar la entrega en tu domicilio.
     </p>
   </div>
 
@@ -34,7 +33,7 @@
         <span style="font-size: 1.1rem;">✅</span>
         <div>
           <strong style="display: block; color: #0f172a;">Pedido Registrado</strong>
-          <span style="color: #16a34a; font-weight: 700;">#{order_number}</span>
+          <span style="color: #16a34a; font-weight: 700;" class="ty-order-val">#Confirmado</span>
         </div>
       </div>
 
@@ -50,7 +49,7 @@
         <span style="font-size: 1.1rem;">🚚</span>
         <div>
           <strong style="display: block; color: #0f172a;">Despacho</strong>
-          <span style="color: #64748b;">{shipping_rate_name}</span>
+          <span style="color: #64748b;" class="ty-shipping-val">Envío Prioritario</span>
         </div>
       </div>
 
@@ -58,7 +57,7 @@
         <span style="font-size: 1.1rem;">🤝</span>
         <div>
           <strong style="display: block; color: #0f172a;">Pago al Recibir</strong>
-          <span style="color: #059669; font-weight: 800;">{order_total}</span>
+          <span style="color: #059669; font-weight: 800;" class="ty-total-val">Pago al Entregar</span>
         </div>
       </div>
     </div>
@@ -67,43 +66,32 @@
   <!-- Resumen de Productos Comprados -->
   <div style="border: 1px solid #e2e8f0; border-radius: 14px; padding: 1.25rem; margin-bottom: 1.5rem; background: #ffffff;">
     <h3 style="font-size: 1rem; font-weight: 800; color: #0f172a; margin: 0 0 1rem; display: flex; align-items: center; gap: 0.5rem; border-bottom: 1px solid #f1f5f9; padding-bottom: 0.6rem;">
-      <span>🛍️</span> Detalle del Pedido #{order_number}
+      <span>🛍️</span> Detalle del Pedido <span class="ty-order-val"></span>
     </h3>
 
-    <div style="font-size: 0.925rem; color: #334155; line-height: 1.6; background: #f8fafc; padding: 0.85rem 1rem; border-radius: 10px; border: 1px solid #cbd5e1; margin-bottom: 1rem; font-weight: 600;">
+    <div style="font-size: 0.925rem; color: #334155; line-height: 1.6; background: #f8fafc; padding: 0.85rem 1rem; border-radius: 10px; border: 1px solid #cbd5e1; margin-bottom: 1rem; font-weight: 600;" class="ty-summary-val">
       {products_summary_with_quantity}
     </div>
 
     <!-- Subtotal y Total -->
     <div style="display: flex; justify-content: space-between; align-items: center; font-size: 1.15rem; font-weight: 900; color: #0f172a; padding-top: 0.5rem;">
       <span>TOTAL A PAGAR AL RECIBIR:</span>
-      <span style="color: #16a34a; font-size: 1.3rem;">{order_total}</span>
+      <span style="color: #16a34a; font-size: 1.3rem;" class="ty-total-val">{order_total}</span>
     </div>
   </div>
 
   <!-- Datos de Envío y Contacto -->
   <div style="border: 1px solid #e2e8f0; border-radius: 14px; padding: 1.25rem; margin-bottom: 1.5rem; background: #ffffff;">
     <h3 style="font-size: 1rem; font-weight: 800; color: #0f172a; margin: 0 0 0.85rem; display: flex; align-items: center; gap: 0.5rem; border-bottom: 1px solid #f1f5f9; padding-bottom: 0.6rem;">
-      <span>📍</span> Dirección de Entrega y Contacto
+      <span>📍</span> Indicaciones de Entrega
     </h3>
 
     <div style="display: grid; grid-template-columns: 1fr; gap: 0.6rem; font-size: 0.9rem; color: #334155;">
-      <div>
-        <strong style="color: #0f172a;">Cliente:</strong> {first_name} {last_name}
-      </div>
-      <div>
-        <strong style="color: #0f172a;">Teléfono de Contacto:</strong> <span style="color: #2563eb; font-weight: 700;">{phone}</span>
-      </div>
-      <div>
-        <strong style="color: #0f172a;">Correo Electrónico:</strong> {email}
-      </div>
-      <div>
-        <strong style="color: #0f172a;">Dirección:</strong> {address} {address2}
-      </div>
-      <div>
-        <strong style="color: #0f172a;">Ciudad / Provincia:</strong> {city}, {province} ({zip_code})
-      </div>
-      {order_note}
+      <div><strong style="color: #0f172a;">Cliente:</strong> <span class="ty-client-val">{first_name} {last_name}</span></div>
+      <div><strong style="color: #0f172a;">Teléfono:</strong> <span style="color: #2563eb; font-weight: 700;" class="ty-phone-val">{phone}</span></div>
+      <div><strong style="color: #0f172a;">Correo:</strong> <span class="ty-email-val">{email}</span></div>
+      <div><strong style="color: #0f172a;">Dirección:</strong> <span class="ty-address-val">{address} {address2}</span></div>
+      <div><strong style="color: #0f172a;">Ubicación:</strong> <span class="ty-city-val">{city}, {province} ({zip_code})</span></div>
     </div>
   </div>
 
@@ -113,9 +101,9 @@
       <span>💡</span> Recuerda tener listo tu pago:
     </h4>
     <ul style="margin: 0; padding-left: 1.25rem; font-size: 0.875rem; color: #1e3a8a; line-height: 1.6;">
-      <li>Ten a la mano el monto exacto de <strong>{order_total}</strong> al momento de la entrega.</li>
+      <li>Ten a la mano tu pago al momento de la entrega.</li>
       <li>Puedes pagar en <strong>Efectivo, Yape o Plin</strong> directamente al repartidor.</li>
-      <li>Mantén tu celular atento al número <strong>{phone}</strong> para coordinar la llegada.</li>
+      <li>Mantén tu celular atento para coordinar la llegada.</li>
     </ul>
   </div>
 
@@ -125,12 +113,84 @@
       💛 Gracias por confiar en YA COMPRÉ
     </p>
     <p style="font-size: 0.8rem; color: #64748b; margin: 0 0 1.25rem;">
-      ¿Tienes alguna duda sobre tu envío? Escríbenos respondiendo al correo {email} o contáctanos a nuestro soporte.
+      En breve nos pondremos en contacto contigo para confirmar el despacho.
     </p>
-
-    <a href="/" style="display: inline-block; background: #0f172a; color: #ffffff; text-decoration: none; font-weight: 800; font-size: 0.9rem; padding: 0.85rem 2rem; border-radius: 30px; box-shadow: 0 4px 15px rgba(15,23,42,0.2); transition: all 0.2s ease;">
+    <a href="/" style="display: inline-block; background: #0f172a; color: #ffffff; text-decoration: none; font-weight: 800; font-size: 0.9rem; padding: 0.85rem 2rem; border-radius: 30px; box-shadow: 0 4px 15px rgba(15,23,42,0.2);">
       🛍️ Volver a la Tienda
     </a>
   </div>
 
 </div>
+
+<script>
+document.addEventListener('DOMContentLoaded', () => {
+  const container = document.getElementById('thank-you-card-container');
+  if (!container) return;
+
+  const urlParams = new URLSearchParams(window.location.search);
+  
+  // Read params from URL query string or localStorage
+  const firstName = urlParams.get('first_name') || urlParams.get('name') || urlParams.get('first_name_input') || '';
+  const lastName = urlParams.get('last_name') || urlParams.get('lastname') || '';
+  const orderNum = urlParams.get('order_number') || urlParams.get('order_id') || urlParams.get('order') || '';
+  const orderTotal = urlParams.get('order_total') || urlParams.get('total') || '';
+  const phone = urlParams.get('phone') || urlParams.get('tel') || '';
+  const email = urlParams.get('email') || '';
+  const address = urlParams.get('address') || '';
+  const address2 = urlParams.get('address2') || '';
+  const city = urlParams.get('city') || '';
+  const province = urlParams.get('province') || '';
+  const zipCode = urlParams.get('zip_code') || '';
+  const shippingName = urlParams.get('shipping_rate_name') || 'Envío Prioritario Gratis';
+  const productsSummary = urlParams.get('products_summary_with_quantity') || urlParams.get('products') || urlParams.get('summary') || '';
+
+  // Update DOM elements if values are present
+  if (firstName) {
+    const nameSpan = document.getElementById('ty-name-span');
+    if (nameSpan) nameSpan.textContent = ', ' + firstName;
+  }
+
+  // Replace any curly braces remaining in HTML
+  let html = container.innerHTML;
+  
+  const replacements = {
+    '{first_name}': firstName || '',
+    '{last_name}': lastName || '',
+    '{order_number}': orderNum ? '#' + orderNum.replace('#','') : '',
+    '{order_total}': orderTotal || '',
+    '{phone}': phone || '',
+    '{email}': email || '',
+    '{address}': address || '',
+    '{address2}': address2 || '',
+    '{city}': city || '',
+    '{province}': province || '',
+    '{zip_code}': zipCode || '',
+    '{shipping_rate_name}': shippingName,
+    '{products_summary_with_quantity}': productsSummary || 'Tu pedido en promoción'
+  };
+
+  for (const [key, value] of Object.entries(replacements)) {
+    html = html.split(key).join(value);
+  }
+
+  container.innerHTML = html;
+
+  // Clean empty labels if values were not passed in URL
+  if (!phone) {
+    const phoneEl = container.querySelector('.ty-phone-val');
+    if (phoneEl && phoneEl.parentElement) phoneEl.parentElement.style.display = 'none';
+  }
+  if (!email) {
+    const emailEl = container.querySelector('.ty-email-val');
+    if (emailEl && emailEl.parentElement) emailEl.parentElement.style.display = 'none';
+  }
+  if (!address) {
+    const addrEl = container.querySelector('.ty-address-val');
+    if (addrEl && addrEl.parentElement) addrEl.parentElement.style.display = 'none';
+  }
+  if (!city && !province) {
+    const cityEl = container.querySelector('.ty-city-val');
+    if (cityEl && cityEl.parentElement) cityEl.parentElement.style.display = 'none';
+  }
+});
+</script>
