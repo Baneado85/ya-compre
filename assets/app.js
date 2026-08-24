@@ -283,52 +283,62 @@ function closeModals() {
   document.querySelectorAll('.modal-backdrop').forEach(b => b.classList.remove('active'));
 }
 
-// --- Cash on Delivery Modal (pedido directo por WhatsApp, alternativa al checkout de Shopify) ---
+// --- Cash on Delivery Modal (Pago en Casa / Formulario Modal) ---
 function openCODModal(productTitle, productPrice) {
   const backdrop = document.getElementById('cod-modal-backdrop');
   if (backdrop) backdrop.classList.add('active');
 
-  const codSummary = document.getElementById('cod-order-summary');
-  if (codSummary && productTitle) {
-    codSummary.innerHTML = `
-      <div style="background-color: var(--bg-subtle); padding: 1rem; border-radius: var(--radius-sm); margin-bottom: 1.5rem;">
-        <div style="font-size: 0.85rem; color: var(--text-secondary);">Producto:</div>
-        <div style="font-weight: 600; font-size: 0.95rem; margin: 0.25rem 0;">${productTitle}</div>
-        <div style="font-size: 1.1rem; font-weight: 700; margin-top: 0.5rem; color: var(--text-primary);">Precio: ${productPrice}</div>
-      </div>
-    `;
-  }
+  const pTitle = productTitle || document.querySelector('h1')?.textContent.trim() || 'BIOTINA MAX + COLÁGENO - FÓRMULA PREMIUM';
+  const pPrice = productPrice || document.getElementById('main-price-display')?.textContent.trim() || 'S/. 139.90';
+  const pImg = document.getElementById('main-product-media-img')?.src || '';
+
+  const summaryTitle = document.getElementById('cod-summary-title');
+  const summaryPrice = document.getElementById('cod-summary-price');
+  const summarySubtotal = document.getElementById('cod-summary-subtotal');
+  const summaryTotal = document.getElementById('cod-summary-total');
+  const summaryImg = document.getElementById('cod-summary-img');
+
+  if (summaryTitle) summaryTitle.textContent = pTitle;
+  if (summaryPrice) summaryPrice.textContent = pPrice;
+  if (summarySubtotal) summarySubtotal.textContent = pPrice;
+  if (summaryTotal) summaryTotal.textContent = pPrice;
+  if (summaryImg && pImg) summaryImg.src = pImg;
+
   const form = document.getElementById('cod-checkout-form');
   if (form) {
-    form.dataset.productTitle = productTitle || '';
-    form.dataset.productPrice = productPrice || '';
+    form.dataset.productTitle = pTitle;
+    form.dataset.productPrice = pPrice;
   }
 }
 
 function submitCODOrder(event) {
   event.preventDefault();
-  const name = document.getElementById('cod-name').value.trim();
-  const phone = document.getElementById('cod-phone').value.trim();
-  const address = document.getElementById('cod-address').value.trim();
-  const district = document.getElementById('cod-district').value.trim();
-  const paymentMethod = document.getElementById('cod-payment').value;
+  const fullName = document.getElementById('cod-name')?.value.trim() || '';
+  const phone = document.getElementById('cod-phone')?.value.trim() || '';
+  const province = document.getElementById('cod-province')?.value || '';
+  const district = document.getElementById('cod-district')?.value.trim() || '';
+  const address = document.getElementById('cod-address')?.value.trim() || '';
 
-  if (!name || !phone || !address || !district) {
-    alert('Por favor completa todos los campos requeridos.');
+  if (!fullName || !phone || !province || !district || !address) {
+    alert('Por favor completa todos los campos requeridos para coordinar tu envío.');
     return;
   }
 
-  const productTitle = event.target.dataset.productTitle || 'Consulta general';
-  const productPrice = event.target.dataset.productPrice || '';
+  const nameParts = fullName.split(' ');
+  const firstName = nameParts[0] || 'Cliente';
+  const lastName = nameParts.slice(1).join(' ') || '';
 
-  const message = `¡Hola! 🛍️ Quisiera confirmar mi pedido contra entrega:\n\n*Cliente:* ${name}\n*Teléfono:* ${phone}\n*Dirección:* ${address}, ${district}\n*Método de Pago:* ${paymentMethod}\n\n*Producto:* ${productTitle} ${productPrice}\n\n¡Quedo a la espera de la confirmación de envío!`;
-
-  const encoded = encodeURIComponent(message);
-  const whatsappUrl = `https://wa.me/51900000000?text=${encoded}`;
+  const productTitle = event.target.dataset.productTitle || 'BIOTINA MAX + COLÁGENO - FÓRMULA PREMIUM';
+  const productPrice = event.target.dataset.productPrice || 'S/. 139.90';
+  const randomOrderNum = Math.floor(1000 + Math.random() * 9000);
 
   closeModals();
   event.target.reset();
-  window.open(whatsappUrl, '_blank');
+
+  // Redirect to Thank You Page with all customer parameters
+  const redirectUrl = `/pages/gracias?first_name=${encodeURIComponent(firstName)}&last_name=${encodeURIComponent(lastName)}&phone=${encodeURIComponent(phone)}&province=${encodeURIComponent(province)}&city=${encodeURIComponent(district)}&address=${encodeURIComponent(address)}&order_number=${randomOrderNum}&order_total=${encodeURIComponent(productPrice)}&products_summary_with_quantity=1x%20${encodeURIComponent(productTitle)}`;
+  
+  window.location.href = redirectUrl;
 }
 
 // --- Comparison Slider ---

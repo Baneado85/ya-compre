@@ -1,49 +1,150 @@
-<!-- Cash on Delivery (Pago Contra Entrega) Checkout Form Modal -->
-<div class="modal-backdrop" id="cod-modal-backdrop">
-  <div class="modal-window cod-form-modal">
-    <button class="modal-close-btn" onclick="closeModals()">&times;</button>
-
-    <div style="text-align: center; margin-bottom: 1.5rem;">
-      <img src="{{ 'logo2.png' | asset_url }}" alt="{{ shop.name }} Logo" style="height: 48px; margin: 0 auto 0.5rem;">
-      <h2 style="font-family: var(--font-heading); font-size: 1.5rem;">Pedido Contra Entrega (Perú)</h2>
-      <p style="font-size: 0.85rem; color: var(--text-secondary);">Completa tus datos para enviarte el pedido y pagar al recibirlo.</p>
+<!-- Cash on Delivery (Pago Contra Entrega / Pago en Casa) Form Modal -->
+<div class="modal-backdrop" id="cod-modal-backdrop" style="background: rgba(0,0,0,0.6); backdrop-filter: blur(4px);">
+  <div class="modal-window cod-form-modal" style="max-width: 540px; background: #f0fdf4; border-radius: 20px; padding: 1.5rem 1.75rem; border: 1px solid #bbf7d0; box-shadow: 0 20px 50px rgba(0,0,0,0.25); max-height: 90vh; overflow-y: auto;">
+    
+    <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 1rem; border-bottom: 1px solid #dcfce7; padding-bottom: 0.75rem;">
+      <div style="font-weight: 900; font-size: 1.25rem; color: #166534; font-family: var(--font-heading, sans-serif); letter-spacing: 0.5px;">
+        PAGO EN CASA
+      </div>
+      <button class="modal-close-btn" onclick="closeModals()" style="font-size: 1.5rem; color: #166534; background: none; border: none; cursor: pointer; font-weight: 700;">&times;</button>
     </div>
 
-    <div id="cod-order-summary"></div>
+    <!-- Logistics Security Banner (AliDriver, Shalom, Olva Courier) -->
+    <div style="background: #ffffff; border-radius: 12px; padding: 1rem; border: 1px solid #bbf7d0; margin-bottom: 1.25rem; text-align: center; box-shadow: 0 4px 15px rgba(22,163,74,0.08);">
+      <h3 style="font-size: 1.15rem; font-weight: 900; color: #0f172a; margin: 0 0 0.25rem; line-height: 1.2;">
+        Recibe tu pedido de forma segura
+      </h3>
+      <p style="font-size: 0.78rem; color: #64748b; margin: 0 0 0.85rem;">
+        Trabajamos con aliados logísticos confiables para llevar tus productos a todo el Perú.
+      </p>
 
-    <form id="cod-checkout-form">
-      <div class="form-group">
-        <label for="cod-name">Nombres y Apellidos *</label>
-        <input type="text" id="cod-name" placeholder="Ej. Juan Pérez" required>
+      <!-- Logistics Logos Badges -->
+      <div style="display: flex; align-items: center; justify-content: center; gap: 0.5rem; flex-wrap: wrap; margin-bottom: 0.75rem;">
+        <span style="background: #ef4444; color: #fff; font-weight: 900; font-size: 0.7rem; padding: 0.25rem 0.6rem; border-radius: 4px; font-style: italic;">AliDriver</span>
+        <span style="background: #dc2626; color: #fff; font-weight: 900; font-size: 0.7rem; padding: 0.25rem 0.6rem; border-radius: 4px;">SHALOM</span>
+        <span style="background: #eab308; color: #0f172a; font-weight: 900; font-size: 0.7rem; padding: 0.25rem 0.6rem; border-radius: 4px;">OLVA COURIER</span>
       </div>
 
-      <div class="form-group">
-        <label for="cod-phone">Número de Teléfono *</label>
-        <input type="tel" id="cod-phone" placeholder="Ej. 987654321" required>
+      <!-- Trust Badges Row -->
+      <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 0.4rem; border-top: 1px solid #f1f5f9; padding-top: 0.6rem; font-size: 0.7rem; color: #334155; font-weight: 700;">
+        <div>☑️ Compra segura</div>
+        <div>🚚 Envíos confiables</div>
+        <div>📍 Cobertura nacional</div>
+      </div>
+    </div>
+
+    <!-- Product & Price Summary -->
+    <div id="cod-order-summary" style="background: #ffffff; border-radius: 12px; padding: 1rem; border: 1px solid #cbd5e1; margin-bottom: 1.25rem;">
+      <div style="display: flex; align-items: center; gap: 0.75rem; border-bottom: 1px solid #f1f5f9; padding-bottom: 0.75rem; margin-bottom: 0.75rem;">
+        <img id="cod-summary-img" src="{{ 'magnesio_complex.png' | asset_url }}" alt="Producto" style="width: 52px; height: 52px; object-fit: cover; border-radius: 8px; border: 1px solid #e2e8f0; flex-shrink: 0;">
+        <div style="flex-grow: 1;">
+          <div style="font-weight: 800; font-size: 0.9rem; color: #0f172a; line-height: 1.3;" id="cod-summary-title">
+            BIOTINA MAX + COLÁGENO - FÓRMULA PREMIUM
+          </div>
+        </div>
+        <div style="font-weight: 900; font-size: 1rem; color: #0f172a;" id="cod-summary-price">
+          S/. 139.90
+        </div>
       </div>
 
-      <div class="form-group">
-        <label for="cod-district">Ciudad / Distrito / Provincia *</label>
-        <input type="text" id="cod-district" placeholder="Ej. San Borja, Lima o Chiclayo, Lambayeque" required>
+      <div style="display: flex; justify-content: space-between; font-size: 0.85rem; color: #475569; margin-bottom: 0.35rem;">
+        <span>Subtotal:</span>
+        <strong style="color: #0f172a;" id="cod-summary-subtotal">S/. 139.90</strong>
       </div>
 
-      <div class="form-group">
-        <label for="cod-address">Dirección de Entrega Exacta + Referencia *</label>
-        <input type="text" id="cod-address" placeholder="Ej. Av. Javier Prado 1234, Dpto 301 (Frente a la tienda X)" required>
+      <div style="display: flex; justify-content: space-between; font-size: 0.85rem; color: #475569; margin-bottom: 0.5rem;">
+        <span>Shipping:</span>
+        <strong style="color: #16a34a;">¡Gratis!</strong>
       </div>
 
-      <div class="form-group">
-        <label for="cod-payment">Forma de Pago Preferida al Recibir *</label>
-        <select id="cod-payment" required>
-          <option value="Efectivo en mano">Efectivo en mano al repartidor</option>
-          <option value="Yape / Plin">Yape o Plin al momento de recibir</option>
-          <option value="Tarjeta de crédito/débito">Tarjeta de Crédito / Débito pos repartidor</option>
+      <div style="display: flex; justify-content: space-between; font-size: 1.1rem; font-weight: 900; color: #0f172a; border-top: 1px solid #e2e8f0; padding-top: 0.5rem;">
+        <span>Total:</span>
+        <span style="color: #166534;" id="cod-summary-total">S/. 139.90</span>
+      </div>
+    </div>
+
+    <!-- Form Section Header -->
+    <h4 style="font-size: 1.1rem; font-weight: 900; color: #0f172a; text-align: center; margin: 0 0 1rem;">
+      Rellena tus datos!
+    </h4>
+
+    <!-- Checkout Form -->
+    <form id="cod-checkout-form" style="display: flex; flex-direction: column; gap: 0.85rem;">
+      
+      <!-- Full Name -->
+      <div>
+        <label for="cod-name" style="font-size: 0.85rem; font-weight: 800; color: #166534; display: block; margin-bottom: 0.3rem;">
+          Nombres y Apellidos *
+        </label>
+        <div style="display: flex; align-items: center; background: #ffffff; border: 1.5px solid #cbd5e1; border-radius: 8px; overflow: hidden;">
+          <span style="padding: 0.6rem 0.75rem; background: #e2e8f0; color: #475569; font-size: 1rem;">👤</span>
+          <input type="text" id="cod-name" placeholder="Ejemplo: Juan Perez Montoya" required style="width: 100%; border: none; padding: 0.7rem; font-size: 0.9rem; outline: none; background: transparent;">
+        </div>
+      </div>
+
+      <!-- Phone Number -->
+      <div>
+        <label for="cod-phone" style="font-size: 0.85rem; font-weight: 800; color: #166534; display: block; margin-bottom: 0.3rem;">
+          Teléfono *
+        </label>
+        <div style="display: flex; align-items: center; background: #ffffff; border: 1.5px solid #cbd5e1; border-radius: 8px; overflow: hidden;">
+          <span style="padding: 0.6rem 0.75rem; background: #e2e8f0; color: #475569; font-size: 1rem;">📞</span>
+          <input type="tel" id="cod-phone" placeholder="Ingrese 9 dígitos" pattern="[0-9]{9}" required style="width: 100%; border: none; padding: 0.7rem; font-size: 0.9rem; outline: none; background: transparent;">
+        </div>
+      </div>
+
+      <!-- Province Dropdown -->
+      <div>
+        <label for="cod-province" style="font-size: 0.85rem; font-weight: 800; color: #166534; display: block; margin-bottom: 0.3rem;">
+          Provincia *
+        </label>
+        <select id="cod-province" required style="width: 100%; padding: 0.7rem; border: 1.5px solid #cbd5e1; border-radius: 8px; font-size: 0.9rem; background: #ffffff; color: #0f172a; font-weight: 600; outline: none;">
+          <option value="" disabled selected>Selecciona tu Provincia</option>
+          <option value="Lima">Lima</option>
+          <option value="Arequipa">Arequipa</option>
+          <option value="Trujillo / La Libertad">Trujillo (La Libertad)</option>
+          <option value="Chiclayo / Lambayeque">Chiclayo (Lambayeque)</option>
+          <option value="Piura">Piura</option>
+          <option value="Cusco">Cusco</option>
+          <option value="Huancayo / Junín">Huancayo (Junín)</option>
+          <option value="Ica">Ica</option>
+          <option value="Tacna">Tacna</option>
+          <option value="Cajamarca">Cajamarca</option>
+          <option value="Puno">Puno</option>
+          <option value="Pucallpa / Ucayali">Pucallpa (Ucayali)</option>
+          <option value="Iquitos / Loreto">Iquitos (Loreto)</option>
+          <option value="Chimbote / Áncash">Chimbote (Áncash)</option>
+          <option value="Otra provincia del Perú">Otra Provincia del Perú</option>
         </select>
       </div>
 
-      <button type="submit" class="btn btn-primary" style="width: 100%; height: 50px; font-size: 1.05rem; margin-top: 1rem; background-color: var(--bg-dark); color: #FFF;">
+      <!-- District -->
+      <div>
+        <label for="cod-district" style="font-size: 0.85rem; font-weight: 800; color: #166534; display: block; margin-bottom: 0.3rem;">
+          Distrito *
+        </label>
+        <div style="display: flex; align-items: center; background: #ffffff; border: 1.5px solid #cbd5e1; border-radius: 8px; overflow: hidden;">
+          <span style="padding: 0.6rem 0.75rem; background: #e2e8f0; color: #475569; font-size: 1rem;">📍</span>
+          <input type="text" id="cod-district" placeholder="Ejemplo: San Isidro o Miraflores" required style="width: 100%; border: none; padding: 0.7rem; font-size: 0.9rem; outline: none; background: transparent;">
+        </div>
+      </div>
+
+      <!-- Address -->
+      <div>
+        <label for="cod-address" style="font-size: 0.85rem; font-weight: 800; color: #166534; display: block; margin-bottom: 0.3rem;">
+          Dirección *
+        </label>
+        <div style="display: flex; align-items: center; background: #ffffff; border: 1.5px solid #cbd5e1; border-radius: 8px; overflow: hidden;">
+          <span style="padding: 0.6rem 0.75rem; background: #e2e8f0; color: #475569; font-size: 1rem;">🏠</span>
+          <input type="text" id="cod-address" placeholder="Ejemplo: Av La Molina 123 Dpto 402" required style="width: 100%; border: none; padding: 0.7rem; font-size: 0.9rem; outline: none; background: transparent;">
+        </div>
+      </div>
+
+      <!-- Submit Button -->
+      <button type="submit" id="cod-modal-submit-btn" style="width: 100%; min-height: 54px; margin-top: 0.5rem; background: linear-gradient(90deg, #16a34a 0%, #15803d 100%); color: #ffffff; border: none; border-radius: 12px; font-family: var(--font-heading, sans-serif); font-size: 1.1rem; font-weight: 900; text-transform: uppercase; letter-spacing: 0.5px; cursor: pointer; box-shadow: 0 6px 20px rgba(22,163,74,0.35); transition: all 0.2s ease;">
         📦 CONFIRMAR MI PEDIDO CONTRA ENTREGA
       </button>
+
     </form>
   </div>
 </div>
