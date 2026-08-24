@@ -44,7 +44,7 @@
       }
     },
     "product-reviews": {
-      "type": "product-reviews",
+      "type": "customer-reviews",
       "settings": {
         "tag": "CLIENTES SATISFECHOS",
         "title": "Lo que dicen quienes ya compraron en YA COMPRÉ",
