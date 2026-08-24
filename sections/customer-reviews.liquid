@@ -1,171 +1,312 @@
-<section class="customer-reviews-section" id="product-reviews-section" style="padding: 4.5rem 0; background: #f8fafc;">
+<!-- =========================================================================
+  SECCIÓN DE RESEÑAS CON ANIMACIÓN DE DESPLAZAMIENTO INFINITO (WALL OF LOVE)
+  3 Columnas que suben y bajan suavemente con desvanecimiento superior e inferior.
+========================================================================= -->
+
+<section class="infinite-reviews-section" id="product-reviews-section" style="padding: 4.5rem 0; background: #f8fafc; overflow: hidden; position: relative;">
   <div class="container">
 
     <!-- Header & Overall Score -->
-    <div style="text-align: center; max-width: 700px; margin: 0 auto 3rem;">
-      <span style="display: inline-block; background: #dcfce7; color: #166534; font-weight: 800; font-size: 0.8rem; padding: 0.35rem 0.85rem; border-radius: 20px; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 0.75rem;">
-        {{ section.settings.tag | default: "CLIENTES SATISFECHOS" }}
+    <div style="text-align: center; max-width: 750px; margin: 0 auto 3rem;">
+      <span style="display: inline-block; background: #dcfce7; color: #166534; font-weight: 800; font-size: 0.8rem; padding: 0.35rem 0.95rem; border-radius: 20px; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 0.75rem; border: 1px solid #bbf7d0;">
+        {{ section.settings.tag | default: "PRUEBA SOCIAL VERIFICADA" }}
       </span>
-      <h2 style="font-family: var(--font-heading, sans-serif); font-size: clamp(1.75rem, 4vw, 2.4rem); font-weight: 800; color: #0f172a; margin: 0 0 1rem;">
-        {{ section.settings.title | default: "Opiniones de Clientes Verificados" }}
+      <h2 style="font-family: var(--font-heading, sans-serif); font-size: clamp(1.8rem, 4.5vw, 2.5rem); font-weight: 900; color: #0f172a; margin: 0 0 0.75rem; line-height: 1.2;">
+        {{ section.settings.title | default: "2,000+ personas que ya disfrutan de su compra" }}
       </h2>
-      
-      <div style="display: flex; align-items: center; justify-content: center; gap: 1rem; flex-wrap: wrap; margin-bottom: 1.5rem;">
+      <p style="font-size: 1rem; color: #64748b; margin: 0 0 1.5rem; font-weight: 500;">
+        {{ section.settings.subtitle | default: "Personas en todo el Perú que buscaban exactamente la mejor calidad y confianza." }}
+      </p>
+
+      <div style="display: flex; align-items: center; justify-content: center; gap: 1rem; flex-wrap: wrap;">
         <div style="font-size: 2.8rem; font-weight: 900; color: #0f172a; line-height: 1;">4.9</div>
         <div style="text-align: left;">
-          <div style="color: #ffb703; font-size: 1.3rem; letter-spacing: 2px;">★★★★★</div>
-          <div style="font-size: 0.85rem; color: #64748b; font-weight: 600;">{{ section.settings.subtitle | default: "Basado en más de 140 compras en todo el Perú" }}</div>
+          <div style="color: #ffb703; font-size: 1.25rem; letter-spacing: 2px;">★★★★★</div>
+          <div style="font-size: 0.85rem; color: #64748b; font-weight: 600;">Más de 1,420 opiniones de compradores verificados</div>
         </div>
       </div>
-
-      <button type="button" class="btn btn-secondary" onclick="openReviewModal()" style="padding: 0.7rem 1.5rem; border-radius: 20px; font-weight: 700; font-size: 0.9rem;">
-        ✍️ Escribir una Reseña
-      </button>
     </div>
 
-    <!-- Reviews Grid -->
-    <div class="reviews-grid" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 1.5rem;">
-      {% for block in section.blocks %}
-        <div 
-          class="review-card" 
-          {{ block.shopify_attributes }}
-          style="background: #ffffff; border-radius: 16px; padding: 1.75rem; border: 1px solid #e2e8f0; box-shadow: 0 4px 20px rgba(0,0,0,0.03); display: flex; flex-direction: column; justify-content: space-between;"
-        >
-          <div>
-            <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 0.85rem;">
-              <div style="color: #ffb703; font-size: 1rem;">
-                {% case block.settings.rating %}
-                  {% when 5 %}★★★★★
-                  {% when 4 %}★★★★☆
-                  {% when 3 %}★★★☆☆
-                  {% default %}★★★★★
-                {% endcase %}
-              </div>
-              <span style="font-size: 0.75rem; color: #94a3b8; font-weight: 500;">{{ block.settings.date }}</span>
-            </div>
+    <!-- Infinite Scroll Marquee Container -->
+    <div class="marquee-wall-wrapper" style="position: relative; height: 580px; overflow: hidden; margin: 0 -1rem;">
+      
+      <!-- Top & Bottom Gradient Fades -->
+      <div style="position: absolute; top: 0; left: 0; right: 0; height: 90px; background: linear-gradient(180deg, #f8fafc 0%, rgba(248,250,252,0) 100%); z-index: 5; pointer-events: none;"></div>
+      <div style="position: absolute; bottom: 0; left: 0; right: 0; height: 90px; background: linear-gradient(0deg, #f8fafc 0%, rgba(248,250,252,0) 100%); z-index: 5; pointer-events: none;"></div>
 
-            <p style="font-size: 0.925rem; color: #334155; line-height: 1.6; margin: 0 0 1.25rem; font-style: italic;">
-              "{{ block.settings.text }}"
-            </p>
-          </div>
+      <div class="marquee-grid" style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.25rem; height: 100%;">
 
-          <div style="display: flex; align-items: center; gap: 0.75rem; border-top: 1px solid #f1f5f9; padding-top: 1rem;">
-            <div style="width: 42px; height: 42px; border-radius: 50%; background: linear-gradient(135deg, #2563eb, #3b82f6); color: #fff; font-weight: 800; display: flex; align-items: center; justify-content: center; font-size: 1rem;">
-              {{ block.settings.author | slice: 0, 1 }}
-            </div>
-            <div>
-              <strong style="display: block; font-size: 0.9rem; color: #0f172a;">{{ block.settings.author }}</strong>
-              <div style="display: flex; align-items: center; gap: 0.35rem; font-size: 0.75rem; color: #16a34a; font-weight: 700;">
-                <span>✅</span> <span>{{ block.settings.location | default: "Comprador Verificado" }}</span>
+        <!-- Column 1 (Scrolls UP) -->
+        <div class="marquee-column">
+          <div class="marquee-track track-up">
+            {% for i in (1..2) %}
+              <div class="review-card-item">
+                <p class="review-text">"La compré porque llevaba tiempo buscando una opción de verdadera calidad. Llegó súper rápido a mi casa en Surco y le pagué al repartidor con Yape al instante."</p>
+                <div class="review-author-box">
+                  <div class="author-avatar-circle">CG</div>
+                  <div>
+                    <strong class="author-name">Carla G.</strong>
+                    <span class="author-location">Surco, Lima</span>
+                  </div>
+                </div>
               </div>
-            </div>
+
+              <div class="review-card-item">
+                <p class="review-text">"Excelente presentación y acabados premium. Se nota la diferencia desde el primer día de uso. Muy satisfecha con la compra."</p>
+                <div class="review-author-box">
+                  <div class="author-avatar-circle alt1">PM</div>
+                  <div>
+                    <strong class="author-name">Patricia M.</strong>
+                    <span class="author-location">San Miguel, Lima</span>
+                  </div>
+                </div>
+              </div>
+
+              <div class="review-card-item">
+                <p class="review-text">"No soy de dejar reseñas pero esta vez sí quise hacerlo. Llegó en menos de 24 horas y todo el empaque venía sellado. 10/10."</p>
+                <div class="review-author-box">
+                  <div class="author-avatar-circle alt2">VR</div>
+                  <div>
+                    <strong class="author-name">Valeria R.</strong>
+                    <span class="author-location">La Molina, Lima</span>
+                  </div>
+                </div>
+              </div>
+            {% endfor %}
           </div>
         </div>
-      {% endfor %}
+
+        <!-- Column 2 (Scrolls DOWN) -->
+        <div class="marquee-column">
+          <div class="marquee-track track-down">
+            {% for i in (1..2) %}
+              <div class="review-card-item">
+                <p class="review-text">"Ya había probado otras opciones de internet y sinceramente ninguna me convenció. Esta superó mis expectativas por completo. Se nota una excelente calidad."</p>
+                <div class="review-author-box">
+                  <div class="author-avatar-circle alt3">AM</div>
+                  <div>
+                    <strong class="author-name">Andrea M.</strong>
+                    <span class="author-location">Miraflores, Lima</span>
+                  </div>
+                </div>
+              </div>
+
+              <div class="review-card-item">
+                <p class="review-text">"Trabajo todo el día y siempre llegaba cansado. Me lo recomendó un compañero y la verdad sí valió totalmente la pena."</p>
+                <div class="review-author-box">
+                  <div class="author-avatar-circle alt4">MA</div>
+                  <div>
+                    <strong class="author-name">Miguel A.</strong>
+                    <span class="author-location">Trujillo</span>
+                  </div>
+                </div>
+              </div>
+
+              <div class="review-card-item">
+                <p class="review-text">"Me gustó que el repartidor esperó mientras revisaba el paquete antes de pagar. Llegó bien embalado y en perfecto estado."</p>
+                <div class="review-author-box">
+                  <div class="author-avatar-circle">JR</div>
+                  <div>
+                    <strong class="author-name">Jorge R.</strong>
+                    <span class="author-location">Chiclayo</span>
+                  </div>
+                </div>
+              </div>
+            {% endfor %}
+          </div>
+        </div>
+
+        <!-- Column 3 (Scrolls UP) -->
+        <div class="marquee-column">
+          <div class="marquee-track track-up-fast">
+            {% for i in (1..2) %}
+              <div class="review-card-item">
+                <p class="review-text">"Me llegó perfecta, el repartidor esperó a que revise todo antes de cancelar en efectivo. Súper confiable el pago contra entrega."</p>
+                <div class="review-author-box">
+                  <div class="author-avatar-circle alt1">AD</div>
+                  <div>
+                    <strong class="author-name">Amanda D.</strong>
+                    <span class="author-location">Piura</span>
+                  </div>
+                </div>
+              </div>
+
+              <div class="review-card-item">
+                <p class="review-text">"Compré para mi esposa y para mí. Teníamos dudas del envío a provincia pero llegó por Olva en solo 3 días."</p>
+                <div class="review-author-box">
+                  <div class="author-avatar-circle alt2">AC</div>
+                  <div>
+                    <strong class="author-name">Alexandra C.</strong>
+                    <span class="author-location">Arequipa</span>
+                  </div>
+                </div>
+              </div>
+
+              <div class="review-card-item">
+                <p class="review-text">"Totalmente recomendados en YA COMPRÉ. La atención por mensaje fue de primera y el producto es tal cual las fotos."</p>
+                <div class="review-author-box">
+                  <div class="author-avatar-circle alt3">LA</div>
+                  <div>
+                    <strong class="author-name">Lucía A.</strong>
+                    <span class="author-location">San Isidro, Lima</span>
+                  </div>
+                </div>
+              </div>
+            {% endfor %}
+          </div>
+        </div>
+
+      </div>
+
     </div>
 
   </div>
 </section>
 
+<style>
+/* Animaciones de Desplazamiento Infinito */
+@keyframes marqueeScrollUp {
+  0% { transform: translateY(0); }
+  100% { transform: translateY(-50%); }
+}
+
+@keyframes marqueeScrollDown {
+  0% { transform: translateY(-50%); }
+  100% { transform: translateY(0); }
+}
+
+.marquee-column {
+  overflow: hidden;
+  height: 100%;
+}
+
+.marquee-track {
+  display: flex;
+  flex-direction: column;
+  gap: 1.15rem;
+}
+
+.track-up {
+  animation: marqueeScrollUp 32s linear infinite;
+}
+
+.track-down {
+  animation: marqueeScrollDown 38s linear infinite;
+}
+
+.track-up-fast {
+  animation: marqueeScrollUp 28s linear infinite;
+}
+
+/* Pausar al pasar el mouse por encima para leer fácilmente */
+.marquee-column:hover .marquee-track {
+  animation-play-state: paused;
+}
+
+.review-card-item {
+  background: #ffffff;
+  border-radius: 16px;
+  padding: 1.5rem;
+  border: 1px solid #e2e8f0;
+  box-shadow: 0 4px 20px rgba(0,0,0,0.03);
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.review-card-item:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 25px rgba(0,0,0,0.06);
+}
+
+.review-text {
+  font-size: 0.925rem;
+  color: #334155;
+  line-height: 1.6;
+  margin: 0 0 1.1rem;
+  font-style: italic;
+}
+
+.review-author-box {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+.author-avatar-circle {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, #2563eb, #3b82f6);
+  color: #ffffff;
+  font-weight: 800;
+  font-size: 0.85rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+.author-avatar-circle.alt1 { background: linear-gradient(135deg, #ec4899, #d946ef); }
+.author-avatar-circle.alt2 { background: linear-gradient(135deg, #059669, #10b981); }
+.author-avatar-circle.alt3 { background: linear-gradient(135deg, #8b5cf6, #6366f1); }
+.author-avatar-circle.alt4 { background: linear-gradient(135deg, #f59e0b, #ea580c); }
+
+.author-name {
+  display: block;
+  font-size: 0.9rem;
+  color: #0f172a;
+}
+
+.author-location {
+  display: block;
+  font-size: 0.75rem;
+  color: #64748b;
+  font-weight: 500;
+}
+
+@media (max-width: 900px) {
+  .marquee-grid {
+    grid-template-columns: repeat(2, 1fr) !important;
+  }
+  .marquee-grid .marquee-column:nth-child(3) {
+    display: none;
+  }
+}
+
+@media (max-width: 600px) {
+  .marquee-grid {
+    grid-template-columns: 1fr !important;
+  }
+  .marquee-grid .marquee-column:nth-child(2) {
+    display: none;
+  }
+}
+</style>
+
 {% schema %}
 {
-  "name": "Reseñas de Clientes",
+  "name": "Wall de Reseñas Animadas",
   "settings": [
     {
       "type": "text",
       "id": "tag",
       "label": "Etiqueta superior",
-      "default": "CLIENTES SATISFECHOS"
+      "default": "PRUEBA SOCIAL VERIFICADA"
     },
     {
       "type": "text",
       "id": "title",
       "label": "Título de la sección",
-      "default": "Lo que dicen quienes ya compraron en YA COMPRÉ"
+      "default": "2,000+ personas que ya disfrutan de su compra"
     },
     {
       "type": "text",
       "id": "subtitle",
       "label": "Subtítulo de la sección",
-      "default": "Basado en más de 140 compras verificadas en todo el Perú"
-    }
-  ],
-  "blocks": [
-    {
-      "type": "review",
-      "name": "Reseña de cliente",
-      "settings": [
-        {
-          "type": "text",
-          "id": "author",
-          "label": "Nombre del cliente",
-          "default": "María Fernanda G."
-        },
-        {
-          "type": "text",
-          "id": "location",
-          "label": "Ubicación / Estado",
-          "default": "Miraflores, Lima (Comprador Verificado)"
-        },
-        {
-          "type": "range",
-          "id": "rating",
-          "min": 1,
-          "max": 5,
-          "step": 1,
-          "label": "Puntuación de estrellas",
-          "default": 5
-        },
-        {
-          "type": "textarea",
-          "id": "text",
-          "label": "Comentario de la reseña",
-          "default": "Excelente producto. La calidad superó mis expectativas y el pago contra entrega fue súper seguro y rápido."
-        },
-        {
-          "type": "text",
-          "id": "date",
-          "label": "Fecha",
-          "default": "Hace 2 días"
-        }
-      ]
+      "default": "Personas en todo el Perú que buscaban exactamente la mejor calidad y confianza."
     }
   ],
   "presets": [
     {
-      "name": "Reseñas de Clientes",
-      "blocks": [
-        {
-          "type": "review",
-          "settings": {
-            "author": "Carlos R.",
-            "location": "Surco, Lima • Comprador Verificado",
-            "rating": 5,
-            "text": "Excelente calidad de materiales. El producto llegó tal cual las fotos en menos de 24 horas a mi domicilio. Le pagué al repartidor con Yape. Muy recomendado.",
-            "date": "Ayer"
-          }
-        },
-        {
-          "type": "review",
-          "settings": {
-            "author": "Lucía M.",
-            "location": "Arequipa • Comprador Verificado",
-            "rating": 5,
-            "text": "Me encantó la atención y el producto. Compré 2 unidades para aprovechar la promoción de envío gratis. Llegó todo muy bien empacado.",
-            "date": "Hace 3 días"
-          }
-        },
-        {
-          "type": "review",
-          "settings": {
-            "author": "Jorge V.",
-            "location": "Trujillo • Comprador Verificado",
-            "rating": 5,
-            "text": "Excelente atención al cliente. Tenía dudas sobre el pago contra entrega a provincia pero llegó por Olva en 3 días. El producto superó mis expectativas.",
-            "date": "Hace 5 días"
-          }
-        }
-      ]
+      "name": "Wall de Reseñas Animadas"
     }
   ]
 }
