@@ -1,0 +1,136 @@
+<!-- =========================================================================
+  PLANTILLA PREMIUM DE PÁGINA DE GRACIAS PARA RELEASIT COD FORM
+  Copia todo este código HTML y pégalo en el panel de Releasit COD Form 
+  en: Configuración / Éxito de Entrega / Página de Gracias HTML.
+========================================================================= -->
+
+<div style="font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif; max-width: 620px; margin: 0 auto; background: #ffffff; border-radius: 20px; padding: 2.25rem 1.75rem; box-shadow: 0 10px 40px rgba(0,0,0,0.08); border: 1px solid #e2e8f0; color: #1e293b; text-align: left; box-sizing: border-box;">
+
+  <!-- Header con Animación y Checkmark Verde -->
+  <div style="text-align: center; margin-bottom: 2rem;">
+    <div style="width: 72px; height: 72px; background: #dcfce7; color: #16a34a; border-radius: 50%; display: inline-flex; align-items: center; justify-content: center; font-size: 2.2rem; margin-bottom: 1rem; box-shadow: 0 8px 20px rgba(22,163,74,0.2);">
+      ✓
+    </div>
+    <br>
+    <span style="display: inline-block; background: #f0fdf4; color: #166534; font-size: 0.78rem; font-weight: 800; padding: 0.35rem 0.9rem; border-radius: 20px; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 0.6rem; border: 1px solid #bbf7d0;">
+      ¡PEDIDO CONFIRMADO CON ÉXITO! 🎉
+    </span>
+    <h2 style="font-size: 1.65rem; font-weight: 900; color: #0f172a; margin: 0 0 0.5rem; line-height: 1.25;">
+      ¡Muchas gracias por tu compra, {first_name}!
+    </h2>
+    <p style="font-size: 0.95rem; color: #64748b; margin: 0; line-height: 1.5;">
+      Hemos recibido tu pedido <strong>#{order_number}</strong> correctamente. En breve nos comunicaremos contigo para coordinar la entrega en tu domicilio.
+    </p>
+  </div>
+
+  <!-- Tarjeta de Estado del Pedido (Timeline de Proceso) -->
+  <div style="background: #f8fafc; border: 1px solid #e2e8f0; border-radius: 14px; padding: 1.25rem; margin-bottom: 1.75rem;">
+    <div style="font-size: 0.8rem; font-weight: 800; color: #475569; text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 1rem; text-align: center;">
+      📍 Estado de tu Pedido Pago Contra Entrega
+    </div>
+    
+    <div style="display: grid; grid-template-columns: repeat(2, 1fr); gap: 0.85rem; font-size: 0.825rem;">
+      <div style="display: flex; align-items: center; gap: 0.6rem; background: #ffffff; padding: 0.65rem 0.85rem; border-radius: 10px; border: 1px solid #cbd5e1;">
+        <span style="font-size: 1.1rem;">✅</span>
+        <div>
+          <strong style="display: block; color: #0f172a;">Pedido Registrado</strong>
+          <span style="color: #16a34a; font-weight: 700;">#{order_number}</span>
+        </div>
+      </div>
+
+      <div style="display: flex; align-items: center; gap: 0.6rem; background: #ffffff; padding: 0.65rem 0.85rem; border-radius: 10px; border: 1px solid #cbd5e1;">
+        <span style="font-size: 1.1rem;">📦</span>
+        <div>
+          <strong style="display: block; color: #0f172a;">En Empaque</strong>
+          <span style="color: #2563eb; font-weight: 600;">Verificando Stock</span>
+        </div>
+      </div>
+
+      <div style="display: flex; align-items: center; gap: 0.6rem; background: #ffffff; padding: 0.65rem 0.85rem; border-radius: 10px; border: 1px solid #cbd5e1;">
+        <span style="font-size: 1.1rem;">🚚</span>
+        <div>
+          <strong style="display: block; color: #0f172a;">Despacho</strong>
+          <span style="color: #64748b;">{shipping_rate_name}</span>
+        </div>
+      </div>
+
+      <div style="display: flex; align-items: center; gap: 0.6rem; background: #ffffff; padding: 0.65rem 0.85rem; border-radius: 10px; border: 1px solid #cbd5e1;">
+        <span style="font-size: 1.1rem;">🤝</span>
+        <div>
+          <strong style="display: block; color: #0f172a;">Pago al Recibir</strong>
+          <span style="color: #059669; font-weight: 800;">{order_total}</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Resumen de Productos Comprados -->
+  <div style="border: 1px solid #e2e8f0; border-radius: 14px; padding: 1.25rem; margin-bottom: 1.5rem; background: #ffffff;">
+    <h3 style="font-size: 1rem; font-weight: 800; color: #0f172a; margin: 0 0 1rem; display: flex; align-items: center; gap: 0.5rem; border-bottom: 1px solid #f1f5f9; padding-bottom: 0.6rem;">
+      <span>🛍️</span> Detalle del Pedido #{order_number}
+    </h3>
+
+    <div style="font-size: 0.925rem; color: #334155; line-height: 1.6; background: #f8fafc; padding: 0.85rem 1rem; border-radius: 10px; border: 1px solid #cbd5e1; margin-bottom: 1rem; font-weight: 600;">
+      {products_summary_with_quantity}
+    </div>
+
+    <!-- Subtotal y Total -->
+    <div style="display: flex; justify-content: space-between; align-items: center; font-size: 1.15rem; font-weight: 900; color: #0f172a; padding-top: 0.5rem;">
+      <span>TOTAL A PAGAR AL RECIBIR:</span>
+      <span style="color: #16a34a; font-size: 1.3rem;">{order_total}</span>
+    </div>
+  </div>
+
+  <!-- Datos de Envío y Contacto -->
+  <div style="border: 1px solid #e2e8f0; border-radius: 14px; padding: 1.25rem; margin-bottom: 1.5rem; background: #ffffff;">
+    <h3 style="font-size: 1rem; font-weight: 800; color: #0f172a; margin: 0 0 0.85rem; display: flex; align-items: center; gap: 0.5rem; border-bottom: 1px solid #f1f5f9; padding-bottom: 0.6rem;">
+      <span>📍</span> Dirección de Entrega y Contacto
+    </h3>
+
+    <div style="display: grid; grid-template-columns: 1fr; gap: 0.6rem; font-size: 0.9rem; color: #334155;">
+      <div>
+        <strong style="color: #0f172a;">Cliente:</strong> {first_name} {last_name}
+      </div>
+      <div>
+        <strong style="color: #0f172a;">Teléfono de Contacto:</strong> <span style="color: #2563eb; font-weight: 700;">{phone}</span>
+      </div>
+      <div>
+        <strong style="color: #0f172a;">Correo Electrónico:</strong> {email}
+      </div>
+      <div>
+        <strong style="color: #0f172a;">Dirección:</strong> {address} {address2}
+      </div>
+      <div>
+        <strong style="color: #0f172a;">Ciudad / Provincia:</strong> {city}, {province} ({zip_code})
+      </div>
+      {order_note}
+    </div>
+  </div>
+
+  <!-- Indicaciones Importantes para el Pago Contra Entrega -->
+  <div style="background: #eff6ff; border: 1.5px dashed #3b82f6; border-radius: 14px; padding: 1.25rem; margin-bottom: 1.75rem; text-align: left;">
+    <h4 style="margin: 0 0 0.5rem; font-size: 0.95rem; font-weight: 800; color: #1e40af; display: flex; align-items: center; gap: 0.4rem;">
+      <span>💡</span> Recuerda tener listo tu pago:
+    </h4>
+    <ul style="margin: 0; padding-left: 1.25rem; font-size: 0.875rem; color: #1e3a8a; line-height: 1.6;">
+      <li>Ten a la mano el monto exacto de <strong>{order_total}</strong> al momento de la entrega.</li>
+      <li>Puedes pagar en <strong>Efectivo, Yape o Plin</strong> directamente al repartidor.</li>
+      <li>Mantén tu celular atento al número <strong>{phone}</strong> para coordinar la llegada.</li>
+    </ul>
+  </div>
+
+  <!-- Mensaje de Agradecimiento Final y Soporte -->
+  <div style="text-align: center; border-top: 1px solid #f1f5f9; padding-top: 1.25rem;">
+    <p style="font-size: 0.9rem; font-weight: 700; color: #0f172a; margin: 0 0 0.25rem;">
+      💛 Gracias por confiar en YA COMPRÉ
+    </p>
+    <p style="font-size: 0.8rem; color: #64748b; margin: 0 0 1.25rem;">
+      ¿Tienes alguna duda sobre tu envío? Escríbenos respondiendo al correo {email} o contáctanos a nuestro soporte.
+    </p>
+
+    <a href="/" style="display: inline-block; background: #0f172a; color: #ffffff; text-decoration: none; font-weight: 800; font-size: 0.9rem; padding: 0.85rem 2rem; border-radius: 30px; box-shadow: 0 4px 15px rgba(15,23,42,0.2); transition: all 0.2s ease;">
+      🛍️ Volver a la Tienda
+    </a>
+  </div>
+
+</div>
