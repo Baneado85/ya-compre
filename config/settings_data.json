@@ -99,31 +99,31 @@
           "row_A7pkFj": {
             "type": "row",
             "settings": {
-              "feature_name": "Diseño Ergonómico Probado",
+              "feature_name": "Fórmula enfocada en belleza",
               "our_value_type": "check",
-              "our_value": "Diseño 100% Optimizado",
+              "our_value": "✅ Biotina + Colágeno en una sola fórmula",
               "other_value_type": "cross",
-              "other_value": "Sin estándares de calidad"
+              "other_value": "Fórmulas que pueden venir por separado"
             }
           },
           "row_LPfdYA": {
             "type": "row",
             "settings": {
-              "feature_name": "Diseño Ergonómico Probado",
+              "feature_name": "Cuidado integral",
               "our_value_type": "check",
-              "our_value": "Diseño 100% Optimizado",
+              "our_value": "✅ Enfocado en cabello, uñas y piel",
               "other_value_type": "cross",
-              "other_value": "Sin estándares de calidad"
+              "other_value": "Enfoque limitado o general"
             }
           },
           "row_J6eN4k": {
             "type": "row",
             "settings": {
-              "feature_name": "Diseño Ergonómico Probado",
+              "feature_name": "Presentación práctica",
               "our_value_type": "check",
-              "our_value": "Diseño 100% Optimizado",
+              "our_value": "✅ Cápsulas, fáciles de integrar a tu rutina",
               "other_value_type": "cross",
-              "other_value": "Sin estándares de calidad"
+              "other_value": "Cantidad y presentación variable"
             }
           }
         },
