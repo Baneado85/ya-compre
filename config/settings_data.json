@@ -39,18 +39,6 @@
           "show_vendor": true,
           "show_rating": true,
           "rating_count": "142 opiniones verificadas",
-          "show_bundles": true,
-          "bundles_title": "🎁 ELIGE TU PACK EN PROMOCIÓN:",
-          "bundle1_title": "1 UNIDAD — Prueba Individual",
-          "bundle1_subtitle": "Envío Prioritario a todo el Perú",
-          "bundle2_title": "2 UNIDADES — Pack Pareja / Ahorro",
-          "bundle2_subtitle": "Lleva la 2da unidad con 50% OFF + Envío Gratis",
-          "bundle2_badge": "🔥 MÁS POPULAR (AHORRA 25%)",
-          "bundle3_title": "3 UNIDADES — Pack Familiar Mega Ahorro",
-          "bundle3_subtitle": "¡Lleva 3 al precio de 2.2 + Regalo Exclusivo!",
-          "bundle3_badge": "💎 MEJOR OFERTA (AHORRA 35%)",
-          "btn_text": "📦 PEDIR AHORA — PAGO CONTRA ENTREGA",
-          "btn_subtitle": "Pagas al recibir en la puerta de tu casa | Envío Gratis a todo el Perú",
           "show_trust_badges": false,
           "badge1_title": "Envío Gratis",
           "badge1_sub": "A todo el Perú sin costo",
@@ -64,6 +52,40 @@
       },
       "product-benefits": {
         "type": "product-benefits",
+        "blocks": {
+          "benefit_kNrF7x": {
+            "type": "benefit",
+            "settings": {
+              "icon": "✨",
+              "title": "Fórmula Premium",
+              "text": "Elaborada con ingredientes seleccionados para complementar tu rutina diaria de belleza y bienestar desde el interior.",
+              "image": "shopify://shop_images/jkkjkj.png"
+            }
+          },
+          "benefit_V3NN3j": {
+            "type": "benefit",
+            "settings": {
+              "icon": "💇‍♀️",
+              "title": "Cuidado Integral",
+              "text": "Una combinación de biotina y colágeno pensada para acompañar el cuidado diario de tu cabello, piel y uñas.",
+              "image": "shopify://shop_images/asasdada.png"
+            }
+          },
+          "benefit_rbrkrH": {
+            "type": "benefit",
+            "settings": {
+              "icon": "💖",
+              "title": "Bienestar Todos los Días",
+              "text": "Fórmula práctica en cápsulas, ideal para incorporar fácilmente a tu rutina diaria de cuidado personal.",
+              "image": "shopify://shop_images/asdasdad.png"
+            }
+          }
+        },
+        "block_order": [
+          "benefit_kNrF7x",
+          "benefit_V3NN3j",
+          "benefit_rbrkrH"
+        ],
         "settings": {
           "tag": "CALIDAD Y DISEÑO PREMIUM",
           "title": "Por qué elegir nuestro producto",
@@ -96,6 +118,14 @@
           "enable_sticky_bar": true,
           "btn_text": "PEDIR AHORA — PAGO AL RECIBIR",
           "btn_bg": "#16a34a"
+        }
+      },
+      "customer-reviews": {
+        "type": "customer-reviews",
+        "settings": {
+          "tag": "PRUEBA SOCIAL VERIFICADA",
+          "title": "2,000+ personas que ya disfrutan de su compra",
+          "subtitle": "Personas en todo el Perú que buscaban exactamente la mejor calidad y confianza."
         }
       }
     },
