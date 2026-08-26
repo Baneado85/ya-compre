@@ -95,17 +95,66 @@
       },
       "product-comparison": {
         "type": "product-comparison",
+        "blocks": {
+          "row_A7pkFj": {
+            "type": "row",
+            "settings": {
+              "feature_name": "Diseño Ergonómico Probado",
+              "our_value_type": "check",
+              "our_value": "Diseño 100% Optimizado",
+              "other_value_type": "cross",
+              "other_value": "Sin estándares de calidad"
+            }
+          },
+          "row_LPfdYA": {
+            "type": "row",
+            "settings": {
+              "feature_name": "Diseño Ergonómico Probado",
+              "our_value_type": "check",
+              "our_value": "Diseño 100% Optimizado",
+              "other_value_type": "cross",
+              "other_value": "Sin estándares de calidad"
+            }
+          },
+          "row_J6eN4k": {
+            "type": "row",
+            "settings": {
+              "feature_name": "Diseño Ergonómico Probado",
+              "our_value_type": "check",
+              "our_value": "Diseño 100% Optimizado",
+              "other_value_type": "cross",
+              "other_value": "Sin estándares de calidad"
+            }
+          }
+        },
+        "block_order": [
+          "row_A7pkFj",
+          "row_LPfdYA",
+          "row_J6eN4k"
+        ],
         "settings": {
           "tag": "LA DIFERENCIA ES CLARA",
           "title": "Nuestro Producto vs Productos Convencionales",
           "subtitle": "Compara las especificaciones y comprueba por qué miles de personas nos eligen.",
           "col1_header": "Especificación / Beneficio",
-          "col2_header": "YA COMPRÉ Premium",
+          "col2_header": "YA COMPRE",
           "col3_header": "Productos Convencionales"
         }
       },
       "product-faq": {
         "type": "product-faq",
+        "blocks": {
+          "faq_AMQ6dV": {
+            "type": "faq",
+            "settings": {
+              "question": "¿Cómo funciona el Pago Contra Entrega (COD)?",
+              "answer": "Es 100% seguro. Realizas tu pedido completando tus datos en el formulario. Nosotros preparamos tu paquete y te lo enviamos a tu domicilio. Le pagas directamente al repartidor en efectivo, Yape, Plin o tarjeta al recibirlo en tu puerta."
+            }
+          }
+        },
+        "block_order": [
+          "faq_AMQ6dV"
+        ],
         "settings": {
           "tag": "DESPEJA TUS DUDAS",
           "title": "Preguntas Frecuentes sobre tu Pedido",
