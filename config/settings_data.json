@@ -144,21 +144,45 @@
       "product-faq": {
         "type": "product-faq",
         "blocks": {
+          "faq_ktzwHF": {
+            "type": "faq",
+            "settings": {
+              "question": "¿Para qué sirve Biotina MAX+ con Colágeno?",
+              "answer": "Está pensada para complementar tu rutina de belleza desde adentro. Su fórmula combina biotina + colágeno, dos ingredientes populares en suplementos orientados al cuidado de cabello, uñas y piel. No reemplaza una alimentación equilibrada, pero puede convertirse en un complemento práctico para tu rutina diaria."
+            }
+          },
+          "faq_cfzrDK": {
+            "type": "faq",
+            "settings": {
+              "question": "¿En cuánto tiempo voy a notar resultados?",
+              "answer": "No existe un tiempo exacto porque cada organismo es diferente.\n\nLos suplementos no generan cambios de un día para otro. La constancia, alimentación, descanso y otros hábitos también influyen. Lo importante es consumirlo siguiendo las indicaciones del envase y mantener una rutina constante."
+            }
+          },
           "faq_AMQ6dV": {
             "type": "faq",
             "settings": {
-              "question": "¿Cómo funciona el Pago Contra Entrega (COD)?",
-              "answer": "Es 100% seguro. Realizas tu pedido completando tus datos en el formulario. Nosotros preparamos tu paquete y te lo enviamos a tu domicilio. Le pagas directamente al repartidor en efectivo, Yape, Plin o tarjeta al recibirlo en tu puerta."
+              "question": "¿Cómo debo tomar las cápsulas?",
+              "answer": "Tómalas siguiendo la dosis indicada en el envase del producto.\n\nNo es necesario consumir más cantidad pensando que obtendrás resultados más rápidos. La clave está en respetar las indicaciones y mantener constancia."
+            }
+          },
+          "faq_RxVAgg": {
+            "type": "faq",
+            "settings": {
+              "question": "¿Solo sirve para el cabello?",
+              "answer": "No. La fórmula está orientada a una rutina de belleza más completa.\n\nCABELLO\nPara complementar el cuidado de un cabello fuerte y saludable.\n\nUÑAS\nIdeal como complemento nutricional dentro de una rutina enfocada en uñas fuertes.\n\nPIEL\nEl colágeno y la biotina forman parte de muchas rutinas enfocadas en el cuidado de la piel."
             }
           }
         },
         "block_order": [
-          "faq_AMQ6dV"
+          "faq_ktzwHF",
+          "faq_cfzrDK",
+          "faq_AMQ6dV",
+          "faq_RxVAgg"
         ],
         "settings": {
           "tag": "DESPEJA TUS DUDAS",
-          "title": "Preguntas Frecuentes sobre tu Pedido",
-          "subtitle": "Todo lo que necesitas saber antes de realizar tu compra con Pago Contra Entrega."
+          "title": "Preguntas Frecuentes",
+          "subtitle": "Las preguntas que siempre nos hacen — respondidas sin rodeos"
         }
       },
       "sticky-buy-bar": {
