@@ -1,3 +1,403 @@
+<style>
+  .main-product-section {
+    padding: 1.5rem 0 3rem;
+    background: #ffffff;
+    font-family: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, sans-serif;
+  }
+
+  .product-detail-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 2rem;
+  }
+
+  @media (min-width: 992px) {
+    .product-detail-grid {
+      grid-template-columns: 1.15fr 1fr !important;
+      gap: 3rem !important;
+      align-items: start !important;
+    }
+  }
+
+  /* Gallery & Badges */
+  .product-gallery {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    gap: 0.85rem;
+  }
+
+  .main-image-wrapper {
+    position: relative;
+    border-radius: 16px;
+    overflow: hidden;
+    background: #ffffff;
+    border: 1px solid rgba(0, 0, 0, 0.08);
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
+  }
+
+  .main-product-img {
+    width: 100%;
+    height: auto;
+    aspect-ratio: 1 / 1;
+    object-fit: cover;
+    display: block;
+  }
+
+  .gallery-badge {
+    position: absolute;
+    top: 0.85rem;
+    left: 0.85rem;
+    z-index: 3;
+    background: #e63946;
+    color: #ffffff;
+    font-weight: 800;
+    font-size: 0.75rem;
+    padding: 0.35rem 0.75rem;
+    border-radius: 20px;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    box-shadow: 0 4px 12px rgba(230, 57, 70, 0.35);
+  }
+
+  .cod-badge {
+    position: absolute;
+    top: 0.85rem;
+    right: 0.85rem;
+    z-index: 3;
+    background: rgba(15, 23, 42, 0.88);
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+    color: #ffd166;
+    font-weight: 700;
+    font-size: 0.725rem;
+    padding: 0.35rem 0.75rem;
+    border-radius: 20px;
+    display: flex;
+    align-items: center;
+    gap: 0.35rem;
+    border: 1px solid rgba(255, 209, 102, 0.25);
+  }
+
+  .gallery-thumbs {
+    display: flex !important;
+    flex-direction: row !important;
+    gap: 0.6rem !important;
+    overflow-x: auto !important;
+    padding-bottom: 0.4rem !important;
+  }
+
+  .thumb-item {
+    width: 64px !important;
+    height: 64px !important;
+    flex-shrink: 0 !important;
+    object-fit: cover !important;
+    border-radius: 10px !important;
+    cursor: pointer !important;
+    border: 2px solid transparent !important;
+    opacity: 0.65 !important;
+    transition: all 0.2s ease !important;
+  }
+
+  .thumb-item.active, .thumb-item:hover {
+    border-color: #0f172a !important;
+    opacity: 1 !important;
+    transform: translateY(-2px);
+  }
+
+  /* Info Header */
+  .product-vendor {
+    text-transform: uppercase;
+    font-size: 0.75rem;
+    font-weight: 800;
+    letter-spacing: 1.5px;
+    color: #64748b;
+    margin-bottom: 0.35rem;
+    display: block;
+  }
+
+  .pdp-title {
+    font-family: var(--font-heading, 'Space Grotesk', sans-serif);
+    font-size: clamp(1.4rem, 4vw, 2.1rem);
+    font-weight: 800;
+    line-height: 1.22;
+    margin: 0 0 0.65rem;
+    color: #0f172a;
+  }
+
+  .product-rating-summary {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    margin-bottom: 1rem;
+  }
+
+  .product-rating-summary .stars {
+    color: #ffb703;
+    font-size: 1.15rem;
+    letter-spacing: 1px;
+  }
+
+  .product-rating-summary .score {
+    font-weight: 800;
+    font-size: 0.9rem;
+    color: #0f172a;
+  }
+
+  .product-rating-summary .review-link {
+    font-size: 0.85rem;
+    color: #64748b;
+    text-decoration: underline;
+  }
+
+  /* Stock Box */
+  .stock-progress-box {
+    background: #fff0f3;
+    border: 1px solid #ffccd5;
+    border-radius: 10px;
+    padding: 0.75rem 1rem;
+    margin-bottom: 1.25rem;
+  }
+
+  .stock-header {
+    display: flex;
+    justify-content: space-between;
+    font-size: 0.825rem;
+    font-weight: 800;
+    color: #c9184a;
+    margin-bottom: 0.4rem;
+  }
+
+  .stock-bar-bg {
+    width: 100%;
+    height: 8px;
+    background: #ffb3c1;
+    border-radius: 10px;
+    overflow: hidden;
+  }
+
+  .stock-bar-fill {
+    width: 85%;
+    height: 100%;
+    background: linear-gradient(90deg, #ff4d6d 0%, #c9184a 100%);
+    border-radius: 10px;
+  }
+
+  /* Price Container */
+  .product-price-container {
+    display: flex;
+    align-items: baseline;
+    gap: 0.75rem;
+    flex-wrap: wrap;
+    margin-bottom: 1.25rem;
+    padding-bottom: 1rem;
+    border-bottom: 1px solid #f1f5f9;
+  }
+
+  .price-current {
+    font-size: clamp(1.8rem, 4vw, 2.5rem);
+    font-weight: 900;
+    color: #0f172a;
+    line-height: 1;
+  }
+
+  .price-original {
+    font-size: 1.2rem;
+    text-decoration: line-through;
+    color: #94a3b8;
+    font-weight: 500;
+  }
+
+  .shipping-tag {
+    background: #e0f2fe;
+    color: #0284c7;
+    font-size: 0.75rem;
+    font-weight: 800;
+    padding: 0.3rem 0.65rem;
+    border-radius: 6px;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.25rem;
+  }
+
+  /* Quantity Box */
+  .quantity-selector-container {
+    margin-bottom: 1.25rem;
+  }
+
+  .qty-label {
+    font-weight: 700;
+    font-size: 0.875rem;
+    color: #334155;
+    display: block;
+    margin-bottom: 0.4rem;
+  }
+
+  .qty-control-box {
+    display: inline-flex !important;
+    flex-direction: row !important;
+    align-items: center !important;
+    gap: 0.4rem !important;
+    background: #f8fafc;
+    border: 1px solid #cbd5e1;
+    border-radius: 12px;
+    padding: 0.2rem 0.4rem;
+  }
+
+  .qty-btn {
+    width: 38px !important;
+    height: 38px !important;
+    border-radius: 8px !important;
+    border: none !important;
+    background: #ffffff !important;
+    font-size: 1.2rem !important;
+    font-weight: 800 !important;
+    color: #0f172a !important;
+    cursor: pointer !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+  }
+
+  .qty-input {
+    width: 44px !important;
+    height: 38px !important;
+    text-align: center !important;
+    border: none !important;
+    background: transparent !important;
+    font-size: 1rem !important;
+    font-weight: 800 !important;
+    color: #0f172a !important;
+    outline: none !important;
+  }
+
+  /* Fallback Buy Button */
+  .pdp-buy-btn-fallback {
+    width: 100% !important;
+    padding: 1.1rem 1.5rem !important;
+    border-radius: 14px !important;
+    background: linear-gradient(135deg, #16a34a 0%, #15803d 100%) !important;
+    color: #ffffff !important;
+    font-size: 1.05rem !important;
+    font-weight: 800 !important;
+    border: none !important;
+    cursor: pointer !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    gap: 0.6rem !important;
+    box-shadow: 0 8px 24px rgba(22, 163, 74, 0.35) !important;
+    margin-top: 0.5rem !important;
+    margin-bottom: 1.25rem !important;
+  }
+
+  /* Trust Badges Grid */
+  .trust-badges-grid {
+    display: grid !important;
+    grid-template-columns: repeat(2, 1fr) !important;
+    gap: 0.75rem !important;
+    background: #f8fafc !important;
+    padding: 1.25rem !important;
+    border-radius: 14px !important;
+    border: 1px solid #e2e8f0 !important;
+    margin-top: 1.25rem !important;
+  }
+
+  .trust-badge-item {
+    display: flex !important;
+    align-items: center !important;
+    gap: 0.6rem !important;
+  }
+
+  .trust-badge-item strong {
+    display: block;
+    font-size: 0.85rem;
+    color: #0f172a;
+  }
+
+  .trust-badge-item span {
+    font-size: 0.75rem;
+    color: #64748b;
+  }
+
+  /* Visor de Elecciones de Pago y Envíos (Auto-Rotator Banner) */
+  .payment-badges-card {
+    margin-top: 1.5rem !important;
+    background: #ffffff !important;
+    border: 1px solid #e2e8f0 !important;
+    border-radius: 14px !important;
+    padding: 1.25rem !important;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.03) !important;
+  }
+
+  .payment-badges-header {
+    display: flex !important;
+    flex-direction: column !important;
+    gap: 0.15rem !important;
+    margin-bottom: 0.85rem !important;
+  }
+
+  .payment-subtext {
+    font-size: 0.8rem !important;
+    color: #64748b !important;
+    font-weight: 600 !important;
+  }
+
+  .payment-title-box {
+    font-size: 1.35rem !important;
+    font-weight: 900 !important;
+    color: #0f172a !important;
+  }
+
+  #payment-active-name {
+    display: inline-block !important;
+    border-bottom: 2.5px solid #c69a59 !important;
+    padding-bottom: 2px !important;
+    transition: all 0.25s ease !important;
+  }
+
+  .payment-badges-icons-row {
+    display: flex !important;
+    flex-direction: row !important;
+    align-items: center !important;
+    justify-content: flex-start !important;
+    gap: 0.65rem !important;
+    flex-wrap: wrap !important;
+  }
+
+  .payment-icon-item {
+    padding: 0.4rem 0.55rem !important;
+    border-radius: 10px !important;
+    border: 1.5px solid #e2e8f0 !important;
+    background: #fafafa !important;
+    cursor: pointer !important;
+    transition: all 0.25s ease !important;
+    display: inline-flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+  }
+
+  .payment-icon-item.active {
+    border-color: #c69a59 !important;
+    background: #ffffff !important;
+    box-shadow: 0 4px 14px rgba(198, 154, 89, 0.3) !important;
+    transform: scale(1.08) translateY(-2px) !important;
+  }
+
+  @media (max-width: 600px) {
+    .trust-badges-grid {
+      grid-template-columns: 1fr 1fr !important;
+      padding: 0.85rem !important;
+      gap: 0.6rem !important;
+    }
+    .payment-icon-item svg {
+      width: 38px !important;
+      height: 25px !important;
+    }
+  }
+</style>
+
 <section class="main-product-section" id="main-product-section" style="padding: 1.5rem 0 3rem; background: {{ section.settings.bg_color | default: '#ffffff' }};">
   <div class="container">
 
@@ -232,7 +632,7 @@
           </div>
         {% endif %}
 
-        <!-- Payment Options / Payment Badges Banner ("Aceptamos y trabajamos con") -->
+        <!-- Payment & Delivery Auto-Rotating Visor ("Aceptamos y trabajamos con") -->
         {% if section.settings.show_payment_badges %}
           <div class="payment-badges-card">
             <div class="payment-badges-header">
@@ -240,17 +640,17 @@
                 {{ section.settings.payment_badges_title | default: "Aceptamos y trabajamos con" }}
               </span>
               <div class="payment-title-box">
-                <span id="payment-active-name">Visa</span>
+                <span id="payment-active-name">Yape</span>
               </div>
             </div>
 
             <div class="payment-badges-icons-row">
-              <!-- Yape -->
+              <!-- 0: Yape -->
               <div 
-                class="payment-icon-item" 
+                class="payment-icon-item active" 
                 data-payment-name="Yape" 
-                onclick="setActivePaymentBadge(this, 'Yape')"
-                onmouseenter="setActivePaymentBadge(this, 'Yape')"
+                onclick="setActivePaymentBadge(this, 'Yape', 0)"
+                onmouseenter="setActivePaymentBadge(this, 'Yape', 0)"
                 title="Yape"
               >
                 <svg width="42" height="28" viewBox="0 0 44 28" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -260,12 +660,12 @@
                 </svg>
               </div>
 
-              <!-- Plin -->
+              <!-- 1: Plin -->
               <div 
                 class="payment-icon-item" 
                 data-payment-name="Plin" 
-                onclick="setActivePaymentBadge(this, 'Plin')"
-                onmouseenter="setActivePaymentBadge(this, 'Plin')"
+                onclick="setActivePaymentBadge(this, 'Plin', 1)"
+                onmouseenter="setActivePaymentBadge(this, 'Plin', 1)"
                 title="Plin"
               >
                 <svg width="42" height="28" viewBox="0 0 44 28" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -276,27 +676,27 @@
                 </svg>
               </div>
 
-              <!-- Visa (Active Default) -->
+              <!-- 2: Visa -->
               <div 
-                class="payment-icon-item active" 
+                class="payment-icon-item" 
                 data-payment-name="Visa" 
-                onclick="setActivePaymentBadge(this, 'Visa')"
-                onmouseenter="setActivePaymentBadge(this, 'Visa')"
+                onclick="setActivePaymentBadge(this, 'Visa', 2)"
+                onmouseenter="setActivePaymentBadge(this, 'Visa', 2)"
                 title="Visa"
               >
                 <svg width="42" height="28" viewBox="0 0 44 28" fill="none" xmlns="http://www.w3.org/2000/svg">
                   <rect width="44" height="28" rx="6" fill="#1434CB"/>
-                  <path d="M17.8 19H15.1L16.8 9H19.5L17.8 19ZM25.4 9.3C24.9 9.1 24.1 8.9 23.1 8.9C20.1 8.9 18 10.5 18 12.8C18 14.5 19.5 15.4 20.6 16C21.8 16.6 22.2 17 22.2 17.5C22.2 18.3 21.3 18.6 20.4 18.6C19.2 18.6 18.5 18.4 17.7 18L17.3 17.8L16.8 20.2C17.6 20.6 19 20.9 20.4 20.9C23.6 20.9 25.7 19.3 25.7 16.9C25.7 15.3 24.7 14.2 22.9 13.3C21.8 12.7 21.2 12.3 21.2 11.7C21.2 11.2 21.8 10.7 22.9 10.7C23.8 10.7 24.5 10.9 25.1 11.1L25.4 9.3ZM31.6 9H29.5C28.8 9 28.3 9.2 28 9.9L23.9 19H26.8L27.4 17.3H30.9L31.2 19H33.8L31.6 9ZM28.2 15.1C28.4 14.5 29.3 12.1 29.3 12.1L29.6 13.5L30.1 15.1H28.2ZM13.8 9L11.2 15.8L10.9 14.3C10.4 12.6 8.8 10.7 7 9.8L9.5 19H12.5L17.1 9H13.8Z" fill="white"/>
+                  <path d="M17.8 19H15.1L16.8 9H19.5L17.8 19ZM25.4 9.3C24.9 9.1 24.1 8.9 23.1 8.9C20.1 8.9 18 10.5 18 12.8C18 14.5 19.5 15.4 20.6 16C21.8 16.6 22.2 17 22.2 17.5C22.2 18.3 21.3 18.6 20.4 18.6C19.2 18.6 18.5 18.4 17.7 18L17.3 17.8L16.8 20.2C17.6 20.6 19 20.9 20.4 20.9C25.7 20.9 25.7 19.3 25.7 16.9C25.7 15.3 24.7 14.2 22.9 13.3C21.8 12.7 21.2 12.3 21.2 11.7C21.2 11.2 21.8 10.7 22.9 10.7C23.8 10.7 24.5 10.9 25.1 11.1L25.4 9.3ZM31.6 9H29.5C28.8 9 28.3 9.2 28 9.9L23.9 19H26.8L27.4 17.3H30.9L31.2 19H33.8L31.6 9ZM28.2 15.1C28.4 14.5 29.3 12.1 29.3 12.1L29.6 13.5L30.1 15.1H28.2ZM13.8 9L11.2 15.8L10.9 14.3C10.4 12.6 8.8 10.7 7 9.8L9.5 19H12.5L17.1 9H13.8Z" fill="white"/>
                   <path d="M8.8 9H4.6L4.5 9.2C7.7 10 9.8 12 10.9 14.3L9.9 9.8C9.7 9.2 9.3 9 8.8 9Z" fill="#F7B600"/>
                 </svg>
               </div>
 
-              <!-- Mastercard -->
+              <!-- 3: Mastercard -->
               <div 
                 class="payment-icon-item" 
                 data-payment-name="Mastercard" 
-                onclick="setActivePaymentBadge(this, 'Mastercard')"
-                onmouseenter="setActivePaymentBadge(this, 'Mastercard')"
+                onclick="setActivePaymentBadge(this, 'Mastercard', 3)"
+                onmouseenter="setActivePaymentBadge(this, 'Mastercard', 3)"
                 title="Mastercard"
               >
                 <svg width="42" height="28" viewBox="0 0 44 28" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -307,33 +707,34 @@
                 </svg>
               </div>
 
-              <!-- American Express -->
+              <!-- 4: Olva Courier -->
               <div 
                 class="payment-icon-item" 
-                data-payment-name="American Express" 
-                onclick="setActivePaymentBadge(this, 'American Express')"
-                onmouseenter="setActivePaymentBadge(this, 'American Express')"
-                title="American Express"
+                data-payment-name="Olva Courier" 
+                onclick="setActivePaymentBadge(this, 'Olva Courier', 4)"
+                onmouseenter="setActivePaymentBadge(this, 'Olva Courier', 4)"
+                title="Olva Courier"
               >
                 <svg width="42" height="28" viewBox="0 0 44 28" fill="none" xmlns="http://www.w3.org/2000/svg">
-                  <rect width="44" height="28" rx="6" fill="#006FCF"/>
-                  <path d="M7 16.8L9.2 11.2H11.5L13.7 16.8H12.2L11.7 15.5H9L8.5 16.8H7ZM9.4 14.3H11.3L10.3 11.8L9.4 14.3ZM14.2 16.8V11.2H16.5L17.8 14.5L19.1 11.2H21.4V16.8H20.1V13.1L18.4 16.8H17.2L15.5 13.1V16.8H14.2ZM22.5 16.8V11.2H27.5V12.4H24V13.4H27V14.6H24V15.6H27.5V16.8H22.5ZM28.5 16.8L30.8 13.9L28.7 11.2H30.4L31.7 13L33 11.2H34.7L32.6 13.9L34.9 16.8H33.2L31.7 14.8L30.2 16.8H28.5Z" fill="white"/>
+                  <rect width="44" height="28" rx="6" fill="#FFF200"/>
+                  <rect x="0.5" y="0.5" width="43" height="27" rx="5.5" stroke="#E6D800"/>
+                  <path d="M8 14C8 10.6863 10.6863 8 14 8C17.3137 8 20 10.6863 20 14C20 17.3137 17.3137 20 14 20C10.6863 20 8 17.3137 8 14Z" fill="#ED1C24"/>
+                  <text x="23" y="18" fill="#1A1A1A" font-size="9" font-family="sans-serif" font-weight="900" letter-spacing="-0.5px">OLVA</text>
                 </svg>
               </div>
 
-              <!-- PagoEfectivo / Diners / Cash -->
+              <!-- 5: Shalom Express -->
               <div 
                 class="payment-icon-item" 
-                data-payment-name="PagoEfectivo / Efectivo" 
-                onclick="setActivePaymentBadge(this, 'PagoEfectivo / Efectivo')"
-                onmouseenter="setActivePaymentBadge(this, 'PagoEfectivo / Efectivo')"
-                title="PagoEfectivo / Efectivo"
+                data-payment-name="Shalom Express" 
+                onclick="setActivePaymentBadge(this, 'Shalom Express', 5)"
+                onmouseenter="setActivePaymentBadge(this, 'Shalom Express', 5)"
+                title="Shalom Express"
               >
                 <svg width="42" height="28" viewBox="0 0 44 28" fill="none" xmlns="http://www.w3.org/2000/svg">
-                  <rect width="44" height="28" rx="6" fill="#F4F5F7"/>
-                  <rect x="0.5" y="0.5" width="43" height="27" rx="5.5" stroke="#D1D5DB"/>
-                  <path d="M12 11H32M12 17H24" stroke="#374151" stroke-width="2" stroke-linecap="round"/>
-                  <circle cx="28" cy="17" r="2.5" fill="#10B981"/>
+                  <rect width="44" height="28" rx="6" fill="#D32F2F"/>
+                  <path d="M6 14L14 8V20L6 14Z" fill="white"/>
+                  <text x="14" y="18" fill="white" font-size="8" font-family="sans-serif" font-weight="900" letter-spacing="-0.3px">SHALOM</text>
                 </svg>
               </div>
             </div>
@@ -379,18 +780,63 @@
     }
   }
 
-  function setActivePaymentBadge(element, name) {
-    const activeLabel = document.getElementById('payment-active-name');
-    if (activeLabel) {
-      activeLabel.textContent = name;
+  /* Auto-Rotating Payment & Shipping Visor Script */
+  (function initPaymentRotator() {
+    const items = [
+      { name: 'Yape', index: 0 },
+      { name: 'Plin', index: 1 },
+      { name: 'Visa', index: 2 },
+      { name: 'Mastercard', index: 3 },
+      { name: 'Olva Courier', index: 4 },
+      { name: 'Shalom Express', index: 5 }
+    ];
+
+    let currentIndex = 0;
+    let intervalId = null;
+    let pauseTimeout = null;
+
+    function setRotatorIndex(index) {
+      currentIndex = index;
+      const nameEl = document.getElementById('payment-active-name');
+      if (nameEl) {
+        nameEl.textContent = items[index].name;
+      }
+      const badgeElements = document.querySelectorAll('.payment-icon-item');
+      badgeElements.forEach((el, idx) => {
+        if (idx === index) {
+          el.classList.add('active');
+        } else {
+          el.classList.remove('active');
+        }
+      });
     }
-    document.querySelectorAll('.payment-icon-item').forEach(el => {
-      el.classList.remove('active');
-    });
-    if (element) {
-      element.classList.add('active');
+
+    function startAutoRotation() {
+      if (intervalId) clearInterval(intervalId);
+      intervalId = setInterval(() => {
+        currentIndex = (currentIndex + 1) % items.length;
+        setRotatorIndex(currentIndex);
+      }, 2200);
     }
-  }
+
+    window.setActivePaymentBadge = function(element, name, index) {
+      if (intervalId) clearInterval(intervalId);
+      if (pauseTimeout) clearTimeout(pauseTimeout);
+      setRotatorIndex(index);
+      // Resume auto rotation after 4 seconds
+      pauseTimeout = setTimeout(startAutoRotation, 4000);
+    };
+
+    if (document.readyState === 'loading') {
+      document.addEventListener('DOMContentLoaded', () => {
+        setRotatorIndex(0);
+        startAutoRotation();
+      });
+    } else {
+      setRotatorIndex(0);
+      startAutoRotation();
+    }
+  })();
 </script>
 
 {% schema %}
@@ -488,18 +934,18 @@
     },
     {
       "type": "header",
-      "content": "Métodos de Pago e Insignia Interactiva"
+      "content": "Visor de Métodos de Pago y Envíos (Auto-rotativo)"
     },
     {
       "type": "checkbox",
       "id": "show_payment_badges",
-      "label": "Mostrar banner interactivo de formas de pago",
+      "label": "Mostrar visor rotativo de formas de pago y envíos",
       "default": true
     },
     {
       "type": "text",
       "id": "payment_badges_title",
-      "label": "Título formas de pago",
+      "label": "Título del visor",
       "default": "Aceptamos y trabajamos con"
     },
     {
