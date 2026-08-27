@@ -1,14 +1,14 @@
-<section class="main-product-section" id="main-product-section" style="padding: 2rem 0 3rem;">
+<section class="main-product-section" id="main-product-section" style="padding: 1.5rem 0 3rem; background: {{ section.settings.bg_color | default: '#ffffff' }};">
   <div class="container">
 
     {% if section.settings.show_urgency_bar %}
       <!-- Urgency & Countdown Announcement Bar -->
-      <div class="urgency-banner" style="background: {{ section.settings.urgency_bg_color | default: 'linear-gradient(90deg, #e63946 0%, #d62828 100%)' }}; color: {{ section.settings.urgency_text_color | default: '#ffffff' }}; padding: 0.75rem 1.25rem; border-radius: var(--radius-md, 8px); margin-bottom: 1.5rem; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 0.5rem; box-shadow: 0 4px 15px rgba(230,57,70,0.25);">
-        <div class="urgency-text" style="font-weight: 700; font-size: 0.95rem; display: flex; align-items: center; gap: 0.5rem;">
-          <span style="font-size: 1.2rem; animation: pulse 1.5s infinite;">⚡</span>
+      <div class="urgency-banner" style="background: {{ section.settings.urgency_bg_color | default: 'linear-gradient(135deg, #e63946 0%, #d62828 100%)' }}; color: {{ section.settings.urgency_text_color | default: '#ffffff' }}; padding: 0.65rem 1rem; border-radius: var(--radius-md, 10px); margin-bottom: 1.25rem; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 0.5rem; box-shadow: 0 4px 16px rgba(230,57,70,0.2);">
+        <div class="urgency-text" style="font-weight: 700; font-size: 0.875rem; display: flex; align-items: center; gap: 0.4rem;">
+          <span style="font-size: 1.1rem; animation: pulse 1.5s infinite;">⚡</span>
           <span>{{ section.settings.urgency_text | default: "¡OFERTA ESPECIAL POR TIEMPO LIMITADO!" }}</span>
         </div>
-        <div class="urgency-timer" style="display: flex; align-items: center; gap: 0.4rem; font-weight: 800; font-family: monospace; font-size: 1.1rem; background: rgba(0,0,0,0.2); padding: 0.35rem 0.75rem; border-radius: 6px;">
+        <div class="urgency-timer" style="display: flex; align-items: center; gap: 0.35rem; font-weight: 800; font-family: monospace; font-size: 1rem; background: rgba(0,0,0,0.22); padding: 0.3rem 0.65rem; border-radius: 6px; letter-spacing: 0.5px;">
           <span id="pdp-countdown-hours">00</span>:
           <span id="pdp-countdown-mins">14</span>:
           <span id="pdp-countdown-secs">59</span>
@@ -16,62 +16,72 @@
       </div>
     {% endif %}
 
-    <div class="product-detail-grid" style="display: grid; grid-template-columns: 1fr; gap: 2.5rem;">
+    <div class="product-detail-grid">
       
       <!-- Media Gallery -->
-      <div class="product-gallery" style="position: relative;">
-        <div class="main-image-wrapper" style="position: relative; border-radius: var(--radius-lg, 12px); overflow: hidden; background: #fff; border: 1px solid rgba(0,0,0,0.06); box-shadow: 0 8px 30px rgba(0,0,0,0.05);">
+      <div class="product-gallery">
+        <div class="main-image-wrapper">
           {% if section.settings.show_discount_badge %}
-            <div class="gallery-badge" style="position: absolute; top: 1rem; left: 1rem; z-index: 2; background: #e63946; color: #fff; font-weight: 800; font-size: 0.85rem; padding: 0.4rem 0.85rem; border-radius: 20px; text-transform: uppercase; letter-spacing: 0.5px; box-shadow: 0 4px 10px rgba(230,57,70,0.4);">
+            <div class="gallery-badge">
               {{ section.settings.discount_badge_text | default: "🔥 HASTA -30% OFF" }}
             </div>
           {% endif %}
           
-          <div class="cod-badge" style="position: absolute; top: 1rem; right: 1rem; z-index: 2; background: rgba(0,0,0,0.85); backdrop-filter: blur(8px); color: #ffd166; font-weight: 700; font-size: 0.75rem; padding: 0.4rem 0.85rem; border-radius: 20px; display: flex; align-items: center; gap: 0.35rem; border: 1px solid rgba(255,209,102,0.3);">
+          <div class="cod-badge">
             <span>🚚</span> PAGO CONTRA ENTREGA
           </div>
 
           {% if product.featured_image %}
-            <img src="{{ product.featured_image | image_url: width: 1000 }}" alt="{{ product.title | escape }}" class="main-product-img" id="main-product-media-img" style="width: 100%; height: auto; display: block; object-fit: cover; transition: transform 0.3s ease;">
+            <img src="{{ product.featured_image | image_url: width: 1000 }}" alt="{{ product.title | escape }}" class="main-product-img" id="main-product-media-img">
           {% else %}
-            <img src="{{ 'magnesio_complex.png' | asset_url }}" alt="{{ product.title | default: 'Producto' | escape }}" class="main-product-img" id="main-product-media-img" style="width: 100%; height: auto; display: block; object-fit: cover;">
+            <img src="{{ 'magnesio_complex.png' | asset_url }}" alt="{{ product.title | default: 'Producto' | escape }}" class="main-product-img" id="main-product-media-img">
           {% endif %}
         </div>
 
         {% if product.images.size > 1 %}
-          <div class="gallery-thumbs" style="display: flex; gap: 0.75rem; margin-top: 1rem; overflow-x: auto; padding-bottom: 0.5rem;">
+          <div class="gallery-thumbs">
             {% for image in product.images %}
               <img 
                 src="{{ image | image_url: width: 250 }}" 
                 alt="{{ product.title | escape }}" 
                 class="thumb-item {% if forloop.first %}active{% endif %}" 
-                style="width: 75px; height: 75px; object-fit: cover; border-radius: 8px; cursor: pointer; border: 2px solid {% if forloop.first %}var(--color-button, #121212){% else %}transparent{% endif %}; opacity: {% if forloop.first %}1{% else %}0.7{% endif %}; transition: all 0.2s ease;"
                 onclick="switchProductGalleryThumb(this, '{{ image | image_url: width: 1000 }}')"
               >
             {% endfor %}
+          </div>
+        {% else %}
+          <!-- Mobile Demo Fallback Thumbnails if single image -->
+          <div class="gallery-thumbs">
+            <img src="{{ product.featured_image | default: 'magnesio_complex.png' | asset_url }}" class="thumb-item active" onclick="switchProductGalleryThumb(this, '{{ product.featured_image | default: 'magnesio_complex.png' | asset_url }}')">
+            <img src="{{ 'hero_bg.png' | asset_url }}" class="thumb-item" onclick="switchProductGalleryThumb(this, '{{ 'hero_bg.png' | asset_url }}')">
+            <img src="{{ 'cortisol_calm.png' | asset_url }}" class="thumb-item" onclick="switchProductGalleryThumb(this, '{{ 'cortisol_calm.png' | asset_url }}')">
           </div>
         {% endif %}
       </div>
 
       <!-- Product Information -->
-      <div class="product-detail-info" style="display: flex; flex-direction: column;">
+      <div class="product-detail-info">
         
         {% if section.settings.show_vendor and product.vendor != blank %}
-          <span class="product-vendor" style="text-transform: uppercase; font-size: 0.8rem; font-weight: 700; letter-spacing: 1.5px; color: var(--text-secondary, #666); margin-bottom: 0.25rem;">
+          <span class="product-vendor">
             {{ product.vendor }}
+          </span>
+        {% else %}
+          <span class="product-vendor">
+            YA COMPRÉ • FÓRMULA PREMIUM
           </span>
         {% endif %}
 
-        <h1 style="font-family: var(--font-heading, sans-serif); font-size: clamp(1.5rem, 4vw, 2.2rem); font-weight: 800; line-height: 1.25; margin: 0 0 0.75rem; color: var(--color-foreground, #111);">
+        <h1 class="pdp-title">
           {{ product.title | default: "BIOTINA MAX + COLÁGENO - FÓRMULA PREMIUM" }}
         </h1>
 
         <!-- Rating Summary -->
         {% if section.settings.show_rating %}
-          <div class="product-rating-summary" style="display: flex; align-items: center; gap: 0.5rem; margin-bottom: 1rem;">
-            <div style="color: #ffb703; font-size: 1.1rem; letter-spacing: 1px;">★★★★★</div>
-            <span style="font-weight: 700; font-size: 0.9rem; color: #111;">4.9/5.0</span>
-            <a href="#product-reviews-section" style="font-size: 0.85rem; color: var(--text-secondary, #666); text-decoration: underline; cursor: pointer;">
+          <div class="product-rating-summary">
+            <div class="stars">★★★★★</div>
+            <span class="score">4.9/5.0</span>
+            <a href="#product-reviews-section" class="review-link">
               ({{ section.settings.rating_count | default: "142 opiniones verificadas" }})
             </a>
           </div>
@@ -79,20 +89,20 @@
 
         <!-- Stock Progress Bar -->
         {% if section.settings.show_stock_bar %}
-          <div class="stock-progress-box" style="background: #fff0f3; border: 1px solid #ffccd5; border-radius: 8px; padding: 0.75rem 1rem; margin-bottom: 1.25rem;">
-            <div style="display: flex; justify-content: space-between; font-size: 0.85rem; font-weight: 700; color: #c9184a; margin-bottom: 0.4rem;">
+          <div class="stock-progress-box">
+            <div class="stock-header">
               <span>🔥 {{ section.settings.stock_text | default: "¡ALERTA DE STOCK BAJO!" }}</span>
               <span id="stock-count-val">{{ section.settings.initial_stock | default: 10 }} unidades restantes</span>
             </div>
-            <div style="width: 100%; height: 8px; background: #ffb3c1; border-radius: 10px; overflow: hidden;">
-              <div id="stock-progress-bar" style="width: 85%; height: 100%; background: linear-gradient(90deg, #ff4d6d, #c9184a); border-radius: 10px; transition: width 0.5s ease;"></div>
+            <div class="stock-bar-bg">
+              <div id="stock-progress-bar" class="stock-bar-fill"></div>
             </div>
           </div>
         {% endif %}
 
         <!-- Price Section -->
-        <div class="product-price-container" style="display: flex; align-items: baseline; gap: 0.75rem; flex-wrap: wrap; margin-bottom: 1.25rem; padding-bottom: 1rem; border-bottom: 1px solid rgba(0,0,0,0.08);">
-          <span class="price-current" id="main-price-display" style="font-size: clamp(1.8rem, 4vw, 2.5rem); font-weight: 900; color: #0f172a; font-family: var(--font-heading, sans-serif);">
+        <div class="product-price-container">
+          <span class="price-current" id="main-price-display">
             {% if product.price != blank and product.price > 0 %}
               {{ product.selected_or_first_available_variant.price | money }}
             {% else %}
@@ -101,31 +111,25 @@
           </span>
 
           {% if product.compare_at_price > product.price %}
-            <span class="price-original" id="main-compare-price-display" style="font-size: 1.25rem; text-decoration: line-through; color: #94a3b8; font-weight: 500;">
+            <span class="price-original" id="main-compare-price-display">
               {{ product.compare_at_price | money }}
             </span>
           {% else %}
-            <span class="price-original" id="main-compare-price-display" style="font-size: 1.25rem; text-decoration: line-through; color: #94a3b8; font-weight: 500;">
+            <span class="price-original" id="main-compare-price-display">
               S/. 199.90
             </span>
           {% endif %}
 
-          <span class="shipping-tag" style="background: #e0f2fe; color: #0284c7; font-size: 0.75rem; font-weight: 700; padding: 0.25rem 0.6rem; border-radius: 4px; display: flex; align-items: center; gap: 0.25rem;">
+          <span class="shipping-tag">
             <span>🚚</span> ENVÍO GRATIS
           </span>
         </div>
 
         <!-- Clean Standard Quantity Selector -->
-        <div class="quantity-selector-container" style="margin-bottom: 1.5rem;">
-          <label style="font-weight: 700; font-size: 0.9rem; color: #334155; display: block; margin-bottom: 0.5rem;">
-            Cantidad:
-          </label>
-          <div style="display: flex; align-items: center; gap: 0.5rem; max-width: 140px;">
-            <button 
-              type="button" 
-              onclick="adjustQtyVal(-1)" 
-              style="width: 40px; height: 42px; border-radius: 8px; border: 1px solid #cbd5e1; background: #f8fafc; font-size: 1.2rem; font-weight: 700; cursor: pointer;"
-            >−</button>
+        <div class="quantity-selector-container">
+          <label class="qty-label">Cantidad:</label>
+          <div class="qty-control-box">
+            <button type="button" class="qty-btn" onclick="adjustQtyVal(-1)">−</button>
             <input 
               type="number" 
               id="selected-product-qty" 
@@ -133,25 +137,21 @@
               value="1" 
               min="1" 
               onchange="onQtyInputChange(this.value)"
-              style="width: 50px; height: 42px; text-align: center; border-radius: 8px; border: 1px solid #cbd5e1; font-size: 1rem; font-weight: 700; outline: none;"
+              class="qty-input"
             >
-            <button 
-              type="button" 
-              onclick="adjustQtyVal(1)" 
-              style="width: 40px; height: 42px; border-radius: 8px; border: 1px solid #cbd5e1; background: #f8fafc; font-size: 1.2rem; font-weight: 700; cursor: pointer;"
-            >+</button>
+            <button type="button" class="qty-btn" onclick="adjustQtyVal(1)">+</button>
           </div>
         </div>
 
         <!-- Variants Selector (if product has options) -->
         {% unless product.has_only_default_variant %}
-          <div class="product-variant-selector-wrapper" style="margin-bottom: 1.5rem;">
+          <div class="product-variant-selector-wrapper">
             {% for option in product.options_with_values %}
-              <div style="margin-bottom: 1rem;">
-                <label style="font-weight: 700; font-size: 0.9rem; color: #334155; display: block; margin-bottom: 0.4rem;">
-                  {{ option.name }}: <span style="font-weight: 400;" id="option-val-label-{{ option.position }}">{{ option.selected_value }}</span>
+              <div class="variant-option-group">
+                <label class="variant-label">
+                  {{ option.name }}: <span id="option-val-label-{{ option.position }}">{{ option.selected_value }}</span>
                 </label>
-                <div style="display: flex; gap: 0.5rem; flex-wrap: wrap;">
+                <div class="variant-pills-row">
                   {% for value in option.values %}
                     <button 
                       type="button" 
@@ -159,7 +159,6 @@
                       data-option-index="{{ option.position }}"
                       data-value="{{ value | escape }}"
                       onclick="selectVariantOption(this, {{ option.position }}, '{{ value | escape }}')"
-                      style="padding: 0.5rem 1rem; border-radius: 20px; border: 1.5px solid {% if option.selected_value == value %}#0f172a{% else %}#cbd5e1{% endif %}; background: {% if option.selected_value == value %}#0f172a{% else %}#fff{% endif %}; color: {% if option.selected_value == value %}#fff{% else %}#334155{% endif %}; font-size: 0.85rem; font-weight: 600; cursor: pointer; transition: all 0.2s ease;"
                     >
                       {{ value }}
                     </button>
@@ -191,41 +190,151 @@
             {% endcase %}
           {% endfor %}
 
-          <!-- Releasit COD Form Direct Embed Container -->
-          <div class="releasit-cod-form" id="releasit-cod-form-container" data-product-id="{{ product.id }}" style="margin: 0.5rem 0 1.25rem;">
-            <!-- Releasit COD Form Shopify app automatically renders its form and payment button here -->
+          <!-- Releasit COD Form Direct Embed Container & Fallback Buy Button -->
+          <div class="releasit-cod-form" id="releasit-cod-form-container" data-product-id="{{ product.id }}">
+            <button type="submit" class="pdp-buy-btn-fallback">
+              <span>🛒</span> PEDIR AHORA — PAGO AL RECIBIR
+            </button>
           </div>
         {% endform %}
 
         <!-- Trust Badges Container -->
         {% if section.settings.show_trust_badges %}
-          <div class="trust-badges-grid" style="display: grid; grid-template-columns: repeat(2, 1fr); gap: 0.75rem; background: #f8fafc; padding: 1.25rem; border-radius: 12px; border: 1px solid #e2e8f0; margin-top: 1rem;">
-            <div style="display: flex; align-items: center; gap: 0.6rem;">
-              <span style="font-size: 1.4rem;">🚚</span>
+          <div class="trust-badges-grid">
+            <div class="trust-badge-item">
+              <span class="badge-icon">🚚</span>
               <div>
-                <strong style="display: block; font-size: 0.85rem; color: #0f172a;">{{ section.settings.badge1_title | default: "Envío Gratis" }}</strong>
-                <span style="font-size: 0.75rem; color: #64748b;">{{ section.settings.badge1_sub | default: "A todo el Perú sin costo" }}</span>
+                <strong>{{ section.settings.badge1_title | default: "Envío Gratis" }}</strong>
+                <span>{{ section.settings.badge1_sub | default: "A todo el Perú sin costo" }}</span>
               </div>
             </div>
-            <div style="display: flex; align-items: center; gap: 0.6rem;">
-              <span style="font-size: 1.4rem;">🤝</span>
+            <div class="trust-badge-item">
+              <span class="badge-icon">🤝</span>
               <div>
-                <strong style="display: block; font-size: 0.85rem; color: #0f172a;">{{ section.settings.badge2_title | default: "Pago al Recibir" }}</strong>
-                <span style="font-size: 0.75rem; color: #64748b;">{{ section.settings.badge2_sub | default: "Efectivo, Yape o Plin" }}</span>
+                <strong>{{ section.settings.badge2_title | default: "Pago al Recibir" }}</strong>
+                <span>{{ section.settings.badge2_sub | default: "Efectivo, Yape o Plin" }}</span>
               </div>
             </div>
-            <div style="display: flex; align-items: center; gap: 0.6rem;">
-              <span style="font-size: 1.4rem;">🛡️</span>
+            <div class="trust-badge-item">
+              <span class="badge-icon">🛡️</span>
               <div>
-                <strong style="display: block; font-size: 0.85rem; color: #0f172a;">{{ section.settings.badge3_title | default: "Garantía de 30 Días" }}</strong>
-                <span style="font-size: 0.75rem; color: #64748b;">{{ section.settings.badge3_sub | default: "Satisfacción 100% asegurada" }}</span>
+                <strong>{{ section.settings.badge3_title | default: "Garantía de 30 Días" }}</strong>
+                <span>{{ section.settings.badge3_sub | default: "Satisfacción 100% asegurada" }}</span>
               </div>
             </div>
-            <div style="display: flex; align-items: center; gap: 0.6rem;">
-              <span style="font-size: 1.4rem;">⚡</span>
+            <div class="trust-badge-item">
+              <span class="badge-icon">⚡</span>
               <div>
-                <strong style="display: block; font-size: 0.85rem; color: #0f172a;">{{ section.settings.badge4_title | default: "Despacho Rápido" }}</strong>
-                <span style="font-size: 0.75rem; color: #64748b;">{{ section.settings.badge4_sub | default: "Entrega en 24 a 48 hrs" }}</span>
+                <strong>{{ section.settings.badge4_title | default: "Despacho Rápido" }}</strong>
+                <span>{{ section.settings.badge4_sub | default: "Entrega en 24 a 48 hrs" }}</span>
+              </div>
+            </div>
+          </div>
+        {% endif %}
+
+        <!-- Payment Options / Payment Badges Banner ("Aceptamos y trabajamos con") -->
+        {% if section.settings.show_payment_badges %}
+          <div class="payment-badges-card">
+            <div class="payment-badges-header">
+              <span class="payment-subtext">
+                {{ section.settings.payment_badges_title | default: "Aceptamos y trabajamos con" }}
+              </span>
+              <div class="payment-title-box">
+                <span id="payment-active-name">Visa</span>
+              </div>
+            </div>
+
+            <div class="payment-badges-icons-row">
+              <!-- Yape -->
+              <div 
+                class="payment-icon-item" 
+                data-payment-name="Yape" 
+                onclick="setActivePaymentBadge(this, 'Yape')"
+                onmouseenter="setActivePaymentBadge(this, 'Yape')"
+                title="Yape"
+              >
+                <svg width="42" height="28" viewBox="0 0 44 28" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <rect width="44" height="28" rx="6" fill="#752B8D"/>
+                  <circle cx="22" cy="14" r="9" fill="#00D2B8"/>
+                  <path d="M18 10L22 15.5L26 10H28.5L23.2 17.2V21H20.8V17.2L15.5 10H18Z" fill="#752B8D"/>
+                </svg>
+              </div>
+
+              <!-- Plin -->
+              <div 
+                class="payment-icon-item" 
+                data-payment-name="Plin" 
+                onclick="setActivePaymentBadge(this, 'Plin')"
+                onmouseenter="setActivePaymentBadge(this, 'Plin')"
+                title="Plin"
+              >
+                <svg width="42" height="28" viewBox="0 0 44 28" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <rect width="44" height="28" rx="6" fill="#00B4D8"/>
+                  <path d="M14 8H18.5C21 8 22.8 9.5 22.8 11.8C22.8 14.1 21 15.6 18.5 15.6H16.5V20H14V8ZM16.5 13.4H18.3C19.7 13.4 20.4 12.8 20.4 11.8C20.4 10.8 19.7 10.2 18.3 10.2H16.5V13.4Z" fill="white"/>
+                  <path d="M24.5 8H27V20H24.5V8Z" fill="white"/>
+                  <circle cx="31" cy="17.5" r="2.5" fill="#FFD166"/>
+                </svg>
+              </div>
+
+              <!-- Visa (Active Default) -->
+              <div 
+                class="payment-icon-item active" 
+                data-payment-name="Visa" 
+                onclick="setActivePaymentBadge(this, 'Visa')"
+                onmouseenter="setActivePaymentBadge(this, 'Visa')"
+                title="Visa"
+              >
+                <svg width="42" height="28" viewBox="0 0 44 28" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <rect width="44" height="28" rx="6" fill="#1434CB"/>
+                  <path d="M17.8 19H15.1L16.8 9H19.5L17.8 19ZM25.4 9.3C24.9 9.1 24.1 8.9 23.1 8.9C20.1 8.9 18 10.5 18 12.8C18 14.5 19.5 15.4 20.6 16C21.8 16.6 22.2 17 22.2 17.5C22.2 18.3 21.3 18.6 20.4 18.6C19.2 18.6 18.5 18.4 17.7 18L17.3 17.8L16.8 20.2C17.6 20.6 19 20.9 20.4 20.9C23.6 20.9 25.7 19.3 25.7 16.9C25.7 15.3 24.7 14.2 22.9 13.3C21.8 12.7 21.2 12.3 21.2 11.7C21.2 11.2 21.8 10.7 22.9 10.7C23.8 10.7 24.5 10.9 25.1 11.1L25.4 9.3ZM31.6 9H29.5C28.8 9 28.3 9.2 28 9.9L23.9 19H26.8L27.4 17.3H30.9L31.2 19H33.8L31.6 9ZM28.2 15.1C28.4 14.5 29.3 12.1 29.3 12.1L29.6 13.5L30.1 15.1H28.2ZM13.8 9L11.2 15.8L10.9 14.3C10.4 12.6 8.8 10.7 7 9.8L9.5 19H12.5L17.1 9H13.8Z" fill="white"/>
+                  <path d="M8.8 9H4.6L4.5 9.2C7.7 10 9.8 12 10.9 14.3L9.9 9.8C9.7 9.2 9.3 9 8.8 9Z" fill="#F7B600"/>
+                </svg>
+              </div>
+
+              <!-- Mastercard -->
+              <div 
+                class="payment-icon-item" 
+                data-payment-name="Mastercard" 
+                onclick="setActivePaymentBadge(this, 'Mastercard')"
+                onmouseenter="setActivePaymentBadge(this, 'Mastercard')"
+                title="Mastercard"
+              >
+                <svg width="42" height="28" viewBox="0 0 44 28" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <rect width="44" height="28" rx="6" fill="#1A1A1A"/>
+                  <circle cx="17" cy="14" r="8" fill="#EB001B"/>
+                  <circle cx="27" cy="14" r="8" fill="#F79E1B"/>
+                  <path d="M22 8.32C23.86 9.7 25 11.71 25 14C25 16.29 23.86 18.3 22 19.68C20.14 18.3 19 16.29 19 14C19 11.71 20.14 9.7 22 8.32Z" fill="#FF5F00"/>
+                </svg>
+              </div>
+
+              <!-- American Express -->
+              <div 
+                class="payment-icon-item" 
+                data-payment-name="American Express" 
+                onclick="setActivePaymentBadge(this, 'American Express')"
+                onmouseenter="setActivePaymentBadge(this, 'American Express')"
+                title="American Express"
+              >
+                <svg width="42" height="28" viewBox="0 0 44 28" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <rect width="44" height="28" rx="6" fill="#006FCF"/>
+                  <path d="M7 16.8L9.2 11.2H11.5L13.7 16.8H12.2L11.7 15.5H9L8.5 16.8H7ZM9.4 14.3H11.3L10.3 11.8L9.4 14.3ZM14.2 16.8V11.2H16.5L17.8 14.5L19.1 11.2H21.4V16.8H20.1V13.1L18.4 16.8H17.2L15.5 13.1V16.8H14.2ZM22.5 16.8V11.2H27.5V12.4H24V13.4H27V14.6H24V15.6H27.5V16.8H22.5ZM28.5 16.8L30.8 13.9L28.7 11.2H30.4L31.7 13L33 11.2H34.7L32.6 13.9L34.9 16.8H33.2L31.7 14.8L30.2 16.8H28.5Z" fill="white"/>
+                </svg>
+              </div>
+
+              <!-- PagoEfectivo / Diners / Cash -->
+              <div 
+                class="payment-icon-item" 
+                data-payment-name="PagoEfectivo / Efectivo" 
+                onclick="setActivePaymentBadge(this, 'PagoEfectivo / Efectivo')"
+                onmouseenter="setActivePaymentBadge(this, 'PagoEfectivo / Efectivo')"
+                title="PagoEfectivo / Efectivo"
+              >
+                <svg width="42" height="28" viewBox="0 0 44 28" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <rect width="44" height="28" rx="6" fill="#F4F5F7"/>
+                  <rect x="0.5" y="0.5" width="43" height="27" rx="5.5" stroke="#D1D5DB"/>
+                  <path d="M12 11H32M12 17H24" stroke="#374151" stroke-width="2" stroke-linecap="round"/>
+                  <circle cx="28" cy="17" r="2.5" fill="#10B981"/>
+                </svg>
               </div>
             </div>
           </div>
@@ -233,7 +342,7 @@
 
         <!-- Product Detailed Copy (Dynamically loaded for any product added in Shopify Admin) -->
         {% if product.description != blank %}
-          <div class="product-full-copy" style="margin-top: 2rem; border-top: 1px solid #e2e8f0; padding-top: 2rem; color: #334155; line-height: 1.7; font-size: 0.95rem;">
+          <div class="product-full-copy">
             {{ product.description }}
           </div>
         {% endif %}
@@ -251,11 +360,36 @@
     const next = Math.max(1, current + delta);
     input.value = next;
   }
+
   function onQtyInputChange(val) {
     const input = document.getElementById('selected-product-qty');
     if (!input) return;
     const current = parseInt(val, 10) || 1;
     input.value = Math.max(1, current);
+  }
+
+  function switchProductGalleryThumb(thumbEl, newSrc) {
+    const mainImg = document.getElementById('main-product-media-img');
+    if (mainImg) {
+      mainImg.src = newSrc;
+    }
+    document.querySelectorAll('.thumb-item').forEach(el => el.classList.remove('active'));
+    if (thumbEl) {
+      thumbEl.classList.add('active');
+    }
+  }
+
+  function setActivePaymentBadge(element, name) {
+    const activeLabel = document.getElementById('payment-active-name');
+    if (activeLabel) {
+      activeLabel.textContent = name;
+    }
+    document.querySelectorAll('.payment-icon-item').forEach(el => {
+      el.classList.remove('active');
+    });
+    if (element) {
+      element.classList.add('active');
+    }
   }
 </script>
 
@@ -268,6 +402,12 @@
     }
   ],
   "settings": [
+    {
+      "type": "color",
+      "id": "bg_color",
+      "label": "Color de fondo de sección",
+      "default": "#ffffff"
+    },
     {
       "type": "header",
       "content": "Barra de Urgencia y Temporizador"
@@ -283,6 +423,12 @@
       "id": "urgency_text",
       "label": "Texto de urgencia",
       "default": "¡OFERTA ESPECIAL POR TIEMPO LIMITADO!"
+    },
+    {
+      "type": "color",
+      "id": "urgency_bg_color",
+      "label": "Color fondo urgencia",
+      "default": "#e63946"
     },
     {
       "type": "header",
@@ -339,6 +485,22 @@
       "id": "rating_count",
       "label": "Texto resumen de opiniones",
       "default": "142 opiniones verificadas"
+    },
+    {
+      "type": "header",
+      "content": "Métodos de Pago e Insignia Interactiva"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_payment_badges",
+      "label": "Mostrar banner interactivo de formas de pago",
+      "default": true
+    },
+    {
+      "type": "text",
+      "id": "payment_badges_title",
+      "label": "Título formas de pago",
+      "default": "Aceptamos y trabajamos con"
     },
     {
       "type": "header",

@@ -13,7 +13,7 @@
   --bg-dark: #111111;
   --bg-dark-surface: #1C1C1C;
   --bg-accent-gradient: linear-gradient(135deg, #111111 0%, #2A2A2A 100%);
-  
+
   --text-primary: #121212;
   --text-secondary: #555555;
   --text-muted: #888888;
@@ -24,7 +24,7 @@
   --accent-star: #FFB800;
   --accent-green: #2E7D32;
   --accent-whatsapp: #25D366;
-  
+
   --border-light: rgba(0, 0, 0, 0.08);
   --border-dark: rgba(255, 255, 255, 0.12);
 
@@ -46,7 +46,9 @@
 }
 
 /* Reset & Base Setup */
-*, *::before, *::after {
+*,
+*::before,
+*::after {
   box-sizing: border-box;
   margin: 0;
   padding: 0;
@@ -66,7 +68,8 @@ body {
   -webkit-font-smoothing: antialiased;
 }
 
-img, video {
+img,
+video {
   max-width: 100%;
   height: auto;
   display: block;
@@ -89,13 +92,16 @@ button {
   width: 8px;
   height: 6px;
 }
+
 ::-webkit-scrollbar-track {
   background: var(--bg-main);
 }
+
 ::-webkit-scrollbar-thumb {
   background: #D0C9C0;
   border-radius: 4px;
 }
+
 ::-webkit-scrollbar-thumb:hover {
   background: #A0988E;
 }
@@ -303,9 +309,11 @@ button {
 .mobile-menu-toggle.active span:nth-child(1) {
   transform: translateY(7px) rotate(45deg);
 }
+
 .mobile-menu-toggle.active span:nth-child(2) {
   opacity: 0;
 }
+
 .mobile-menu-toggle.active span:nth-child(3) {
   transform: translateY(-7px) rotate(-45deg);
 }
@@ -351,6 +359,7 @@ button {
   .brand-logo .brand-name {
     font-size: 1.05rem;
   }
+
   .brand-logo img {
     height: 38px;
   }
@@ -385,12 +394,10 @@ button {
 .hero-overlay {
   position: absolute;
   inset: 0;
-  background: linear-gradient(
-    90deg, 
-    rgba(17, 17, 17, 0.92) 0%, 
-    rgba(17, 17, 17, 0.75) 50%, 
-    rgba(17, 17, 17, 0.35) 100%
-  );
+  background: linear-gradient(90deg,
+      rgba(17, 17, 17, 0.92) 0%,
+      rgba(17, 17, 17, 0.75) 50%,
+      rgba(17, 17, 17, 0.35) 100%);
   z-index: 2;
 }
 
@@ -458,14 +465,17 @@ button {
   .hero-section {
     min-height: 70vh;
   }
+
   .hero-content {
     padding: 3rem 0;
   }
+
   .hero-actions {
     flex-direction: column;
     align-items: stretch;
     width: 100%;
   }
+
   .hero-actions .btn {
     width: 100%;
   }
@@ -574,6 +584,7 @@ button {
     gap: 1rem;
   }
 }
+
 @media (max-width: 576px) {
   .features-grid {
     grid-template-columns: 1fr;
@@ -734,16 +745,20 @@ button {
   .product-card {
     border-radius: var(--radius-sm);
   }
+
   .product-info {
     padding: 0.85rem;
   }
+
   .product-title {
     font-size: 0.85rem;
     height: 2.6em;
   }
+
   .price-current {
     font-size: 1.05rem;
   }
+
   .btn-add-cart {
     padding: 0.55rem;
     font-size: 0.78rem;
@@ -960,7 +975,7 @@ button {
 .promo-overlay {
   position: absolute;
   inset: 0;
-  background: linear-gradient(90deg, rgba(17,17,17,0.95) 0%, rgba(17,17,17,0.6) 100%);
+  background: linear-gradient(90deg, rgba(17, 17, 17, 0.95) 0%, rgba(17, 17, 17, 0.6) 100%);
   z-index: 2;
 }
 
@@ -1052,6 +1067,7 @@ button {
     align-items: flex-start;
     padding: 2.5rem 1.5rem;
   }
+
   .promo-badges {
     align-items: flex-start;
     flex-direction: row;
@@ -1101,7 +1117,8 @@ button {
   }
 }
 
-.before-image, .after-image {
+.before-image,
+.after-image {
   position: absolute;
   inset: 0;
   width: 100%;
@@ -1139,7 +1156,7 @@ button {
   z-index: 3;
   cursor: ew-resize;
   transform: translateX(-50%);
-  box-shadow: 0 0 10px rgba(0,0,0,0.5);
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
 }
 
 .slider-handle-button {
@@ -1155,7 +1172,7 @@ button {
   display: flex;
   align-items: center;
   justify-content: center;
-  box-shadow: 0 2px 10px rgba(0,0,0,0.3);
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
   font-weight: bold;
 }
 
@@ -1198,6 +1215,7 @@ button {
     grid-template-columns: repeat(2, 1fr);
   }
 }
+
 @media (max-width: 576px) {
   .tiktok-grid {
     grid-template-columns: 1fr;
@@ -1229,7 +1247,7 @@ button {
 .tiktok-card-overlay {
   position: absolute;
   inset: 0;
-  background: linear-gradient(180deg, rgba(0,0,0,0.1) 0%, rgba(0,0,0,0.85) 100%);
+  background: linear-gradient(180deg, rgba(0, 0, 0, 0.1) 0%, rgba(0, 0, 0, 0.85) 100%);
   display: flex;
   flex-direction: column;
   justify-content: space-between;
@@ -1262,7 +1280,7 @@ button {
   display: flex;
   align-items: center;
   justify-content: center;
-  box-shadow: 0 4px 14px rgba(0,0,0,0.3);
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.3);
   transition: transform var(--transition-fast), background-color var(--transition-fast);
 }
 
@@ -1316,6 +1334,7 @@ button {
     grid-template-columns: repeat(2, 1fr);
   }
 }
+
 @media (max-width: 576px) {
   .testimonials-grid {
     grid-template-columns: 1fr;
@@ -1511,6 +1530,7 @@ button {
     gap: 2rem;
   }
 }
+
 @media (max-width: 576px) {
   .footer-grid {
     grid-template-columns: 1fr;
@@ -2088,8 +2108,15 @@ button {
 
 /* Animations */
 @keyframes fadeIn {
-  from { opacity: 0; transform: translateY(10px); }
-  to { opacity: 1; transform: translateY(0); }
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }
 
 .animate-fade-in {
@@ -2104,17 +2131,26 @@ button {
   0% {
     box-shadow: 0 0 0 0 rgba(22, 163, 74, 0.6);
   }
+
   70% {
     box-shadow: 0 0 0 16px rgba(22, 163, 74, 0);
   }
+
   100% {
     box-shadow: 0 0 0 0 rgba(22, 163, 74, 0);
   }
 }
 
 @keyframes pulse {
-  0%, 100% { transform: scale(1); }
-  50% { transform: scale(1.2); }
+
+  0%,
+  100% {
+    transform: scale(1);
+  }
+
+  50% {
+    transform: scale(1.2);
+  }
 }
 
 .bundle-option-card:hover {
@@ -2147,7 +2183,7 @@ button {
   .trust-badges-grid {
     grid-template-columns: 1fr !important;
   }
-  
+
   .sticky-buy-bar .container {
     flex-direction: row;
     gap: 0.5rem;
@@ -2158,4 +2194,3 @@ button {
     font-size: 0.85rem !important;
   }
 }
-

@@ -1,9 +1,4 @@
-<!-- =========================================================================
-  SECCIÓN DE RESEÑAS CON ANIMACIÓN DE DESPLAZAMIENTO INFINITO (WALL OF LOVE)
-  3 Columnas que suben y bajan suavemente con desvanecimiento superior e inferior.
-========================================================================= -->
-
-<section class="infinite-reviews-section" id="product-reviews-section" style="padding: 4.5rem 0; background: #f8fafc; overflow: hidden; position: relative;">
+<section class="infinite-reviews-section" id="product-reviews-section" style="padding: 4.5rem 0; background: {{ section.settings.bg_color | default: '#fbf6f0' }}; overflow: hidden; position: relative;">
   <div class="container">
 
     <!-- Header & Overall Score -->
@@ -31,8 +26,8 @@
     <div class="marquee-wall-wrapper" style="position: relative; height: 580px; overflow: hidden; margin: 0 -1rem;">
       
       <!-- Top & Bottom Gradient Fades -->
-      <div style="position: absolute; top: 0; left: 0; right: 0; height: 90px; background: linear-gradient(180deg, #f8fafc 0%, rgba(248,250,252,0) 100%); z-index: 5; pointer-events: none;"></div>
-      <div style="position: absolute; bottom: 0; left: 0; right: 0; height: 90px; background: linear-gradient(0deg, #f8fafc 0%, rgba(248,250,252,0) 100%); z-index: 5; pointer-events: none;"></div>
+      <div style="position: absolute; top: 0; left: 0; right: 0; height: 90px; background: linear-gradient(180deg, {{ section.settings.bg_color | default: '#fbf6f0' }} 0%, rgba(251,246,240,0) 100%); z-index: 5; pointer-events: none;"></div>
+      <div style="position: absolute; bottom: 0; left: 0; right: 0; height: 90px; background: linear-gradient(0deg, {{ section.settings.bg_color | default: '#fbf6f0' }} 0%, rgba(251,246,240,0) 100%); z-index: 5; pointer-events: none;"></div>
 
       <div class="marquee-grid" style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.25rem; height: 100%;">
 
@@ -103,12 +98,12 @@
               </div>
 
               <div class="review-card-item">
-                <p class="review-text">"Me gustó que el repartidor esperó mientras revisaba el paquete antes de pagar. Llegó bien embalado y en perfecto estado."</p>
+                <p class="review-text">"Súper recomendado. Pagué al recibir el producto en mi casa en Arequipa sin ningún problema. La atención postventa de 10."</p>
                 <div class="review-author-box">
-                  <div class="author-avatar-circle">JR</div>
+                  <div class="author-avatar-circle">DS</div>
                   <div>
-                    <strong class="author-name">Jorge R.</strong>
-                    <span class="author-location">Chiclayo</span>
+                    <strong class="author-name">Diego S.</strong>
+                    <span class="author-location">Arequipa</span>
                   </div>
                 </div>
               </div>
@@ -118,37 +113,37 @@
 
         <!-- Column 3 (Scrolls UP) -->
         <div class="marquee-column">
-          <div class="marquee-track track-up-fast">
+          <div class="marquee-track track-up-slow">
             {% for i in (1..2) %}
               <div class="review-card-item">
-                <p class="review-text">"Me llegó perfecta, el repartidor esperó a que revise todo antes de cancelar en efectivo. Súper confiable el pago contra entrega."</p>
+                <p class="review-text">"Tenía mis dudas sobre pedir por internet pero el pago contra entrega te da una seguridad total. Producto 100% original."</p>
                 <div class="review-author-box">
-                  <div class="author-avatar-circle alt1">AD</div>
+                  <div class="author-avatar-circle alt1">SL</div>
                   <div>
-                    <strong class="author-name">Amanda D.</strong>
-                    <span class="author-location">Piura</span>
+                    <strong class="author-name">Sofia L.</strong>
+                    <span class="author-location">Chorillos, Lima</span>
                   </div>
                 </div>
               </div>
 
               <div class="review-card-item">
-                <p class="review-text">"Compré para mi esposa y para mí. Teníamos dudas del envío a provincia pero llegó por Olva en solo 3 días."</p>
+                <p class="review-text">"Definitivamente la mejor compra del año. El paquete llegó súper bien protegido y el producto cumple todo lo prometido."</p>
                 <div class="review-author-box">
-                  <div class="author-avatar-circle alt2">AC</div>
+                  <div class="author-avatar-circle alt2">JR</div>
                   <div>
-                    <strong class="author-name">Alexandra C.</strong>
-                    <span class="author-location">Arequipa</span>
+                    <strong class="author-name">Jorge R.</strong>
+                    <span class="author-location">Chiclayo</span>
                   </div>
                 </div>
               </div>
 
               <div class="review-card-item">
-                <p class="review-text">"Totalmente recomendados en YA COMPRÉ. La atención por mensaje fue de primera y el producto es tal cual las fotos."</p>
+                <p class="review-text">"Súper rápida la entrega y el repartidor muy amable. Me esperó a que revisara la caja antes de pagarle."</p>
                 <div class="review-author-box">
-                  <div class="author-avatar-circle alt3">LA</div>
+                  <div class="author-avatar-circle alt3">BC</div>
                   <div>
-                    <strong class="author-name">Lucía A.</strong>
-                    <span class="author-location">San Isidro, Lima</span>
+                    <strong class="author-name">Beatriz C.</strong>
+                    <span class="author-location">Jesús María, Lima</span>
                   </div>
                 </div>
               </div>
@@ -157,134 +152,21 @@
         </div>
 
       </div>
-
     </div>
 
   </div>
 </section>
 
-<style>
-/* Animaciones de Desplazamiento Infinito */
-@keyframes marqueeScrollUp {
-  0% { transform: translateY(0); }
-  100% { transform: translateY(-50%); }
-}
-
-@keyframes marqueeScrollDown {
-  0% { transform: translateY(-50%); }
-  100% { transform: translateY(0); }
-}
-
-.marquee-column {
-  overflow: hidden;
-  height: 100%;
-}
-
-.marquee-track {
-  display: flex;
-  flex-direction: column;
-  gap: 1.15rem;
-}
-
-.track-up {
-  animation: marqueeScrollUp 32s linear infinite;
-}
-
-.track-down {
-  animation: marqueeScrollDown 38s linear infinite;
-}
-
-.track-up-fast {
-  animation: marqueeScrollUp 28s linear infinite;
-}
-
-/* Pausar al pasar el mouse por encima para leer fácilmente */
-.marquee-column:hover .marquee-track {
-  animation-play-state: paused;
-}
-
-.review-card-item {
-  background: #ffffff;
-  border-radius: 16px;
-  padding: 1.5rem;
-  border: 1px solid #e2e8f0;
-  box-shadow: 0 4px 20px rgba(0,0,0,0.03);
-  transition: transform 0.2s ease, box-shadow 0.2s ease;
-}
-
-.review-card-item:hover {
-  transform: translateY(-2px);
-  box-shadow: 0 8px 25px rgba(0,0,0,0.06);
-}
-
-.review-text {
-  font-size: 0.925rem;
-  color: #334155;
-  line-height: 1.6;
-  margin: 0 0 1.1rem;
-  font-style: italic;
-}
-
-.review-author-box {
-  display: flex;
-  align-items: center;
-  gap: 0.75rem;
-}
-
-.author-avatar-circle {
-  width: 40px;
-  height: 40px;
-  border-radius: 50%;
-  background: linear-gradient(135deg, #2563eb, #3b82f6);
-  color: #ffffff;
-  font-weight: 800;
-  font-size: 0.85rem;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  flex-shrink: 0;
-}
-.author-avatar-circle.alt1 { background: linear-gradient(135deg, #ec4899, #d946ef); }
-.author-avatar-circle.alt2 { background: linear-gradient(135deg, #059669, #10b981); }
-.author-avatar-circle.alt3 { background: linear-gradient(135deg, #8b5cf6, #6366f1); }
-.author-avatar-circle.alt4 { background: linear-gradient(135deg, #f59e0b, #ea580c); }
-
-.author-name {
-  display: block;
-  font-size: 0.9rem;
-  color: #0f172a;
-}
-
-.author-location {
-  display: block;
-  font-size: 0.75rem;
-  color: #64748b;
-  font-weight: 500;
-}
-
-@media (max-width: 900px) {
-  .marquee-grid {
-    grid-template-columns: repeat(2, 1fr) !important;
-  }
-  .marquee-grid .marquee-column:nth-child(3) {
-    display: none;
-  }
-}
-
-@media (max-width: 600px) {
-  .marquee-grid {
-    grid-template-columns: 1fr !important;
-  }
-  .marquee-grid .marquee-column:nth-child(2) {
-    display: none;
-  }
-}
-</style>
-
 {% schema %}
 {
   "name": "Wall de Reseñas Animadas",
   "settings": [
+    {
+      "type": "color",
+      "id": "bg_color",
+      "label": "Color de fondo de sección",
+      "default": "#fbf6f0"
+    },
     {
       "type": "text",
       "id": "tag",
