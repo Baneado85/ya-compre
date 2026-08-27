@@ -1903,19 +1903,23 @@ button {
   padding: 0.4rem 0.55rem !important;
   border-radius: 10px !important;
   border: 1.5px solid #e2e8f0 !important;
-  background: #fafafa !important;
+  background: #ffffff !important;
   cursor: pointer !important;
-  transition: all 0.25s ease !important;
   display: inline-flex !important;
   align-items: center !important;
   justify-content: center !important;
+  filter: blur(1.8px) opacity(0.4) !important;
+  transform: scale(0.92) !important;
+  transition: all 0.35s cubic-bezier(0.4, 0, 0.2, 1) !important;
 }
 
+.payment-icon-item:hover,
 .payment-icon-item.active {
+  filter: blur(0px) opacity(1) !important;
   border-color: #c69a59 !important;
   background: #ffffff !important;
-  box-shadow: 0 4px 14px rgba(198, 154, 89, 0.3) !important;
-  transform: scale(1.08) translateY(-2px) !important;
+  box-shadow: 0 6px 18px rgba(198, 154, 89, 0.35) !important;
+  transform: scale(1.12) translateY(-2px) !important;
 }
 
 @media (max-width: 600px) {

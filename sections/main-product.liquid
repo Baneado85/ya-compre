@@ -377,19 +377,23 @@
     padding: 0.4rem 0.55rem !important;
     border-radius: 10px !important;
     border: 1.5px solid #e2e8f0 !important;
-    background: #fafafa !important;
+    background: #ffffff !important;
     cursor: pointer !important;
-    transition: all 0.25s ease !important;
     display: inline-flex !important;
     align-items: center !important;
     justify-content: center !important;
+    filter: blur(1.8px) opacity(0.4) !important;
+    transform: scale(0.92) !important;
+    transition: all 0.35s cubic-bezier(0.4, 0, 0.2, 1) !important;
   }
 
+  .payment-icon-item:hover,
   .payment-icon-item.active {
+    filter: blur(0px) opacity(1) !important;
     border-color: #c69a59 !important;
     background: #ffffff !important;
-    box-shadow: 0 4px 14px rgba(198, 154, 89, 0.3) !important;
-    transform: scale(1.08) translateY(-2px) !important;
+    box-shadow: 0 6px 18px rgba(198, 154, 89, 0.35) !important;
+    transform: scale(1.12) translateY(-2px) !important;
   }
 
   @media (max-width: 600px) {
@@ -718,11 +722,12 @@
                 onmouseenter="setActivePaymentBadge(this, 'Olva Courier', 4)"
                 title="Olva Courier"
               >
-                <svg width="42" height="28" viewBox="0 0 44 28" fill="none" xmlns="http://www.w3.org/2000/svg">
-                  <rect width="44" height="28" rx="6" fill="#FFF200"/>
-                  <rect x="0.5" y="0.5" width="43" height="27" rx="5.5" stroke="#E6D800"/>
-                  <path d="M8 14C8 10.6863 10.6863 8 14 8C17.3137 8 20 10.6863 20 14C20 17.3137 17.3137 20 14 20C10.6863 20 8 17.3137 8 14Z" fill="#ED1C24"/>
-                  <text x="23" y="18" fill="#1A1A1A" font-size="9" font-family="sans-serif" font-weight="900" letter-spacing="-0.5px">OLVA</text>
+                <svg width="44" height="28" viewBox="0 0 44 28" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <rect width="44" height="28" rx="6" fill="#FFDE00"/>
+                  <ellipse cx="13" cy="14" rx="8" ry="7" fill="#ED1C24"/>
+                  <text x="13" y="16.5" fill="white" font-size="7" font-family="Arial, sans-serif" font-weight="900" text-anchor="middle">O</text>
+                  <text x="23" y="15" fill="#002D62" font-size="7.5" font-family="Arial, sans-serif" font-weight="900" letter-spacing="-0.3px">OLVA</text>
+                  <text x="23" y="20.5" fill="#ED1C24" font-size="4.5" font-family="Arial, sans-serif" font-weight="800" letter-spacing="0.2px">COURIER</text>
                 </svg>
               </div>
 
@@ -734,10 +739,10 @@
                 onmouseenter="setActivePaymentBadge(this, 'Shalom Express', 5)"
                 title="Shalom Express"
               >
-                <svg width="42" height="28" viewBox="0 0 44 28" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <svg width="44" height="28" viewBox="0 0 44 28" fill="none" xmlns="http://www.w3.org/2000/svg">
                   <rect width="44" height="28" rx="6" fill="#D32F2F"/>
-                  <path d="M6 14L14 8V20L6 14Z" fill="white"/>
-                  <text x="14" y="18" fill="white" font-size="8" font-family="sans-serif" font-weight="900" letter-spacing="-0.3px">SHALOM</text>
+                  <path d="M5 14L11 8.5V19.5L5 14Z" fill="#FFD54F"/>
+                  <text x="12" y="17" fill="white" font-size="7.5" font-family="Arial, sans-serif" font-weight="900" letter-spacing="-0.3px">SHALOM</text>
                 </svg>
               </div>
             </div>
