@@ -1595,8 +1595,8 @@ button {
 
 .cod-badge {
   position: absolute;
-  top: 0.85rem;
-  right: 0.85rem;
+  bottom: 0.85rem;
+  left: 0.85rem;
   z-index: 3;
   background: rgba(15, 23, 42, 0.88);
   backdrop-filter: blur(8px);
@@ -1693,10 +1693,17 @@ button {
 .stock-header {
   display: flex;
   justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 0.25rem 0.5rem;
   font-size: 0.825rem;
   font-weight: 800;
   color: #c9184a;
   margin-bottom: 0.4rem;
+}
+
+.stock-header span {
+  white-space: nowrap;
 }
 
 .stock-bar-bg {
