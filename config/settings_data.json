@@ -29,16 +29,20 @@
       "main-product": {
         "type": "main-product",
         "settings": {
+          "bg_color": "#ffffff",
           "show_urgency_bar": true,
           "urgency_text": "¡OFERTA ESPECIAL POR TIEMPO LIMITADO!",
+          "urgency_bg_color": "#e63946",
           "show_stock_bar": true,
           "stock_text": "¡ALERTA DE STOCK BAJO!",
           "initial_stock": 10,
           "show_discount_badge": true,
-          "discount_badge_text": "🔥 HASTA -50% OFF",
+          "discount_badge_text": "🔥 con-30% de descuento",
           "show_vendor": true,
           "show_rating": true,
           "rating_count": "142 opiniones verificadas",
+          "show_payment_badges": true,
+          "payment_badges_title": "Aceptamos y trabajamos con",
           "show_trust_badges": false,
           "badge1_title": "Envío Gratis",
           "badge1_sub": "A todo el Perú sin costo",
@@ -133,6 +137,7 @@
           "row_J6eN4k"
         ],
         "settings": {
+          "bg_color": "#fffdfa",
           "tag": "LA DIFERENCIA ES CLARA",
           "title": "Nuestro Producto vs Productos Convencionales",
           "subtitle": "Compara las especificaciones y comprueba por qué miles de personas nos eligen.",
@@ -180,6 +185,7 @@
           "faq_RxVAgg"
         ],
         "settings": {
+          "bg_color": "#fcf8f3",
           "tag": "DESPEJA TUS DUDAS",
           "title": "Preguntas Frecuentes",
           "subtitle": "Las preguntas que siempre nos hacen — respondidas sin rodeos"
@@ -196,6 +202,7 @@
       "customer-reviews": {
         "type": "customer-reviews",
         "settings": {
+          "bg_color": "#fbf6f0",
           "tag": "PRUEBA SOCIAL VERIFICADA",
           "title": "2,000+ personas que ya disfrutan de su compra",
           "subtitle": "Personas en todo el Perú que buscaban exactamente la mejor calidad y confianza."
