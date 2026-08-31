@@ -69,15 +69,11 @@
                 <span class="price-original">{{ product.compare_at_price | money }}</span>
               {% endif %}
             </div>
-            <div class="product-actions">
-              {% if product.available %}
-                <button class="btn-add-cart" onclick="openCODModal('{{ product.title | escape }}', '{{ product.price | money }}')">
-                  📦 Pedir Contra Entrega
-                </button>
-              {% else %}
+            {% unless product.available %}
+              <div class="product-actions">
                 <button class="btn-add-cart" disabled style="opacity:0.5; cursor:not-allowed;">Agotado</button>
-              {% endif %}
-            </div>
+              </div>
+            {% endunless %}
           </div>
         </article>
       {% else %}
