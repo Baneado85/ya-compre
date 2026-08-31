@@ -898,23 +898,44 @@ button {
 
 .product-price-row {
   display: flex;
-  align-items: baseline;
-  gap: 0.6rem;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.5rem;
   margin-top: auto;
-  margin-bottom: 1rem;
+  margin-bottom: 0.75rem;
 }
 
-.price-current {
+.price-wrapper {
+  display: flex;
+  align-items: baseline;
+  gap: 0.4rem;
+  flex-wrap: wrap;
+}
+
+.product-card .price-current {
   font-family: var(--font-heading);
-  font-size: 1.2rem;
-  font-weight: 700;
-  color: var(--text-primary);
+  font-size: 1.25rem;
+  font-weight: 800;
+  color: var(--text-primary, #0f172a);
+  line-height: 1.2;
 }
 
-.price-original {
-  font-size: 0.875rem;
-  color: var(--text-muted);
+.product-card .price-original {
+  font-size: 0.85rem;
+  color: var(--text-muted, #94a3b8);
   text-decoration: line-through;
+  font-weight: 500;
+}
+
+.price-discount-tag {
+  background: #ffe4e6;
+  color: #e11d48;
+  font-size: 0.75rem;
+  font-weight: 700;
+  padding: 0.2rem 0.5rem;
+  border-radius: 6px;
+  letter-spacing: 0.3px;
+  white-space: nowrap;
 }
 
 .product-actions {
@@ -2374,14 +2395,14 @@ button {
   border-bottom: 1px solid #f1f5f9;
 }
 
-.price-current {
+.product-price-container .price-current {
   font-size: clamp(1.8rem, 4vw, 2.5rem);
   font-weight: 900;
   color: #0f172a;
   line-height: 1;
 }
 
-.price-original {
+.product-price-container .price-original {
   font-size: 1.2rem;
   text-decoration: line-through;
   color: #94a3b8;

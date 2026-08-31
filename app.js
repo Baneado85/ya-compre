@@ -389,8 +389,11 @@ function renderProducts(category) {
           <span>${p.rating} (${p.reviewCount})</span>
         </div>
         <div class="product-price-row">
-          <span class="price-current">S/. ${p.price.toFixed(2)}</span>
-          <span class="price-original">S/. ${p.originalPrice.toFixed(2)}</span>
+          <div class="price-wrapper">
+            <span class="price-current">S/. ${p.price.toFixed(2)}</span>
+            <span class="price-original">S/. ${p.originalPrice.toFixed(2)}</span>
+          </div>
+          <span class="price-discount-tag">-${p.discountPercent}% OFF</span>
         </div>
         <div class="product-actions">
           <button class="btn-add-cart" onclick="addToCart('${p.id}')">
