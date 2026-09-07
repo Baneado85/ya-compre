@@ -245,6 +245,31 @@ button {
   width: 100%;
 }
 
+.back-to-products-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-weight: 600;
+  font-size: 0.9rem;
+  color: var(--text-primary);
+  text-decoration: none;
+  padding: 0.5rem 1rem;
+  border-radius: 8px;
+  background-color: rgba(0, 0, 0, 0.05);
+  border: 1px solid rgba(0, 0, 0, 0.1);
+  transition: all var(--transition-fast);
+}
+
+.back-to-products-btn:hover {
+  background-color: var(--text-primary);
+  color: #ffffff;
+}
+
+.is-product-page #nav-links,
+.is-product-page #mobile-menu-toggle {
+  display: none !important;
+}
+
 .nav-actions {
   display: flex;
   align-items: center;

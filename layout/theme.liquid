@@ -24,7 +24,7 @@
 
   {{ content_for_header }}
 </head>
-<body>
+<body class="{% if request.page_type == 'product' or template contains 'product' %}is-product-page{% endif %}">
 
   {% section 'announcement-bar' %}
   {% section 'header' %}

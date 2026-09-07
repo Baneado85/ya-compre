@@ -275,6 +275,7 @@ const state = {
 
 // --- DOM Loaded Initialization ---
 document.addEventListener('DOMContentLoaded', () => {
+  initProductPageHeader();
   initDynamicSlogan();
   initAnnouncementBar();
   initCatalog();
@@ -846,4 +847,28 @@ function initMobileMenu() {
 
 function openTikTokModal(title, videoSrc) {
   alert(`Reproduciendo testimonio en video: "${title}"`);
+}
+
+function initProductPageHeader() {
+  if (window.location.pathname.includes('/products/')) {
+    document.body.classList.add('is-product-page');
+    const navLinks = document.getElementById('nav-links');
+    const mobileToggle = document.getElementById('mobile-menu-toggle');
+    const navContainer = document.querySelector('.nav-container');
+
+    if (navLinks) navLinks.style.display = 'none';
+    if (mobileToggle) mobileToggle.style.display = 'none';
+
+    if (navContainer && !document.querySelector('.back-to-products-btn')) {
+      const backBtn = document.createElement('a');
+      backBtn.href = '/#productos';
+      backBtn.className = 'back-to-products-btn';
+      backBtn.setAttribute('aria-label', 'Volver a productos');
+      backBtn.innerHTML = `
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="19" y1="12" x2="5" y2="12"/><polyline points="12 19 5 12 12 5"/></svg>
+        <span>Volver a productos</span>
+      `;
+      navContainer.insertBefore(backBtn, navContainer.firstChild);
+    }
+  }
 }
