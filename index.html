@@ -167,6 +167,7 @@
         <div class="filter-tabs">
           <button class="filter-tab active" data-category="todos">Todos los productos</button>
           <button class="filter-tab" data-category="bestsellers">Destacados</button>
+          <button class="filter-tab" data-category="tecnologia">Tecnología</button>
           <button class="filter-tab" data-category="bienestar">Salud & Bienestar</button>
           <button class="filter-tab" data-category="belleza">Belleza & Skincare</button>
           <button class="filter-tab" data-category="hogar">Hogar & Estilo</button>
@@ -411,10 +412,12 @@
         <div class="footer-col">
           <h4>Tienda</h4>
           <ul class="footer-links">
-            <li><a href="#productos" onclick="filterCategory('todos')">Novedades</a></li>
-            <li><a href="#productos" onclick="filterCategory('bestsellers')">Más vendidos</a></li>
-            <li><a href="#productos" onclick="filterCategory('bestsellers')">Ofertas especiales</a></li>
-            <li><a href="#productos" onclick="filterCategory('bienestar')">Colección Bienestar</a></li>
+            <li><a href="/?category=todos#productos" onclick="filterCategory('todos')">Novedades</a></li>
+            <li><a href="/?category=bestsellers#productos" onclick="filterCategory('bestsellers')">Más vendidos</a></li>
+            <li><a href="/?category=tecnologia#productos" onclick="filterCategory('tecnologia')">Tecnología &amp; Gadgets</a></li>
+            <li><a href="/?category=bienestar#productos" onclick="filterCategory('bienestar')">Colección Bienestar</a></li>
+            <li><a href="/?category=belleza#productos" onclick="filterCategory('belleza')">Belleza &amp; Skincare</a></li>
+            <li><a href="/?category=hogar#productos" onclick="filterCategory('hogar')">Hogar &amp; Estilo</a></li>
           </ul>
         </div>
 
@@ -699,8 +702,18 @@
       }
     }
     function filterCategory(cat) {
+      if (window.location.pathname.includes('/products/')) {
+        window.location.href = `/?category=${encodeURIComponent(cat)}#productos`;
+        return;
+      }
       const filterTab = document.querySelector(`.filter-tab[data-category="${cat}"]`);
-      if (filterTab) filterTab.click();
+      if (filterTab) {
+        filterTab.click();
+        const catalogEl = document.getElementById('productos') || document.querySelector('.catalog-section');
+        if (catalogEl) {
+          catalogEl.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        }
+      }
     }
   </script>
 

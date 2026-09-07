@@ -24,10 +24,12 @@
       <div class="footer-col">
         <h4>Tienda</h4>
         <ul class="footer-links">
-          <li><a href="#productos" onclick="filterCategory('todos')">Novedades</a></li>
-          <li><a href="#productos" onclick="filterCategory('bestsellers')">Más vendidos</a></li>
-          <li><a href="#productos" onclick="filterCategory('tecnologia')">Tecnología &amp; Gadgets</a></li>
-          <li><a href="#productos" onclick="filterCategory('bienestar')">Colección Bienestar</a></li>
+          <li><a href="{{ routes.root_url }}?category=todos#productos" onclick="filterCategory('todos')">Novedades</a></li>
+          <li><a href="{{ routes.root_url }}?category=bestsellers#productos" onclick="filterCategory('bestsellers')">Más vendidos</a></li>
+          <li><a href="{{ routes.root_url }}?category=tecnologia#productos" onclick="filterCategory('tecnologia')">Tecnología &amp; Gadgets</a></li>
+          <li><a href="{{ routes.root_url }}?category=bienestar#productos" onclick="filterCategory('bienestar')">Colección Bienestar</a></li>
+          <li><a href="{{ routes.root_url }}?category=belleza#productos" onclick="filterCategory('belleza')">Belleza &amp; Skincare</a></li>
+          <li><a href="{{ routes.root_url }}?category=hogar#productos" onclick="filterCategory('hogar')">Hogar &amp; Estilo</a></li>
         </ul>
       </div>
 

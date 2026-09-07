@@ -12,6 +12,7 @@ const state = {
 // --- DOM Loaded Initialization ---
 document.addEventListener('DOMContentLoaded', () => {
   initProductPageHeader();
+  checkUrlCategoryFilter();
   initDynamicSlogan();
   initAnnouncementBar();
   initCatalogFilter();
@@ -128,8 +129,35 @@ function applyCatalogFilter(category) {
 }
 
 function filterCategory(cat) {
+  if (window.location.pathname.includes('/products/')) {
+    window.location.href = `/?category=${encodeURIComponent(cat)}#productos`;
+    return;
+  }
   const filterTab = document.querySelector(`.filter-tab[data-category="${cat}"]`);
-  if (filterTab) filterTab.click();
+  if (filterTab) {
+    filterTab.click();
+    const catalogEl = document.getElementById('productos') || document.querySelector('.catalog-section');
+    if (catalogEl) {
+      catalogEl.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    }
+  }
+}
+
+function checkUrlCategoryFilter() {
+  const urlParams = new URLSearchParams(window.location.search);
+  const categoryParam = urlParams.get('category') || urlParams.get('cat');
+  if (categoryParam) {
+    const filterTab = document.querySelector(`.filter-tab[data-category="${categoryParam}"]`);
+    if (filterTab) {
+      setTimeout(() => {
+        filterTab.click();
+        const catalogEl = document.getElementById('productos') || document.querySelector('.catalog-section');
+        if (catalogEl) {
+          catalogEl.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        }
+      }, 150);
+    }
+  }
 }
 
 // --- Add to Cart buttons (grid + product page) via Shopify AJAX Cart API ---
